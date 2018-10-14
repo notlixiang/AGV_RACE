@@ -1,0 +1,16 @@
+--cpu=Cortex-M4 --fpu=SoftVFP
+".\output\startup_stm32f4xx.o"
+".\output\main.o"
+".\output\stm32f4xx_it.o"
+".\output\system_stm32f4xx.o"
+".\output\led.o"
+".\output\key.o"
+".\output\delay.o"
+".\output\misc.o"
+".\output\stm32f4xx_rcc.o"
+".\output\stm32f4xx_tim.o"
+".\output\stm32f4xx_gpio.o"
+--strict --scatter ".\output\test.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\output\test.map" -o .\output\test.axf
