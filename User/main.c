@@ -228,7 +228,8 @@ int main(void)
 float msg_cnt=msg_cnt_max;
 
 float led_on_cnt=20.0/0.05;
-//LED_ON();
+led_on_cnt=20;
+LED_ON();
 while(1)
 {
 
@@ -587,6 +588,6 @@ vx=100;
 	
 	//RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 				//50ms in total
-		
+
 }
 }
