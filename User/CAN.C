@@ -57,19 +57,19 @@ void CAN_Configuration(void)
 	/* CAN GPIOs configuration **************************************************/
 
 	/* Enable GPIO clock */
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
 
 	/* Configure CAN RX and TX pins */
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12|GPIO_Pin_13;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 	GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_UP;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_Init(GPIOD, &GPIO_InitStructure);
 
 	/* Connect CAN pins to AF9 */
-	GPIO_PinAFConfig(GPIOB, GPIO_PinSource12, GPIO_AF_CAN1);
-	GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_CAN1); 
+	GPIO_PinAFConfig(GPIOD, GPIO_PinSource0, GPIO_AF_CAN1);
+	GPIO_PinAFConfig(GPIOD, GPIO_PinSource1, GPIO_AF_CAN1); 
 
 	/* CAN configuration ********************************************************/  
 	/* Enable CAN clock */
