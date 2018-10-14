@@ -55,9 +55,9 @@ void PendSV_Handler(void)
 
 //SysTick handler
 extern u16 ntime;
-void SysTick_Handler(void)
-{
-	ntime--;
-}
+//void SysTick_Handler(void)
+//{
+//	ntime--;
+//}
 
 

@@ -1,15 +1,15 @@
-.\output\delay.o: ..\board\src\delay.c
-.\output\delay.o: ..\board\inc\delay.h
-.\output\delay.o: ..\inc\stm32f4xx_conf.h
+.\output\delay.o: ..\User\delay.c
+.\output\delay.o: ..\User\delay.h
+.\output\delay.o: ..\User\stm32f4xx_conf.h
 .\output\delay.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
-.\output\delay.o: ..\inc\stm32f4xx.h
+.\output\delay.o: ..\User\stm32f4xx.h
 .\output\delay.o: ..\Libraries\CMSIS\Include\core_cm4.h
 .\output\delay.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\delay.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
 .\output\delay.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
 .\output\delay.o: ..\Libraries\CMSIS\Include\core_cm4_simd.h
-.\output\delay.o: ..\inc\system_stm32f4xx.h
-.\output\delay.o: ..\inc\stm32f4xx_conf.h
+.\output\delay.o: ..\User\system_stm32f4xx.h
+.\output\delay.o: ..\User\stm32f4xx_conf.h
 .\output\delay.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h
 .\output\delay.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_crc.h
 .\output\delay.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_cryp.h
@@ -35,3 +35,4 @@
 .\output\delay.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\output\delay.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\output\delay.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
+.\output\delay.o: ..\User\sys.h
