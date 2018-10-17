@@ -210,3 +210,19 @@ void UART4_Configuration(void)
 	USART_ClearITPendingBit(UART4, USART_IT_TC);//清除中断TC位
 	USART_Cmd(UART4,ENABLE);//最后使能串?
 }
+
+unsigned int crc_cal_by_bit(unsigned char *ptr, unsigned int len) {
+    unsigned int crc = 0;
+    while (len-- != 0) {
+        for (unsigned char i = 0x80; i != 0; i /= 2) {
+            crc *= 2;
+            if ((crc & 0x10000) !=
+                0) //上一位CRC乘2后，若首位是1，则除以0x11021 
+                crc ^= 0x11021;
+            if ((*ptr & i) != 0) //如果本位是1，那么CRC = 上一位的CRC + 本位/CRC_CCITT 
+                crc ^= 0x1021;
+        }
+        ptr++;
+    }
+    return crc;
+}
