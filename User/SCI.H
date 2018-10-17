@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
 �ļ����ƣ�SCI.h
 ��    �ܣ�
 ��дʱ�䣺2012.11.22
@@ -21,5 +21,6 @@ extern volatile unsigned int RS232_rec_counter ;//����RS232���ռ�
 void RS232_Send_Data(unsigned char *send_buff,unsigned int length);
 static void RS485_Delay(uint32_t nCount);
 void USART_Configuration(void);
+void UART4_Configuration(void);
 
 #endif
