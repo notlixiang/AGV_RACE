@@ -7,7 +7,7 @@
 ***********************************************************************/
 #ifndef  _SCI_H_
 #define  _SCI_H_
-
+#include "main.h"
 
 #define RS232_REC_BUFF_SIZE				25
 #define RS232_END_FLAG1	0x01		//RS232һ�����ݽ�����־1 
@@ -22,5 +22,6 @@ void RS232_Send_Data(unsigned char *send_buff,unsigned int length);
 static void RS485_Delay(uint32_t nCount);
 void USART_Configuration(void);
 void UART4_Configuration(void);
+void UART4_Send_Data(unsigned char *send_buff,unsigned int length);
 
 #endif

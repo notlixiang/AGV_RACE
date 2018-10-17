@@ -12,6 +12,7 @@
 ".\output\sys.o"
 ".\output\systick.o"
 ".\output\stm32f4xx_it.o"
+".\output\qr.o"
 ".\output\misc.o"
 ".\output\stm32f4xx_rcc.o"
 ".\output\stm32f4xx_tim.o"

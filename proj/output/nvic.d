@@ -38,3 +38,7 @@
 .\output\nvic.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\nvic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\nvic.o: ..\User\led.h
+.\output\nvic.o: ..\User\main.h
+.\output\nvic.o: ..\User\qr.h
+.\output\nvic.o: ..\User\sci.h
+.\output\nvic.o: ..\User\delay.h

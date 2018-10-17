@@ -13,6 +13,9 @@
 #include <stdlib.h>
 #include "led.h"
 #include <stdint.h>
+#include "qr.h"
+#include "sci.h"
+#include "delay.h"
 
 #define N1 0x01 //CAN ID of each wheel, left front wheel
 #define N2 0x0C  //left back wheel

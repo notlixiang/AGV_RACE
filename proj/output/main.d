@@ -38,11 +38,13 @@
 .\output\main.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\main.o: ..\User\led.h
-.\output\main.o: ..\User\SCI.H
+.\output\main.o: ..\User\main.h
+.\output\main.o: ..\User\qr.h
+.\output\main.o: ..\User\sci.h
+.\output\main.o: ..\User\delay.h
 .\output\main.o: ..\User\NVIC.H
 .\output\main.o: ..\User\can.h
 .\output\main.o: ..\User\myiic.h
 .\output\main.o: ..\User\sys.h
 .\output\main.o: ..\User\ks103.h
-.\output\main.o: ..\User\delay.h
 .\output\main.o: ..\User\SysTick.H

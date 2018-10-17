@@ -211,6 +211,17 @@ void UART4_Configuration(void)
 	USART_Cmd(UART4,ENABLE);//最后使能串?
 }
 
+void UART4_Send_Data(unsigned char *send_buff,unsigned int length)
+{
+ 	unsigned int i = 0;
+	for(i = 0;i < length;i ++)
+	{			
+		UART4->DR = send_buff[i];
+		while((UART4->SR&0X40)==0);	
+	}	
+}
+
+
 unsigned int crc_cal_by_bit(unsigned char *ptr, unsigned int len) {
     unsigned int crc = 0;
     while (len-- != 0) {
@@ -226,3 +237,4 @@ unsigned int crc_cal_by_bit(unsigned char *ptr, unsigned int len) {
     }
     return crc;
 }
+

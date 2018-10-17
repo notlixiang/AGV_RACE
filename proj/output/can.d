@@ -38,4 +38,8 @@
 .\output\can.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\can.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\can.o: ..\User\led.h
+.\output\can.o: ..\User\main.h
+.\output\can.o: ..\User\qr.h
+.\output\can.o: ..\User\sci.h
+.\output\can.o: ..\User\delay.h
 .\output\can.o: ..\User\can.h

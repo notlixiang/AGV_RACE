@@ -186,8 +186,9 @@ int main(void) {
     delay_init(168);
     delay(2);
     delay_ms(3000);
-    //init_can();
-    //manyou
+
+	scanner_init();
+	
     int16_t remember_vx = 0;
     int16_t remember_vy = 0;
     int16_t random_value;
@@ -239,6 +240,10 @@ int main(void) {
         }
 
 
+    delay_ms(10000);
+				
+ scanner_triggger() ;
+				
 //		delay_ms(1000);
 //	
 //LED_ON();
@@ -536,7 +541,7 @@ int main(void) {
         CAN1_WriteData(0x600 + N3, &command_read_speed[0], 8);
         delay(2);
         CAN1_WriteData(0x600 + N4, &command_read_speed[0], 8);
-        delay(2);
+        delay_ms(2);
 
 
 //	LED_ON();	
