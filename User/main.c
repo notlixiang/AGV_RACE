@@ -26,7 +26,7 @@
 #define LENGTH 0.670
 #define WIDTH 0.495
 #define RADIUS_OF_WHEEL 0.0825  //unit (m)
-#define RED_RATIO 35
+#define RED_RATIO 20
 #define LINE_NUM 2500
 
 
@@ -38,7 +38,7 @@
 float AGV_OUT_SPEED_K = OUT_SPEED_K;
 float AGV_SHAPE_K = (LENGTH+WIDTH)/2;
 
-#define SPEED_MAX 200		//	mm/s 直线速度，经过测试可以保证驱动器稳定工作最高为700
+#define SPEED_MAX 1200		//	mm/s 直线速度，经过测试可以保证驱动器稳定工作最高为700
 #define OMEGA_MAX SPEED_MAX/AGV_SHAPE_K		// 	mrad/s	旋转速度，保证驱动器稳定工作
 
 #define DELTA_SPEED_MAX 100
@@ -196,6 +196,7 @@ int main(void)
 	LED_Configuration();
 	delay_init(168);
 	delay(2);
+	delay_ms(3000);
 	//init_can();
 	//manyou
 	int16_t remember_vx = 0;
@@ -235,6 +236,7 @@ while(1)
 
 //	delay(20);
 //	CAN1_WriteData(0x600+N2, &command_test[0], 8);
+	
 msg_cnt-=1;
 	if(msg_cnt<0)
 	{
@@ -250,6 +252,14 @@ msg_cnt-=1;
 LED_OFF();	
 	}
 	
+	
+//		delay_ms(1000);
+//	
+//LED_ON();
+//	
+//		delay_ms(1000);
+//	
+//LED_OFF();	
 	
 	
 if(RS232_REC_Flag == 1)	   //如果串口接收到一帧数据（以“?;”结尾）
@@ -470,7 +480,6 @@ for(int i=0;i<8;i++)
 //		remember_vy = vy;
 	
 //********************************************
-vx=100;
 							if(vx>SPEED_MAX)vx=SPEED_MAX;
 							if(vx<-SPEED_MAX)vx=-SPEED_MAX;
 							if(vy>SPEED_MAX)vy=SPEED_MAX;

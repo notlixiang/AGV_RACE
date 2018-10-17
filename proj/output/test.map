@@ -76,6 +76,7 @@ Section Cross References
     main.o(i.main) refers to led.o(i.LED_Configuration) for LED_Configuration
     main.o(i.main) refers to delay.o(i.delay_init) for delay_init
     main.o(i.main) refers to main.o(i.delay) for delay
+    main.o(i.main) refers to delay.o(i.delay_ms) for delay_ms
     main.o(i.main) refers to main.o(i.init_motor) for init_motor
     main.o(i.main) refers to can.o(i.CAN1_WriteData) for CAN1_WriteData
     main.o(i.main) refers to led.o(i.LED_ON) for LED_ON
@@ -434,9 +435,7 @@ Removing Unused input sections from the image.
     Removing can.o(i.write_position_value), (16 bytes).
     Removing can.o(i.write_speed_value), (16 bytes).
     Removing delay.o(.emb_text), (8 bytes).
-    Removing delay.o(i.delay_ms), (52 bytes).
     Removing delay.o(i.delay_us), (52 bytes).
-    Removing delay.o(i.delay_xms), (52 bytes).
     Removing ks103.o(.emb_text), (8 bytes).
     Removing ks103.o(i.KS103_ReadOneByte), (68 bytes).
     Removing ks103.o(i.KS103_WriteOneByte), (50 bytes).
@@ -674,7 +673,7 @@ Removing Unused input sections from the image.
     Removing dfixul.o(.text), (48 bytes).
     Removing cdrcmple.o(.text), (48 bytes).
 
-244 unused section(s) (total 7567 bytes) removed from the image.
+242 unused section(s) (total 7463 bytes) removed from the image.
 
 ==============================================================================
 
@@ -686,41 +685,41 @@ Image Symbol Table
 
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
     ../clib/microlib/printf/stubs.s          0x00000000   Number         0  stubs.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  useno.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
     ../fplib/microlib/fpdiv.c                0x00000000   Number         0  ddiv.o ABSOLUTE
     ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
-    ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixi.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixul.o ABSOLUTE
+    ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixi.o ABSOLUTE
     ../fplib/microlib/fpflt.c                0x00000000   Number         0  dflti.o ABSOLUTE
     ../fplib/microlib/fpmul.c                0x00000000   Number         0  dmul.o ABSOLUTE
     ..\Libraries\STM32F4xx_StdPeriph_Driver\src\misc.c 0x00000000   Number         0  misc.o ABSOLUTE
@@ -789,8 +788,8 @@ Image Symbol Table
     .text                                    0x080003b4   Section        0  dfixi.o(.text)
     .text                                    0x080003f2   Section        0  uidiv.o(.text)
     .text                                    0x0800041e   Section        0  llushr.o(.text)
-    .text                                    0x0800043e   Section        0  iusefp.o(.text)
     .text                                    0x0800043e   Section        0  depilogue.o(.text)
+    .text                                    0x0800043e   Section        0  iusefp.o(.text)
     .text                                    0x080004f8   Section       36  init.o(.text)
     .text                                    0x0800051c   Section        0  llshl.o(.text)
     i.BusFault_Handler                       0x0800053a   Section        0  stm32f4xx_it.o(i.BusFault_Handler)
@@ -858,10 +857,12 @@ Image Symbol Table
     _sputc                                   0x08001789   Thumb Code    10  printf1.o(i._sputc)
     i.delay                                  0x08001792   Section        0  main.o(i.delay)
     i.delay_init                             0x080017ac   Section        0  delay.o(i.delay_init)
-    i.init_can                               0x080017d8   Section        0  main.o(i.init_can)
-    i.init_motor                             0x080017f4   Section        0  main.o(i.init_motor)
-    i.main                                   0x08001848   Section        0  main.o(i.main)
-    .constdata                               0x08001e68   Section      360  can.o(.constdata)
+    i.delay_ms                               0x080017d8   Section        0  delay.o(i.delay_ms)
+    i.delay_xms                              0x0800180c   Section        0  delay.o(i.delay_xms)
+    i.init_can                               0x08001840   Section        0  main.o(i.init_can)
+    i.init_motor                             0x0800185c   Section        0  main.o(i.init_motor)
+    i.main                                   0x080018b0   Section        0  main.o(i.main)
+    .constdata                               0x08001ee4   Section      360  can.o(.constdata)
     .data                                    0x20000000   Section        9  can.o(.data)
     .data                                    0x2000000a   Section        4  delay.o(.data)
     fac_us                                   0x2000000a   Data           1  delay.o(.data)
@@ -1108,12 +1109,14 @@ Image Symbol Table
     __scatterload_zeroinit                   0x08001625   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
     delay                                    0x08001793   Thumb Code    26  main.o(i.delay)
     delay_init                               0x080017ad   Thumb Code    38  delay.o(i.delay_init)
-    init_can                                 0x080017d9   Thumb Code    22  main.o(i.init_can)
-    init_motor                               0x080017f5   Thumb Code    80  main.o(i.init_motor)
-    main                                     0x08001849   Thumb Code  1510  main.o(i.main)
-    CAN_baud_table                           0x08001e68   Data         360  can.o(.constdata)
-    Region$$Table$$Base                      0x08001fd0   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08001ff0   Number         0  anon$$obj.o(Region$$Table)
+    delay_ms                                 0x080017d9   Thumb Code    52  delay.o(i.delay_ms)
+    delay_xms                                0x0800180d   Thumb Code    46  delay.o(i.delay_xms)
+    init_can                                 0x08001841   Thumb Code    22  main.o(i.init_can)
+    init_motor                               0x0800185d   Thumb Code    80  main.o(i.init_motor)
+    main                                     0x080018b1   Thumb Code  1530  main.o(i.main)
+    CAN_baud_table                           0x08001ee4   Data         360  can.o(.constdata)
+    Region$$Table$$Base                      0x0800204c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0800206c   Number         0  anon$$obj.o(Region$$Table)
     can1_rec_flag                            0x20000000   Data           1  can.o(.data)
     CAN1_data                                0x20000001   Data           8  can.o(.data)
     received_len                             0x20000010   Data           1  main.o(.data)
@@ -1168,9 +1171,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000020ac, Max: 0x00080000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00002128, Max: 0x00080000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00001ff0, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x0000206c, Max: 0x00080000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1262,11 +1265,13 @@ Memory Map of the image
     0x08001788   0x0000000a   Code   RO         2076    i._sputc            mc_w.l(printf1.o)
     0x08001792   0x0000001a   Code   RO          294    i.delay             main.o
     0x080017ac   0x0000002c   Code   RO          181    i.delay_init        delay.o
-    0x080017d8   0x0000001c   Code   RO          295    i.init_can          main.o
-    0x080017f4   0x00000054   Code   RO          296    i.init_motor        main.o
-    0x08001848   0x00000620   Code   RO          297    i.main              main.o
-    0x08001e68   0x00000168   Data   RO           18    .constdata          can.o
-    0x08001fd0   0x00000020   Data   RO         2326    Region$$Table       anon$$obj.o
+    0x080017d8   0x00000034   Code   RO          182    i.delay_ms          delay.o
+    0x0800180c   0x00000034   Code   RO          184    i.delay_xms         delay.o
+    0x08001840   0x0000001c   Code   RO          295    i.init_can          main.o
+    0x0800185c   0x00000054   Code   RO          296    i.init_motor        main.o
+    0x080018b0   0x00000634   Code   RO          297    i.main              main.o
+    0x08001ee4   0x00000168   Data   RO           18    .constdata          can.o
+    0x0800204c   0x00000020   Data   RO         2326    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x000005a8, Max: 0x00020000, ABSOLUTE)
@@ -1298,9 +1303,9 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
        644         40        360          9         20     251315   can.o
-        44          6          0          4          0        705   delay.o
+       148         12          0          4          0       1876   delay.o
        596         38          0          0          0       1783   led.o
-      1706        104          0        136        182       6187   main.o
+      1726        108          0        136        182       6187   main.o
        164         22          0          0          0       2875   misc.o
         64          8          0          0          0        507   myiic.o
         82          0          0          0          0        557   nvic.o
@@ -1315,7 +1320,7 @@ Image component sizes
         56         10          0         12          0       1558   systick.o
 
     ----------------------------------------------------------------------
-      6076        418        784        188       1260     297472   Object Totals
+      6200        428        784        188       1260     298643   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          0          3          9          0   (incl. Padding)
 
@@ -1365,15 +1370,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      7392        444        784        188       1260     293020   Grand Totals
-      7392        444        784        188       1260     293020   ELF Image Totals
-      7392        444        784        188          0          0   ROM Totals
+      7516        454        784        188       1260     293991   Grand Totals
+      7516        454        784        188       1260     293991   ELF Image Totals
+      7516        454        784        188          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 8176 (   7.98kB)
+    Total RO  Size (Code + RO Data)                 8300 (   8.11kB)
     Total RW  Size (RW Data + ZI Data)              1448 (   1.41kB)
-    Total ROM Size (Code + RO Data + RW Data)       8364 (   8.17kB)
+    Total ROM Size (Code + RO Data + RW Data)       8488 (   8.29kB)
 
 ==============================================================================
 
