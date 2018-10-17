@@ -184,6 +184,7 @@ int main(void) {
     IIC_Init();
     LED_Configuration();
     delay_init(168);
+    LED_ON();
     delay(2);
     delay_ms(3000);
 
@@ -218,9 +219,9 @@ int main(void) {
 
     float msg_cnt = msg_cnt_max;
 
-    float led_on_cnt = 20.0 / 0.05;
+    float led_on_cnt = 20.0;
     led_on_cnt = 20;
-    LED_ON();
+    LED_OFF();
     while (1) {
 
 //	delay(20);
@@ -238,7 +239,6 @@ int main(void) {
         } else {
             LED_OFF();
         }
-
 
     delay_ms(10000);
 				
