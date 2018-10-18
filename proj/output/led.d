@@ -42,3 +42,4 @@
 .\output\led.o: ..\User\qr.h
 .\output\led.o: ..\User\sci.h
 .\output\led.o: ..\User\delay.h
+.\output\led.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

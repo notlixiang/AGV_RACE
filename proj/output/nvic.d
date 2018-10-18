@@ -42,3 +42,4 @@
 .\output\nvic.o: ..\User\qr.h
 .\output\nvic.o: ..\User\sci.h
 .\output\nvic.o: ..\User\delay.h
+.\output\nvic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

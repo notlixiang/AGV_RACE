@@ -42,4 +42,5 @@
 .\output\can.o: ..\User\qr.h
 .\output\can.o: ..\User\sci.h
 .\output\can.o: ..\User\delay.h
+.\output\can.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\output\can.o: ..\User\can.h

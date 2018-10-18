@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
 �ļ����ƣ�NVIC.C
 ��    �ܣ�
 ��дʱ�䣺2013.4.25
@@ -20,7 +20,7 @@ void NVIC_Configuration(void)
 											
 	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;	  
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;	
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;	
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
@@ -32,6 +32,15 @@ void NVIC_Configuration(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	
+	
+											
+	NVIC_InitStructure.NVIC_IRQChannel = UART4_IRQn;	 
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); 
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;	
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	

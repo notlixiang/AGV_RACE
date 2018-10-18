@@ -17,4 +17,8 @@ void scanner_init(void);
 
 void scanner_triggger(void) ;
 
+void send_read_command(void);
+
+void send_set_command(void);
+
 #endif

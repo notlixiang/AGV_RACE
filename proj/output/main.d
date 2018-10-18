@@ -42,6 +42,7 @@
 .\output\main.o: ..\User\qr.h
 .\output\main.o: ..\User\sci.h
 .\output\main.o: ..\User\delay.h
+.\output\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\output\main.o: ..\User\NVIC.H
 .\output\main.o: ..\User\can.h
 .\output\main.o: ..\User\myiic.h

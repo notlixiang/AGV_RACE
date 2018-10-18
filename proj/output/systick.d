@@ -42,3 +42,4 @@
 .\output\systick.o: ..\User\qr.h
 .\output\systick.o: ..\User\sci.h
 .\output\systick.o: ..\User\delay.h
+.\output\systick.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

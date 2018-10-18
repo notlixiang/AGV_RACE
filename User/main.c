@@ -240,9 +240,8 @@ int main(void) {
             LED_OFF();
         }
 
-    delay_ms(10000);
-				
  scanner_triggger() ;
+  send_read_command();
 				
 //		delay_ms(1000);
 //	

@@ -48,6 +48,11 @@ USART1~6 时钟 :RCC_APB1PeriphClockCmd
 volatile unsigned char RS232_REC_Flag = 0;
 volatile unsigned char RS232_buff[RS232_REC_BUFF_SIZE];//用于接收数据
 volatile unsigned int RS232_rec_counter = 0;//用于RS232接收计数
+
+volatile unsigned char UART4_REC_Flag = 0;
+volatile unsigned char UART4_buff[UART4_REC_BUFF_SIZE];//用于接收数据
+volatile unsigned int UART4_rec_counter = 0;//用于RS232接收计数
+
 static void RS485_Delay(uint32_t nCount);
 
 
@@ -209,6 +214,8 @@ void UART4_Configuration(void)
 	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);        ///////接收中断使能
 	USART_ClearITPendingBit(UART4, USART_IT_TC);//清除中断TC位
 	USART_Cmd(UART4,ENABLE);//最后使能串?
+
+
 }
 
 void UART4_Send_Data(unsigned char *send_buff,unsigned int length)
@@ -221,6 +228,33 @@ void UART4_Send_Data(unsigned char *send_buff,unsigned int length)
 	}	
 }
 
+void UART4_IRQHandler(void)  
+{
+	USART_ClearFlag(UART4,USART_FLAG_TC);
+	if(USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
+	{	
+		UART4_buff[UART4_rec_counter] = UART4->DR;//
+		RS232_Send_Data(UART4_buff+UART4_rec_counter,1);
+		UART4_rec_counter ++;
+/********以RS232_END_FLAG1和RS232_END_FLAG2定义的字符作为一帧数据的结束标识************/
+//		if(UART4_rec_counter >= 2)	//只有接收到2个数据以上才做判断
+//		{
+//			if(UART4_buff[RS232_rec_counter - 1] == RS232_END_FLAG1 && RS232_buff[RS232_rec_counter - 1] == RS232_END_FLAG2) 	//帧起始标志   
+//			{
+//				RS232_REC_Flag = 1;
+//			}
+//		}
+//		if(RS232_rec_counter > RS232_REC_BUFF_SIZE)//超过接收缓冲区大小
+//		{
+//			RS232_rec_counter = 0;
+//		}
+		USART_ClearITPendingBit(UART4, USART_IT_RXNE);
+	}
+	if (USART_GetITStatus(UART4, USART_IT_TXE) != RESET) 
+	{
+        USART_ClearITPendingBit(UART4, USART_IT_TXE);           /* Clear the USART transmit interrupt                  */
+  }	
+}
 
 unsigned int crc_cal_by_bit(unsigned char *ptr, unsigned int len) {
     unsigned int crc = 0;
