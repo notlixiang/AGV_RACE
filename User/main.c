@@ -240,8 +240,8 @@ int main(void) {
             LED_OFF();
         }
 
+// send_read_command();
  scanner_triggger() ;
-  send_read_command();
 				
 //		delay_ms(1000);
 //	
@@ -565,7 +565,7 @@ int main(void) {
 //	(int)(speed_read_value[2]),
 //	(int)(speed_read_value[3]));
 
-        //RS232_Send_Data(dtu_buff,strlen(dtu_buff));
+    //    RS232_Send_Data(dtu_buff,strlen(dtu_buff));
         //50ms in total
 
     }
