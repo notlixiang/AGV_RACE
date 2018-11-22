@@ -38,7 +38,7 @@
 float AGV_OUT_SPEED_K = OUT_SPEED_K;
 float AGV_SHAPE_K = (LENGTH+WIDTH)/2;
 
-#define SPEED_MAX 1200		//	mm/s 直线速度，经过测试可以保证驱动器稳定工作最高为700
+#define SPEED_MAX 700		//	mm/s 直线速度，经过测试可以保证驱动器稳定工作最高为700
 #define OMEGA_MAX SPEED_MAX/AGV_SHAPE_K		// 	mrad/s	旋转速度，保证驱动器稳定工作
 
 #define DELTA_SPEED_MAX 100
@@ -302,7 +302,7 @@ if(RS232_REC_Flag == 1)	   //如果串口接收到一帧数据（以“?;”结�
 							uvx = received_data[head_index+4]*0x0100+received_data[head_index+5];
 							vy = (int16_t)uvx;
 							uvy = received_data[head_index+6]*0x0100+received_data[head_index+7];
-							vx = (int16_t)uvy;
+							vx = -(int16_t)uvy;
 							uwz = received_data[head_index+8]*0x0100+received_data[head_index+9];
 							wz = (int16_t)uwz;
 							temp_recv_omega=uwz;
