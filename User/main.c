@@ -38,7 +38,7 @@
 float AGV_OUT_SPEED_K = OUT_SPEED_K;
 float AGV_SHAPE_K = (LENGTH+WIDTH)/2;
 
-#define SPEED_MAX 700		//	mm/s 直线速度，经过测试可以保证驱动器稳定工作最高为700
+#define SPEED_MAX 1500		//	mm/s 直线速度，经过测试可以保证驱动器稳定工作最高为700
 #define OMEGA_MAX SPEED_MAX/AGV_SHAPE_K		// 	mrad/s	旋转速度，保证驱动器稳定工作
 
 #define DELTA_SPEED_MAX 100
@@ -124,6 +124,10 @@ int16_t vy = 0;
 uint16_t uwz = 0;
 int16_t wz = 0;
 
+int16_t vx_send_back=0;
+int16_t vy_send_back=0;
+int16_t wz_send_back=0;
+
 
 int16_t vxPrevious = 0;
 int16_t vyPrevious = 0;
@@ -150,6 +154,7 @@ void delay(uint32_t t)
 	{
 		for(j=0;j<10000;j++);
 	}
+	//delay_ms(t);
 }
 
 void init_can()
@@ -306,6 +311,10 @@ if(RS232_REC_Flag == 1)	   //如果串口接收到一帧数据（以“?;”结�
 							uwz = received_data[head_index+8]*0x0100+received_data[head_index+9];
 							wz = (int16_t)uwz;
 							temp_recv_omega=uwz;
+							
+ vx_send_back=vx;
+ vy_send_back=vy;
+ wz_send_back=wz;
 						}
 						
 		msg_cnt=msg_cnt_max;
@@ -579,11 +588,12 @@ for(int i=0;i<8;i++)
 //	delay(999);
 
 	delay(26);
- 	sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0", 
-	(int)(speed_read_value[0]/K_omega*1000.0),
-	(int)(speed_read_value[1]/K_omega*1000.0),
-	(int)(speed_read_value[2]/K_omega*1000.0),
-	(int)(speed_read_value[3]/K_omega*1000.0));
+// 	sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0", 
+//	(int)(speed_read_value[0]/K_omega*1000.0),
+//	(int)(speed_read_value[1]/K_omega*1000.0),
+//	(int)(speed_read_value[2]/K_omega*1000.0),
+//	(int)(speed_read_value[3]/K_omega*1000.0));
+	
 //	sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0", 
 //	(int)(speed_read_value[0]/OUT_OMEGA_K*1000.0),
 //	(int)(speed_read_value[1]/OUT_OMEGA_K*1000.0),
@@ -594,8 +604,13 @@ for(int i=0;i<8;i++)
 //	(int)(speed_read_value[1]),
 //	(int)(speed_read_value[2]),
 //	(int)(speed_read_value[3]));
+
+sprintf(dtu_buff, "SPEEDDTU%d,%d,%dDTUSPEED\r\n\0", 
+	(int)vx_send_back,
+	(int)vy_send_back,
+	(int)wz_send_back);
 	
-	//RS232_Send_Data(dtu_buff,strlen(dtu_buff));
+	RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 				//50ms in total
 
 }
