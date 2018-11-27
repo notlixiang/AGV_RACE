@@ -132,37 +132,37 @@ int temp_recv_omega=0;
 
 unsigned char dtu_buff[50];
 
-void delay(uint32_t t)
-{
-	uint32_t i;
-	uint16_t j;
-	for(i=0;i<t;i++)
-	{
-		for(j=0;j<10000;j++);
-	}
-}
+//void delay_ms(uint32_t t)
+//{
+//	uint32_t i;
+//	uint16_t j;
+//	for(i=0;i<t;i++)
+//	{
+//		for(j=0;j<10000;j++);
+//	}
+//}
 
 void init_can()
 {
 	CAN1_WriteData(0x00, &init[0], 2);
-	delay(2);
+	delay_ms(2);
 
 }
 
 
 void init_motor(uint64_t num)
 {
-	delay(40);
+	delay_ms(40);
 	begin1[1] = num;
 	
 	CAN1_WriteData(0x00, &begin1[0], 2);
-	delay(40);
+	delay_ms(40);
 	
 	CAN1_WriteData(0x600+num, &begin2[0], 8);
-	delay(40);
+	delay_ms(40);
 
 	CAN1_WriteData(0x600+num, &begin3[0], 8);
-	delay(40);
+	delay_ms(40);
 }
 
 
@@ -185,7 +185,7 @@ int main(void)
 	IIC_Init();
 	LED_Configuration();
 	delay_init(168);
-	delay(2);
+	delay_ms(2);
 	delay_ms(3000);
 	//init_can();
 	//manyou
@@ -206,13 +206,13 @@ int main(void)
 	command3[6] = (uint8_t)(0x0000000f);
 	command4[6] = (uint8_t)(0x0000000f);
 	
-	  delay(2);
+	  delay_ms(2);
 	CAN1_WriteData(0x600+N1, &command1[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N2, &command2[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N3, &command3[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N4, &command4[0], 8);
 //	
 
@@ -224,7 +224,7 @@ LED_ON();
 while(1)
 {
 
-//	delay(20);
+//	delay_ms(20);
 //	CAN1_WriteData(0x600+N2, &command_test[0], 8);
 	
 msg_cnt-=1;
@@ -243,11 +243,11 @@ LED_OFF();
 	}
 	
 	
-//		delay_ms(1000);
+//		delay_ms_ms(1000);
 //	
 //LED_ON();
 //	
-//		delay_ms(1000);
+//		delay_ms_ms(1000);
 //	
 //LED_OFF();	
 	
@@ -316,7 +316,7 @@ if(0)
 for(int i=0;i<8;i++)
 {
 	KS103_WriteOneByte(ultrasonic_Address2[i],0X02,0X71); 
-	delay(5);
+	delay_ms(5);
 } 
 u8  CurrentAddress=0;
 u8  OldAddress=0;
@@ -531,44 +531,44 @@ for(int i=0;i<8;i++)
 	
 
 
-  delay(2);
+  delay_ms(2);
 	CAN1_WriteData(0x600+N1, &command1[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N2, &command2[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N3, &command3[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N4, &command4[0], 8);
 	
 
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N1, &command_read_position[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N2, &command_read_position[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N3, &command_read_position[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N4, &command_read_position[0], 8);
 	
 	
 	//read speed command_read_speed
-		delay(2);
+		delay_ms(2);
 	CAN1_WriteData(0x600+N1, &command_read_speed[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N2, &command_read_speed[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N3, &command_read_speed[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N4, &command_read_speed[0], 8);
-	delay(2);
+	delay_ms(2);
 	
 	
 //	LED_ON();	
-//	delay(999);
+//	delay_ms(999);
 //	LED_OFF();	
-//	delay(999);
+//	delay_ms(999);
 
-	delay(26);
+	delay_ms(26);
  	sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0", 
 	(int)(speed_read_value[0]/K_omega*1000.0),
 	(int)(speed_read_value[1]/K_omega*1000.0),
