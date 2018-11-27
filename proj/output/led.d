@@ -38,3 +38,4 @@
 .\output\led.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\led.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\led.o: ..\User\led.h
+.\output\led.o: ..\User\odometer.h

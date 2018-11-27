@@ -449,6 +449,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\stm32f4xx_it.c</FilePath>
             </File>
+            <File>
+              <FileName>odometer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\odometer.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -38,3 +38,4 @@
 .\output\nvic.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\nvic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\nvic.o: ..\User\led.h
+.\output\nvic.o: ..\User\odometer.h

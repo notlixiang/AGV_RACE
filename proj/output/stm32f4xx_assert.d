@@ -38,3 +38,4 @@
 .\output\stm32f4xx_assert.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\stm32f4xx_assert.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\stm32f4xx_assert.o: ..\User\led.h
+.\output\stm32f4xx_assert.o: ..\User\odometer.h

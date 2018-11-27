@@ -23,16 +23,7 @@
 
 
 
-#define LENGTH 0.670
-#define WIDTH 0.495
-#define RADIUS_OF_WHEEL 0.0825  //unit (m)
-#define RED_RATIO 20
-#define LINE_NUM 2500
 
-
-#define OUT_SPEED_K 4*5*RED_RATIO*LINE_NUM/(PI*RADIUS_OF_WHEEL*1000)
-#define OUT_OMEGA_K 4*5*RED_RATIO*LINE_NUM/(PI)
-#define K_omega 557042.300821634
 
 
 float AGV_OUT_SPEED_K = OUT_SPEED_K;
@@ -47,8 +38,7 @@ float AGV_SHAPE_K = (LENGTH+WIDTH)/2;
 
 #define Speed_K 5000
 
-#define L_DIRECTION (1)
-#define R_DIRECTION (-1)  //install direction of motors output axis, let left direction installnation as positive.
+ //install direction of motors output axis, let left direction installnation as positive.
 
 
 #define msg_cnt_max  2000
@@ -300,9 +290,9 @@ if(RS232_REC_Flag == 1)	   //如果串口接收到一帧数据（以“?;”结�
 						if(/*received_data[head_index+2]==0x01&&*/agv_started==1)//started
 						{
 							uvx = received_data[head_index+4]*0x0100+received_data[head_index+5];
-							vy = (int16_t)uvx;
+							vx = (int16_t)uvx;
 							uvy = received_data[head_index+6]*0x0100+received_data[head_index+7];
-							vx = (int16_t)uvy;
+							vy  = (int16_t)uvy;
 							uwz = received_data[head_index+8]*0x0100+received_data[head_index+9];
 							wz = (int16_t)uwz;
 							temp_recv_omega=uwz;
@@ -505,10 +495,10 @@ for(int i=0;i<8;i++)
 		wzPrevious=wz;
 		
 	
-	omega1f = AGV_OUT_SPEED_K*(-1*vx + 1*vy + AGV_SHAPE_K * wz);
-	omega2f = AGV_OUT_SPEED_K*(vx + 1*vy + AGV_SHAPE_K * wz);
-	omega3f = AGV_OUT_SPEED_K*(-1*vx + 1*vy - AGV_SHAPE_K * wz);
-	omega4f = AGV_OUT_SPEED_K*(vx + 1*vy - AGV_SHAPE_K * wz);
+	omega1f = AGV_OUT_SPEED_K*(1*vx + 1*vy + AGV_SHAPE_K * wz);
+	omega2f = AGV_OUT_SPEED_K*(vx - 1*vy + AGV_SHAPE_K * wz);
+	omega3f = AGV_OUT_SPEED_K*(1*vx + 1*vy - AGV_SHAPE_K * wz);
+	omega4f = AGV_OUT_SPEED_K*(vx - 1*vy - AGV_SHAPE_K * wz);
 	
 	omega1 = (int32_t)(L_DIRECTION*1*omega1f);
 	omega2 = (int32_t)(L_DIRECTION*1*omega2f);

@@ -14,12 +14,28 @@
 #include "led.h"
 #include <stdint.h>
 
+#include "odometer.h"
+
 #define N1 0x01 //CAN ID of each wheel, left front wheel
 #define N2 0x0C  //left back wheel
 #define N3 0x04	//right back wheel
 #define N4 0x02	//right front wheel
 
 #define PI 3.14159265359
+
+#define LENGTH 0.670
+#define WIDTH 0.495
+#define RADIUS_OF_WHEEL 0.0825  //unit (m)
+#define RED_RATIO 20
+#define LINE_NUM 2500
+
+
+#define OUT_SPEED_K 4*5*RED_RATIO*LINE_NUM/(PI*RADIUS_OF_WHEEL*1000)
+#define OUT_OMEGA_K 4*5*RED_RATIO*LINE_NUM/(PI)
+#define K_omega 557042.300821634
+
+#define L_DIRECTION (1)
+#define R_DIRECTION (-1) 
 
 #endif
 
