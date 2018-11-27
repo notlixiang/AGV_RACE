@@ -529,7 +529,7 @@ I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x4EAA13FA)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x4EAA13FA)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x4EAA13FA)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x4EAA13FA)
-F (..\User\odometer.c)(0x5BFD3395)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I ..\Libraries\CMSIS\Include -I ..\User --diag_suppress=870 -D__UVISION_VERSION="523" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX --C99-o .\output\odometer.o --omf_browse .\output\odometer.crf --depend .\output\odometer.d)
+F (..\User\odometer.c)(0x5BFD4031)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I ..\Libraries\CMSIS\Include -I ..\User --diag_suppress=870 -D__UVISION_VERSION="523" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX --C99-o .\output\odometer.o --omf_browse .\output\odometer.crf --depend .\output\odometer.d)
 I (..\User\main.h)(0x5BFCF568)
 I (..\User\stm32f4xx_it.h)(0x4F69E81E)
 I (..\User\stm32f4xx.h)(0x4EAA13F6)

@@ -23,11 +23,13 @@ void odometer_update_by_xyz(float vx,float vy,float wz,float delta_t)
 //	odometer_z+=wz*delta_t;
 //	
 	
-	odometer_x=vx*delta_t+odometer_x*cos(wz*delta_t/1000.0)-odometer_y*sin(wz*delta_t/1000.0);
-	odometer_y=vy*delta_t+odometer_x*sin(wz*delta_t/1000.0)+odometer_y*cos(wz*delta_t/1000.0);
+//	odometer_x=vx*delta_t+odometer_x*cos(wz*delta_t/1000.0)-odometer_y*sin(wz*delta_t/1000.0);
+//	odometer_y=vy*delta_t+odometer_x*sin(wz*delta_t/1000.0)+odometer_y*cos(wz*delta_t/1000.0);
+//	odometer_z+=wz*delta_t;
+	
+	odometer_x=odometer_x+vx*delta_t*cos(odometer_z/1000.0)-vy*delta_t*sin(odometer_z/1000.0);
+	odometer_y=odometer_y+vx*delta_t*sin(odometer_z/1000.0)+vy*delta_t*cos(odometer_z/1000.0);
 	odometer_z+=wz*delta_t;
-	
-	
 	
 }
 
