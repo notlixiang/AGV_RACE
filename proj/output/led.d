@@ -38,3 +38,13 @@
 .\output\led.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\output\led.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\led.o: ..\User\led.h
+.\output\led.o: ..\User\odometer.h
+.\output\led.o: ..\User\SCI.H
+.\output\led.o: ..\User\NVIC.H
+.\output\led.o: ..\User\can.h
+.\output\led.o: ..\User\myiic.h
+.\output\led.o: ..\User\sys.h
+.\output\led.o: ..\User\ks103.h
+.\output\led.o: ..\User\delay.h
+.\output\led.o: ..\User\SysTick.H
+.\output\led.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

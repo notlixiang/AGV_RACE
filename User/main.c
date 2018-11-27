@@ -7,32 +7,14 @@
 ***********************************************************************/
 #include "main.h"	
 
-#include "stm32f4xx_it.h"
-#include "stm32f4xx.h"
-#include "SCI.H"
-#include "NVIC.H"
-#include "can.h"
-#include "myiic.h"
-#include "ks103.h"
-//#include "IIC.h"
-#include "delay.h"
-#include "SysTick.H"
+
 
 #define abs(x) ((x)>=0?(x):-(x))
 
 
 
 
-#define LENGTH 0.670
-#define WIDTH 0.495
-#define RADIUS_OF_WHEEL 0.0825  //unit (m)
-#define RED_RATIO 20
-#define LINE_NUM 2500
 
-
-#define OUT_SPEED_K 4*5*RED_RATIO*LINE_NUM/(PI*RADIUS_OF_WHEEL*1000)
-#define OUT_OMEGA_K 4*5*RED_RATIO*LINE_NUM/(PI)
-#define K_omega 557042.300821634
 
 
 float AGV_OUT_SPEED_K = OUT_SPEED_K;
@@ -47,8 +29,7 @@ float AGV_SHAPE_K = (LENGTH+WIDTH)/2;
 
 #define Speed_K 5000
 
-#define L_DIRECTION (1)
-#define R_DIRECTION (-1)  //install direction of motors output axis, let left direction installnation as positive.
+ //install direction of motors output axis, let left direction installnation as positive.
 
 
 #define msg_cnt_max  2000
@@ -142,37 +123,37 @@ int temp_recv_omega=0;
 
 unsigned char dtu_buff[50];
 
-void delay(uint32_t t)
-{
-	uint32_t i;
-	uint16_t j;
-	for(i=0;i<t;i++)
-	{
-		for(j=0;j<10000;j++);
-	}
-}
+//void delay_ms(uint32_t t)
+//{
+//	uint32_t i;
+//	uint16_t j;
+//	for(i=0;i<t;i++)
+//	{
+//		for(j=0;j<10000;j++);
+//	}
+//}
 
 void init_can()
 {
 	CAN1_WriteData(0x00, &init[0], 2);
-	delay(2);
+	delay_ms(2);
 
 }
 
 
 void init_motor(uint64_t num)
 {
-	delay(40);
+	delay_ms(40);
 	begin1[1] = num;
 	
 	CAN1_WriteData(0x00, &begin1[0], 2);
-	delay(40);
+	delay_ms(40);
 	
 	CAN1_WriteData(0x600+num, &begin2[0], 8);
-	delay(40);
+	delay_ms(40);
 
 	CAN1_WriteData(0x600+num, &begin3[0], 8);
-	delay(40);
+	delay_ms(40);
 }
 
 
@@ -195,7 +176,7 @@ int main(void)
 	IIC_Init();
 	LED_Configuration();
 	delay_init(168);
-	delay(2);
+	delay_ms(2);
 	delay_ms(3000);
 	//init_can();
 	//manyou
@@ -216,15 +197,26 @@ int main(void)
 	command3[6] = (uint8_t)(0x0000000f);
 	command4[6] = (uint8_t)(0x0000000f);
 	
-	  delay(2);
+	  delay_ms(2);
 	CAN1_WriteData(0x600+N1, &command1[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N2, &command2[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N3, &command3[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N4, &command4[0], 8);
 //	
+
+delay_ms(2);
+	CAN1_WriteData(0x600+N1, &command_read_speed[0], 8);
+	delay_ms(2);
+	CAN1_WriteData(0x600+N2, &command_read_speed[0], 8);
+	delay_ms(2);
+	CAN1_WriteData(0x600+N3, &command_read_speed[0], 8);
+	delay_ms(2);
+	CAN1_WriteData(0x600+N4, &command_read_speed[0], 8);
+	delay_ms(2);
+TIM3_Int_Init(ODOM_PERIOD_MS*10-1,8400-1);//里程计更新周期50ms
 
 float msg_cnt=msg_cnt_max;
 
@@ -234,7 +226,7 @@ LED_ON();
 while(1)
 {
 
-//	delay(20);
+//	delay_ms(20);
 //	CAN1_WriteData(0x600+N2, &command_test[0], 8);
 	
 msg_cnt-=1;
@@ -253,11 +245,11 @@ LED_OFF();
 	}
 	
 	
-//		delay_ms(1000);
+//		delay_ms_ms(1000);
 //	
 //LED_ON();
 //	
-//		delay_ms(1000);
+//		delay_ms_ms(1000);
 //	
 //LED_OFF();	
 	
@@ -300,9 +292,9 @@ if(RS232_REC_Flag == 1)	   //如果串口接收到一帧数据（以“?;”结�
 						if(/*received_data[head_index+2]==0x01&&*/agv_started==1)//started
 						{
 							uvx = received_data[head_index+4]*0x0100+received_data[head_index+5];
-							vy = (int16_t)uvx;
+							vx = (int16_t)uvx;
 							uvy = received_data[head_index+6]*0x0100+received_data[head_index+7];
-							vx = (int16_t)uvy;
+							vy  = (int16_t)uvy;
 							uwz = received_data[head_index+8]*0x0100+received_data[head_index+9];
 							wz = (int16_t)uwz;
 							temp_recv_omega=uwz;
@@ -326,7 +318,7 @@ if(0)
 for(int i=0;i<8;i++)
 {
 	KS103_WriteOneByte(ultrasonic_Address2[i],0X02,0X71); 
-	delay(5);
+	delay_ms(5);
 } 
 u8  CurrentAddress=0;
 u8  OldAddress=0;
@@ -505,17 +497,24 @@ for(int i=0;i<8;i++)
 		wzPrevious=wz;
 		
 	
-	omega1f = AGV_OUT_SPEED_K*(-1*vx + 1*vy + AGV_SHAPE_K * wz);
-	omega2f = AGV_OUT_SPEED_K*(vx + 1*vy + AGV_SHAPE_K * wz);
-	omega3f = AGV_OUT_SPEED_K*(-1*vx + 1*vy - AGV_SHAPE_K * wz);
-	omega4f = AGV_OUT_SPEED_K*(vx + 1*vy - AGV_SHAPE_K * wz);
+	omega1f = AGV_OUT_SPEED_K*(1*vx + 1*vy - AGV_SHAPE_K * wz);
+	omega2f = AGV_OUT_SPEED_K*(vx - 1*vy - AGV_SHAPE_K * wz);
+	omega3f = AGV_OUT_SPEED_K*(1*vx + 1*vy + AGV_SHAPE_K * wz);
+	omega4f = AGV_OUT_SPEED_K*(vx - 1*vy + AGV_SHAPE_K * wz);
 	
 	omega1 = (int32_t)(L_DIRECTION*1*omega1f);
 	omega2 = (int32_t)(L_DIRECTION*1*omega2f);
 	omega3 = (int32_t)(R_DIRECTION*1*omega3f);
 	omega4 = (int32_t)(R_DIRECTION*1*omega4f);  //take the installnation direction of motors into account.
 
+	sprintf(dtu_buff, "ODOMDTU w1 %d, w2 %d ,w3 %d, w4 %d,DTUODOM\r\n\0", 
+	(int)omega1, 
+	(int)omega2,
+	(int)omega3,
+	(int)omega4);
 	
+
+	//RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 
 	//uint8_t command[6] = {0x0f, 0x00, 0x00, 0x00, 0x00, 0x00};
 	command1[4] = (uint8_t)(omega1 & 0x000000ff);
@@ -541,44 +540,44 @@ for(int i=0;i<8;i++)
 	
 
 
-  delay(2);
+  delay_ms(2);
 	CAN1_WriteData(0x600+N1, &command1[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N2, &command2[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N3, &command3[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N4, &command4[0], 8);
 	
 
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N1, &command_read_position[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N2, &command_read_position[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N3, &command_read_position[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N4, &command_read_position[0], 8);
 	
 	
 	//read speed command_read_speed
-		delay(2);
+		delay_ms(2);
 	CAN1_WriteData(0x600+N1, &command_read_speed[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N2, &command_read_speed[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N3, &command_read_speed[0], 8);
-	delay(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N4, &command_read_speed[0], 8);
-	delay(2);
+	delay_ms(2);
 	
 	
 //	LED_ON();	
-//	delay(999);
+//	delay_ms(999);
 //	LED_OFF();	
-//	delay(999);
+//	delay_ms(999);
 
-	delay(26);
+	delay_ms(26);
  	sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0", 
 	(int)(speed_read_value[0]/K_omega*1000.0),
 	(int)(speed_read_value[1]/K_omega*1000.0),
@@ -594,6 +593,8 @@ for(int i=0;i<8;i++)
 //	(int)(speed_read_value[1]),
 //	(int)(speed_read_value[2]),
 //	(int)(speed_read_value[3]));
+	
+	
 	
 	//RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 				//50ms in total
