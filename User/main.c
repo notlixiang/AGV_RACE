@@ -52,6 +52,7 @@ float AGV_SHAPE_K = (LENGTH+WIDTH)/2;
 
 
 #define msg_cnt_max  2000
+#define enable_controller_cnt_max  2000
 
 /***********************************************************************
 [omga1]       [1 -1 -(LENGTH+WIDTH)/2] [vx]
@@ -146,6 +147,8 @@ int temp_recv_omega=0;
 
 unsigned char dtu_buff[50];
 
+
+
 void delay(uint32_t t)
 {
 	uint32_t i;
@@ -233,6 +236,7 @@ int main(void)
 
 float msg_cnt=msg_cnt_max;
 
+int enable_controller_cnt=enable_controller_cnt_max;
 float led_on_cnt=20.0/0.05;
 led_on_cnt=20;
 LED_ON();
@@ -255,6 +259,16 @@ msg_cnt-=1;
 	led_on_cnt-=1;
 	}	else{		
 LED_OFF();	
+	}
+	
+	enable_controller_cnt-=1;
+	if(enable_controller_cnt<0)
+	{
+		init_motor(N1);
+	init_motor(N2);
+	init_motor(N3);
+	init_motor(N4);
+		enable_controller_cnt=enable_controller_cnt_max;
 	}
 	
 	
