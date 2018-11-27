@@ -23,9 +23,11 @@ void odometer_update_by_xyz(float vx,float vy,float wz,float delta_t)
 //	odometer_z+=wz*delta_t;
 //	
 	
-	odometer_x=vx*delta_t+odometer_x*cos(wz*delta_t)-odometer_y*sin(wz*delta_t);
-	odometer_y=vy*delta_t+odometer_x*sin(wz*delta_t)+odometer_y*cos(wz*delta_t);
-	odometer_z=wz*delta_t;
+	odometer_x=vx*delta_t+odometer_x*cos(wz*delta_t/1000.0)-odometer_y*sin(wz*delta_t/1000.0);
+	odometer_y=vy*delta_t+odometer_x*sin(wz*delta_t/1000.0)+odometer_y*cos(wz*delta_t/1000.0);
+	odometer_z+=wz*delta_t;
+	
+	
 	
 }
 
@@ -38,7 +40,7 @@ void odometer_update_by_wheels(float omega_1,float omega_2,float omega_3,float o
 	
 	float vx_temp=(omega_1_tmp+omega_2_tmp+omega_3_tmp+omega_4_tmp)/(4.0*AGV_OUT_SPEED_K);
 	float vy_temp=(omega_1_tmp-omega_2_tmp+omega_3_tmp-omega_4_tmp)/(4.0*AGV_OUT_SPEED_K);
-	float wz_temp=(omega_1_tmp+omega_2_tmp-omega_3_tmp-omega_4_tmp)/(4.0*AGV_OUT_SPEED_K*AGV_SHAPE_K);
+	float wz_temp=-(omega_1_tmp+omega_2_tmp-omega_3_tmp-omega_4_tmp)/(4.0*AGV_OUT_SPEED_K*AGV_SHAPE_K);
 	
 	
 	sprintf(odom_buff, "ODOMDTU x %d, y %d ,z %d,DTUODOM\r\n\0", 

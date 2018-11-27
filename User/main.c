@@ -497,10 +497,10 @@ for(int i=0;i<8;i++)
 		wzPrevious=wz;
 		
 	
-	omega1f = AGV_OUT_SPEED_K*(1*vx + 1*vy + AGV_SHAPE_K * wz);
-	omega2f = AGV_OUT_SPEED_K*(vx - 1*vy + AGV_SHAPE_K * wz);
-	omega3f = AGV_OUT_SPEED_K*(1*vx + 1*vy - AGV_SHAPE_K * wz);
-	omega4f = AGV_OUT_SPEED_K*(vx - 1*vy - AGV_SHAPE_K * wz);
+	omega1f = AGV_OUT_SPEED_K*(1*vx + 1*vy - AGV_SHAPE_K * wz);
+	omega2f = AGV_OUT_SPEED_K*(vx - 1*vy - AGV_SHAPE_K * wz);
+	omega3f = AGV_OUT_SPEED_K*(1*vx + 1*vy + AGV_SHAPE_K * wz);
+	omega4f = AGV_OUT_SPEED_K*(vx - 1*vy + AGV_SHAPE_K * wz);
 	
 	omega1 = (int32_t)(L_DIRECTION*1*omega1f);
 	omega2 = (int32_t)(L_DIRECTION*1*omega2f);

@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\output\test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\output\test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Tue Nov 27 15:00:43 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Tue Nov 27 20:07:50 2018
 <BR><P>
-<H3>Maximum Stack Usage =        376 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        392 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 TIM3_IRQHandler &rArr; odometer_update_by_wheels &rArr; odometer_update_by_xyz &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 <P>
@@ -451,7 +451,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 </UL>
-<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;odometer_update_by_wheels
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;odometer_update_by_xyz
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;odometer_update_by_wheels
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_invalid
 </UL>
 
@@ -821,7 +822,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(.text)
 </UL>
 <P><STRONG><a name="[28]"></a>TIM3_IRQHandler</STRONG> (Thumb, 164 bytes, Stack size 32 bytes, odometer.o(i.TIM3_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 376<LI>Call Chain = TIM3_IRQHandler &rArr; odometer_update_by_wheels &rArr; odometer_update_by_xyz &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 392<LI>Call Chain = TIM3_IRQHandler &rArr; odometer_update_by_wheels &rArr; odometer_update_by_xyz &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RS232_Send_Data
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
@@ -1166,7 +1167,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
 <P><STRONG><a name="[90]"></a>odometer_update_by_wheels</STRONG> (Thumb, 282 bytes, Stack size 64 bytes, odometer.o(i.odometer_update_by_wheels))
-<BR><BR>[Stack]<UL><LI>Max Depth = 344<LI>Call Chain = odometer_update_by_wheels &rArr; odometer_update_by_xyz &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 360<LI>Call Chain = odometer_update_by_wheels &rArr; odometer_update_by_xyz &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
@@ -1179,12 +1180,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[bc]"></a>odometer_update_by_xyz</STRONG> (Thumb, 270 bytes, Stack size 40 bytes, odometer.o(i.odometer_update_by_xyz))
-<BR><BR>[Stack]<UL><LI>Max Depth = 280<LI>Call Chain = odometer_update_by_xyz &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
+<P><STRONG><a name="[bc]"></a>odometer_update_by_xyz</STRONG> (Thumb, 318 bytes, Stack size 56 bytes, odometer.o(i.odometer_update_by_xyz))
+<BR><BR>[Stack]<UL><LI>Max Depth = 296<LI>Call Chain = odometer_update_by_xyz &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin
