@@ -39,3 +39,12 @@
 .\output\nvic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\nvic.o: ..\User\led.h
 .\output\nvic.o: ..\User\odometer.h
+.\output\nvic.o: ..\User\SCI.H
+.\output\nvic.o: ..\User\NVIC.H
+.\output\nvic.o: ..\User\can.h
+.\output\nvic.o: ..\User\myiic.h
+.\output\nvic.o: ..\User\sys.h
+.\output\nvic.o: ..\User\ks103.h
+.\output\nvic.o: ..\User\delay.h
+.\output\nvic.o: ..\User\SysTick.H
+.\output\nvic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

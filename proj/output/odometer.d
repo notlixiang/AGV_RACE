@@ -39,3 +39,12 @@
 .\output\odometer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\odometer.o: ..\User\led.h
 .\output\odometer.o: ..\User\odometer.h
+.\output\odometer.o: ..\User\SCI.H
+.\output\odometer.o: ..\User\NVIC.H
+.\output\odometer.o: ..\User\can.h
+.\output\odometer.o: ..\User\myiic.h
+.\output\odometer.o: ..\User\sys.h
+.\output\odometer.o: ..\User\ks103.h
+.\output\odometer.o: ..\User\delay.h
+.\output\odometer.o: ..\User\SysTick.H
+.\output\odometer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

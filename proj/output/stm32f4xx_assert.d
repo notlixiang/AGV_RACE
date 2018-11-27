@@ -39,3 +39,12 @@
 .\output\stm32f4xx_assert.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\stm32f4xx_assert.o: ..\User\led.h
 .\output\stm32f4xx_assert.o: ..\User\odometer.h
+.\output\stm32f4xx_assert.o: ..\User\SCI.H
+.\output\stm32f4xx_assert.o: ..\User\NVIC.H
+.\output\stm32f4xx_assert.o: ..\User\can.h
+.\output\stm32f4xx_assert.o: ..\User\myiic.h
+.\output\stm32f4xx_assert.o: ..\User\sys.h
+.\output\stm32f4xx_assert.o: ..\User\ks103.h
+.\output\stm32f4xx_assert.o: ..\User\delay.h
+.\output\stm32f4xx_assert.o: ..\User\SysTick.H
+.\output\stm32f4xx_assert.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

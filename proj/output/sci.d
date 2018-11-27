@@ -40,3 +40,11 @@
 .\output\sci.o: ..\User\led.h
 .\output\sci.o: ..\User\odometer.h
 .\output\sci.o: ..\User\SCI.H
+.\output\sci.o: ..\User\NVIC.H
+.\output\sci.o: ..\User\can.h
+.\output\sci.o: ..\User\myiic.h
+.\output\sci.o: ..\User\sys.h
+.\output\sci.o: ..\User\ks103.h
+.\output\sci.o: ..\User\delay.h
+.\output\sci.o: ..\User\SysTick.H
+.\output\sci.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

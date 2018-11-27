@@ -16,6 +16,20 @@
 
 #include "odometer.h"
 
+#include "stm32f4xx_it.h"
+#include "stm32f4xx.h"
+#include "SCI.H"
+#include "NVIC.H"
+#include "can.h"
+#include "myiic.h"
+#include "ks103.h"
+//#include "IIC.h"
+#include "delay.h"
+#include "SysTick.H"
+ #include "math.h"
+#include "sys.h"
+
+
 #define N1 0x01 //CAN ID of each wheel, left front wheel
 #define N2 0x0C  //left back wheel
 #define N3 0x04	//right back wheel
@@ -31,11 +45,13 @@
 
 
 #define OUT_SPEED_K 4*5*RED_RATIO*LINE_NUM/(PI*RADIUS_OF_WHEEL*1000)
-#define OUT_OMEGA_K 4*5*RED_RATIO*LINE_NUM/(PI)
-#define K_omega 557042.300821634
+#define OUT_OMEGA_K 4*5*RED_RATIO*LINE_NUM/(PI*1.0)
+#define K_omega 557042.3008f
 
 #define L_DIRECTION (1)
 #define R_DIRECTION (-1) 
+
+#define ODOM_PERIOD_MS 100
 
 #endif
 

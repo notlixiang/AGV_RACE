@@ -47,3 +47,4 @@
 .\output\main.o: ..\User\ks103.h
 .\output\main.o: ..\User\delay.h
 .\output\main.o: ..\User\SysTick.H
+.\output\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

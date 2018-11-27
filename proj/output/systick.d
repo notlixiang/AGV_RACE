@@ -39,3 +39,12 @@
 .\output\systick.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\systick.o: ..\User\led.h
 .\output\systick.o: ..\User\odometer.h
+.\output\systick.o: ..\User\SCI.H
+.\output\systick.o: ..\User\NVIC.H
+.\output\systick.o: ..\User\can.h
+.\output\systick.o: ..\User\myiic.h
+.\output\systick.o: ..\User\sys.h
+.\output\systick.o: ..\User\ks103.h
+.\output\systick.o: ..\User\delay.h
+.\output\systick.o: ..\User\SysTick.H
+.\output\systick.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

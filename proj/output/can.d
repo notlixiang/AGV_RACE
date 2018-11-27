@@ -39,4 +39,12 @@
 .\output\can.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\can.o: ..\User\led.h
 .\output\can.o: ..\User\odometer.h
+.\output\can.o: ..\User\SCI.H
+.\output\can.o: ..\User\NVIC.H
 .\output\can.o: ..\User\can.h
+.\output\can.o: ..\User\myiic.h
+.\output\can.o: ..\User\sys.h
+.\output\can.o: ..\User\ks103.h
+.\output\can.o: ..\User\delay.h
+.\output\can.o: ..\User\SysTick.H
+.\output\can.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

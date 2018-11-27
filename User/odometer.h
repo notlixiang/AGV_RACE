@@ -13,5 +13,6 @@
 void odometer_reset(void);
 void odometer_update_by_xyz(float vx,float vy,float wz,float delta_t);
 void odometer_update_by_wheels(float omega_1,float omega_2,float omega_3,float omega_4,float delta_t);
+void TIM3_Int_Init(u16 arr,u16 psc);
 
 #endif

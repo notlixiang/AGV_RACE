@@ -7,16 +7,7 @@
 ***********************************************************************/
 #include "main.h"	
 
-#include "stm32f4xx_it.h"
-#include "stm32f4xx.h"
-#include "SCI.H"
-#include "NVIC.H"
-#include "can.h"
-#include "myiic.h"
-#include "ks103.h"
-//#include "IIC.h"
-#include "delay.h"
-#include "SysTick.H"
+
 
 #define abs(x) ((x)>=0?(x):-(x))
 
@@ -215,6 +206,17 @@ int main(void)
 	delay_ms(2);
 	CAN1_WriteData(0x600+N4, &command4[0], 8);
 //	
+
+delay_ms(2);
+	CAN1_WriteData(0x600+N1, &command_read_speed[0], 8);
+	delay_ms(2);
+	CAN1_WriteData(0x600+N2, &command_read_speed[0], 8);
+	delay_ms(2);
+	CAN1_WriteData(0x600+N3, &command_read_speed[0], 8);
+	delay_ms(2);
+	CAN1_WriteData(0x600+N4, &command_read_speed[0], 8);
+	delay_ms(2);
+TIM3_Int_Init(ODOM_PERIOD_MS*10-1,8400-1);//里程计更新周期50ms
 
 float msg_cnt=msg_cnt_max;
 
@@ -584,6 +586,8 @@ for(int i=0;i<8;i++)
 //	(int)(speed_read_value[1]),
 //	(int)(speed_read_value[2]),
 //	(int)(speed_read_value[3]));
+	
+	
 	
 	//RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 				//50ms in total
