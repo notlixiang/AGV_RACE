@@ -52,7 +52,7 @@ float AGV_SHAPE_K = (LENGTH+WIDTH)/2;
 
 
 #define msg_cnt_max  2000
-#define enable_controller_cnt_max  2000
+#define enable_controller_cnt_max  200
 
 /***********************************************************************
 [omga1]       [1 -1 -(LENGTH+WIDTH)/2] [vx]
@@ -151,13 +151,13 @@ unsigned char dtu_buff[50];
 
 void delay(uint32_t t)
 {
-	uint32_t i;
-	uint16_t j;
-	for(i=0;i<t;i++)
-	{
-		for(j=0;j<10000;j++);
-	}
-	//delay_ms(t);
+//	uint32_t i;
+//	uint16_t j;
+//	for(i=0;i<t;i++)
+//	{
+//		for(j=0;j<10000;j++);
+//	}
+	delay_ms(t);
 }
 
 void init_can()
@@ -326,9 +326,16 @@ if(RS232_REC_Flag == 1)	   //如果串口接收到一帧数据（以“?;”结�
 							wz = (int16_t)uwz;
 							temp_recv_omega=uwz;
 							
- vx_send_back=vx;
- vy_send_back=vy;
+ vx_send_back=vy;
+ vy_send_back=-vx;
  wz_send_back=wz;
+							
+							sprintf(dtu_buff, "SPEEDDTU vx %d, vy %d, wz %d DTUSPEED\r\n\0", 
+	(int)vx_send_back,
+	(int)vy_send_back,
+	(int)wz_send_back);
+	
+	RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 						}
 						
 		msg_cnt=msg_cnt_max;
@@ -619,12 +626,12 @@ for(int i=0;i<8;i++)
 //	(int)(speed_read_value[2]),
 //	(int)(speed_read_value[3]));
 
-sprintf(dtu_buff, "SPEEDDTU%d,%d,%dDTUSPEED\r\n\0", 
-	(int)vx_send_back,
-	(int)vy_send_back,
-	(int)wz_send_back);
-	
-	RS232_Send_Data(dtu_buff,strlen(dtu_buff));
+//sprintf(dtu_buff, "SPEEDDTU vx %d, vy %d, wz %d DTUSPEED\r\n\0", 
+//	(int)vx_send_back,
+//	(int)vy_send_back,
+//	(int)wz_send_back);
+//	
+//	RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 				//50ms in total
 
 }

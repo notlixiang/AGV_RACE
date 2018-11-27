@@ -30,33 +30,33 @@ Build target 'Target 1'
 compiling main.c...
 ..\User\main.c(205): warning:  #223-D: function "delay_init" declared implicitly
   	delay_init(168);
-..\User\main.c(366): warning:  #68-D: integer conversion resulted in a change of sign
-  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
-..\User\main.c(366): warning:  #68-D: integer conversion resulted in a change of sign
-  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
-..\User\main.c(366): warning:  #68-D: integer conversion resulted in a change of sign
-  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
-..\User\main.c(366): warning:  #68-D: integer conversion resulted in a change of sign
-  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
-..\User\main.c(366): warning:  #68-D: integer conversion resulted in a change of sign
-  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
-..\User\main.c(366): warning:  #68-D: integer conversion resulted in a change of sign
-  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
-..\User\main.c(366): warning:  #68-D: integer conversion resulted in a change of sign
-  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
-..\User\main.c(366): warning:  #68-D: integer conversion resulted in a change of sign
-  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
-..\User\main.c(354): warning:  #177-D: variable "CurrentAddress"  was declared but never referenced
-  u8  CurrentAddress=0;
-..\User\main.c(355): warning:  #177-D: variable "OldAddress"  was declared but never referenced
-  u8  OldAddress=0;
-..\User\main.c(366): warning:  #550-D: variable "ultrasonic_value"  was set but never used
-  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
-..\User\main.c(622): warning:  #223-D: function "sprintf" declared implicitly
-  sprintf(dtu_buff, "SPEEDDTU%d,%d,%dDTUSPEED\r\n\0", 
-..\User\main.c(627): warning:  #223-D: function "strlen" declared implicitly
+..\User\main.c(333): warning:  #223-D: function "sprintf" declared implicitly
+  							sprintf(dtu_buff, "SPEEDDTU vx %d, vy %d, wz %d DTUSPEED\r\n\0", 
+..\User\main.c(338): warning:  #223-D: function "strlen" declared implicitly
   	RS232_Send_Data(dtu_buff,strlen(dtu_buff));
-..\User\main.c(631): warning:  #1-D: last line of file ends without a newline
+..\User\main.c(373): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(373): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(373): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(373): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(373): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(373): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(373): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(373): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(361): warning:  #177-D: variable "CurrentAddress"  was declared but never referenced
+  u8  CurrentAddress=0;
+..\User\main.c(362): warning:  #177-D: variable "OldAddress"  was declared but never referenced
+  u8  OldAddress=0;
+..\User\main.c(373): warning:  #550-D: variable "ultrasonic_value"  was set but never used
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(638): warning:  #1-D: last line of file ends without a newline
   }
 ..\User\main.c(197): warning:  #550-D: variable "ultra_signal"  was set but never used
     int ultra_signal = 0;
@@ -70,7 +70,7 @@ compiling main.c...
   	int16_t random_value;
 ..\User\main.c: 20 warnings, 0 errors
 linking...
-Program Size: Code=6752 RO-data=784 RW-data=192 ZI-data=1256  
+Program Size: Code=6748 RO-data=784 RW-data=192 ZI-data=1256  
 FromELF: creating hex file...
 ".\output\test.axf" - 0 Error(s), 20 Warning(s).
 
@@ -79,7 +79,7 @@ FromELF: creating hex file...
   C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

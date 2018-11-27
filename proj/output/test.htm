@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\output\test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\output\test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Tue Nov 27 10:10:42 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Tue Nov 27 11:28:34 2018
 <BR><P>
 <H3>Maximum Stack Usage =        136 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -433,7 +433,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_motor
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_can
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_can
 </UL>
 
 <P><STRONG><a name="[6f]"></a>CAN_Baud_Process</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, can.o(i.CAN_Baud_Process))
@@ -650,8 +650,8 @@ Global Symbols
 <P><STRONG><a name="[6]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.SVC_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
-<P><STRONG><a name="[90]"></a>SysTick_CLKSourceConfig</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, misc.o(i.SysTick_CLKSourceConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_init
+<P><STRONG><a name="[92]"></a>SysTick_CLKSourceConfig</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, misc.o(i.SysTick_CLKSourceConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_init
 </UL>
 
 <P><STRONG><a name="[9]"></a>SysTick_Handler</STRONG> (Thumb, 30 bytes, Stack size 4 bytes, systick.o(i.SysTick_Handler))
@@ -777,36 +777,41 @@ Global Symbols
 
 <P><STRONG><a name="[a4]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[94]"></a>delay</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, main.o(i.delay))
-<BR><BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[8f]"></a>delay</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, main.o(i.delay))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = delay &rArr; delay_ms
+</UL>
+<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_motor
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_can
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_can
 </UL>
 
-<P><STRONG><a name="[8f]"></a>delay_init</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, delay.o(i.delay_init))
+<P><STRONG><a name="[91]"></a>delay_init</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, delay.o(i.delay_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = delay_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_CLKSourceConfig
+<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_CLKSourceConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[91]"></a>delay_ms</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, delay.o(i.delay_ms))
+<P><STRONG><a name="[90]"></a>delay_ms</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, delay.o(i.delay_ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = delay_ms
 </UL>
-<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_xms
+<BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_xms
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
 </UL>
 
-<P><STRONG><a name="[92]"></a>delay_xms</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, delay.o(i.delay_xms))
-<BR><BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<P><STRONG><a name="[93]"></a>delay_xms</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, delay.o(i.delay_xms))
+<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 
-<P><STRONG><a name="[93]"></a>init_can</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, main.o(i.init_can))
+<P><STRONG><a name="[94]"></a>init_can</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, main.o(i.init_can))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = init_can &rArr; CAN1_WriteData &rArr; CAN_Transmit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
+<BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN1_WriteData
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -815,13 +820,13 @@ Global Symbols
 <P><STRONG><a name="[95]"></a>init_motor</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, main.o(i.init_motor))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = init_motor &rArr; CAN1_WriteData &rArr; CAN_Transmit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
+<BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN1_WriteData
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[5c]"></a>main</STRONG> (Thumb, 1530 bytes, Stack size 40 bytes, main.o(i.main))
+<P><STRONG><a name="[5c]"></a>main</STRONG> (Thumb, 1580 bytes, Stack size 40 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = main &rArr; USART_Configuration &rArr; USART_Init &rArr; RCC_GetClocksFreq
 </UL>
 <BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Configuration
@@ -829,13 +834,13 @@ Global Symbols
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Configuration
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IIC_Init
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_motor
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_can
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_can
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_ON
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_OFF
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Configuration
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_init
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_init
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN_Configuration
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN1_WriteData
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
