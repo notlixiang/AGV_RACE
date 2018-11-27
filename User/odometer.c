@@ -8,7 +8,7 @@ float odometer_z=0;
 extern float AGV_OUT_SPEED_K ;
 extern float AGV_SHAPE_K ;
 
-unsigned char odom_buff[50];
+unsigned char odom_buff[100];
 
 void odometer_reset(void)
 {
@@ -22,8 +22,9 @@ void odometer_update_by_xyz(float vx,float vy,float wz,float delta_t)
 //	odometer_y+=vy*delta_t;
 //	odometer_z+=wz*delta_t;
 //	
+	
 	odometer_x=vx*delta_t+odometer_x*cos(wz*delta_t)-odometer_y*sin(wz*delta_t);
-	odometer_y=vy*delta_t+odometer_x*cos(wz*delta_t)+odometer_y*sin(wz*delta_t);
+	odometer_y=vy*delta_t+odometer_x*sin(wz*delta_t)+odometer_y*cos(wz*delta_t);
 	odometer_z=wz*delta_t;
 	
 }
@@ -46,14 +47,14 @@ void odometer_update_by_wheels(float omega_1,float omega_2,float omega_3,float o
 	(int)vy_temp,
 	(int)wz_temp);
 	
-	sprintf(odom_buff, "ODOMDTU w1 %d, w2 %d ,w3 %d, w4 %d,DTUODOM\r\n\0", 
-	(int)omega_1, 
-	(int)omega_2,
-	(int)omega_3,
-	(int)omega_4);
+//	sprintf(odom_buff, "ODOMDTU w1 %d, w2 %d ,w3 %d, w4 %d,DTUODOM\r\n\0", 
+//	(int)omega_1, 
+//	(int)omega_2,
+//	(int)omega_3,
+//	(int)omega_4);
 	
 
-	RS232_Send_Data(odom_buff,strlen(odom_buff));
+	//RS232_Send_Data(odom_buff,strlen(odom_buff));
 	
 	
 	odometer_update_by_xyz(vx_temp,vy_temp,wz_temp,delta_t);	
@@ -90,14 +91,14 @@ extern int32_t speed_read_value[4];//??????
 
 void TIM3_IRQHandler(void)
 {
-	float omega_1=speed_read_value[0]/K_omega*1000.0;
-	float omega_2=speed_read_value[1]/K_omega*1000.0;
-	float omega_3=speed_read_value[2]/K_omega*1000.0;
-	float omega_4=speed_read_value[3]/K_omega*1000.0;
+	float omega_1=speed_read_value[0];//K_omega*1000.0;
+	float omega_2=speed_read_value[1];//K_omega*1000.0;
+	float omega_3=speed_read_value[2];//K_omega*1000.0;
+	float omega_4=speed_read_value[3];//K_omega*1000.0;
 	
 	if(TIM_GetITStatus(TIM3,TIM_IT_Update)==SET) //溢出中断
 	{
-		odometer_update_by_wheels( omega_1,omega_2,omega_3,omega_4,ODOM_PERIOD_MS);
+		odometer_update_by_wheels( omega_1,omega_2,omega_3,omega_4,ODOM_PERIOD_MS/1000.0);
 			delay_ms(26);
  	sprintf(odom_buff, "ODOMDTU x %d, y %d ,z %d,DTUODOM\r\n\0", 
 	(int)odometer_x,
@@ -106,7 +107,7 @@ void TIM3_IRQHandler(void)
 	(int)odometer_z);
 	
 
-//	RS232_Send_Data(odom_buff,strlen(odom_buff));
+	RS232_Send_Data(odom_buff,strlen(odom_buff));
 	}
 	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //清除中断标志位
 }

@@ -507,7 +507,14 @@ for(int i=0;i<8;i++)
 	omega3 = (int32_t)(R_DIRECTION*1*omega3f);
 	omega4 = (int32_t)(R_DIRECTION*1*omega4f);  //take the installnation direction of motors into account.
 
+	sprintf(dtu_buff, "ODOMDTU w1 %d, w2 %d ,w3 %d, w4 %d,DTUODOM\r\n\0", 
+	(int)omega1, 
+	(int)omega2,
+	(int)omega3,
+	(int)omega4);
 	
+
+	//RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 
 	//uint8_t command[6] = {0x0f, 0x00, 0x00, 0x00, 0x00, 0x00};
 	command1[4] = (uint8_t)(omega1 & 0x000000ff);
