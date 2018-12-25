@@ -5,7 +5,7 @@
 <h2>Tool Versions:</h2>
 IDE-Version: ¦ÌVision V5.23.0.0
 Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: NULL LI, SJTU, LIC=X1E45-GFRS6-4A7DE-5SB5N-WJZC1-NT6PN
+License Information: null li, SJTU, LIC=Q7GGK-ZZRZB-AUF4J-U308F-E0BQP-C8NZ4
  
 Tool Versions:
 Toolchain:       MDK-ARM Professional  Version: 5.23
@@ -21,12 +21,75 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
 Dialog DLL:      TCM.DLL V1.27.0.0
  
 <h2>Project:</h2>
-E:\_study\ProgramData\git\AGV_RACE\proj\test.uvprojx
-Project File Date:  11/27/2018
+E:\Cloud\OneDrive - sjtu.edu.cn\_study\ProgramData\git\AGV_RACE\proj\test.uvprojx
+Project File Date:  12/06/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
+compiling delay.c...
+compiling ks103.c...
+compiling CAN.C...
+compiling myiic.c...
+compiling LED.C...
+compiling main.c...
+..\User\main.c(178): warning:  #223-D: function "delay_init" declared implicitly
+  	delay_init(168);
+..\User\main.c(335): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(335): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(335): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(335): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(335): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(335): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(335): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(335): warning:  #68-D: integer conversion resulted in a change of sign
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(323): warning:  #177-D: variable "CurrentAddress"  was declared but never referenced
+  u8  CurrentAddress=0;
+..\User\main.c(324): warning:  #177-D: variable "OldAddress"  was declared but never referenced
+  u8  OldAddress=0;
+..\User\main.c(335): warning:  #550-D: variable "ultrasonic_value"  was set but never used
+  uint16_t ultrasonic_value[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+..\User\main.c(510): warning:  #223-D: function "sprintf" declared implicitly
+  	sprintf(dtu_buff, "ODOMDTU w1 %d, w2 %d ,w3 %d, w4 %d,DTUODOM\r\n\0", 
+..\User\main.c(582): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	(int)(speed_read_value[0]/
+_omega*1000.0),
+..\User\main.c(583): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	(int)(speed_read_value[1]/
+_omega*1000.0),
+..\User\main.c(584): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	(int)(speed_read_value[2]/
+_omega*1000.0),
+..\User\main.c(585): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	(int)(speed_read_value[3]/
+_omega*1000.0));
+..\User\main.c(603): warning:  #1-D: last line of file ends without a newline
+  }
+..\User\main.c(170): warning:  #550-D: variable "ultra_signal"  was set but never used
+    int ultra_signal = 0;
+..\User\main.c(171): warning:  #177-D: variable "ultrasonic_switch"  was declared but never referenced
+  	int ultrasonic_switch =0;
+..\User\main.c(183): warning:  #177-D: variable "remember_vx"  was declared but never referenced
+  	int16_t remember_vx = 0;
+..\User\main.c(184): warning:  #177-D: variable "remember_vy"  was declared but never referenced
+  	int16_t remember_vy = 0;
+..\User\main.c(185): warning:  #177-D: variable "random_value"  was declared but never referenced
+  	int16_t random_value;
+..\User\main.c: 23 warnings, 0 errors
+compiling NVIC.C...
+compiling SCI.c...
+compiling stm32f4xx_assert.c...
+compiling SysTick.C...
+compiling sys.c...
+compiling stm32f4xx_it.c...
 compiling odometer.c...
 ..\User\odometer.c(30): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   	odometer_x=odometer_x+vx*delta_t*cos(odometer_z/1000.0)-vy*delta_t*sin(odometer_z/1000.0);
@@ -49,17 +112,26 @@ compiling odometer.c...
 ..\User\odometer.c(114): warning:  #223-D: function "strlen" declared implicitly
   	RS232_Send_Data(odom_buff,strlen(odom_buff));
 ..\User\odometer.c: 10 warnings, 0 errors
+compiling misc.c...
+compiling stm32f4xx_rcc.c...
+compiling stm32f4xx_gpio.c...
+compiling stm32f4xx_tim.c...
+compiling stm32f4xx_can.c...
+compiling stm32f4xx_crc.c...
+compiling stm32f4xx_syscfg.c...
+compiling stm32f4xx_usart.c...
+compiling system_stm32f4xx.c...
 linking...
 Program Size: Code=12056 RO-data=1072 RW-data=204 ZI-data=1356  
 FromELF: creating hex file...
-".\output\test.axf" - 0 Error(s), 10 Warning(s).
+".\output\test.axf" - 0 Error(s), 33 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_Target_1
   C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:10
 </pre>
 </body>
 </html>
