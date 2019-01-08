@@ -105,6 +105,10 @@ int16_t vy = 0;
 uint16_t uwz = 0;
 int16_t wz = 0;
 
+int16_t target_dx = 0;
+int16_t target_dy = 0;
+int16_t target_dz = 0;
+
 
 int16_t vxPrevious = 0;
 int16_t vyPrevious = 0;
@@ -115,6 +119,21 @@ uint8_t ok_flag1=0;
 uint8_t ok_flag2=0;
 uint8_t ok_flag3=0;
 uint8_t ok_flag4=0;
+
+extern float odometer_x;
+extern float odometer_y;
+extern float odometer_z;
+
+const float pos_x_k_pid[3]={0.0001,0.0001,0.0001};
+const float pos_y_k_pid[3]={0.0001,0.0001,0.0001};
+const float pos_z_k_pid[3]={0.0001,0.0001,0.0001};
+
+float x_error[3]={0.000,0.000,0.000};
+float x_error_for_pid[3]={0.000,0.000,0.000};
+float y_error[3]={0.000,0.000,0.000};
+float y_error_for_pid[3]={0.000,0.000,0.000};
+float z_error[3]={0.000,0.000,0.000};
+float z_error_for_pid[3]={0.000,0.000,0.000};
 
 int lift_status=0;
 
@@ -292,12 +311,20 @@ if(RS232_REC_Flag == 1)	   //如果串口接收到一帧数据（以“?;”结�
 						if(/*received_data[head_index+2]==0x01&&*/agv_started==1)//started
 						{
 							uvx = received_data[head_index+4]*0x0100+received_data[head_index+5];
-							vx = (int16_t)uvx;
+							//vx = (int16_t)uvx;
 							uvy = received_data[head_index+6]*0x0100+received_data[head_index+7];
-							vy  = (int16_t)uvy;
+							//vy  = (int16_t)uvy;
 							uwz = received_data[head_index+8]*0x0100+received_data[head_index+9];
-							wz = (int16_t)uwz;
+							//wz = (int16_t)uwz;
 							temp_recv_omega=uwz;
+							
+							odometer_reset();
+							
+							target_dx=(int16_t)uvx;
+							target_dy=(int16_t)uvy;
+							target_dz=(int16_t)uwz;
+							
+							
 						}
 						
 		msg_cnt=msg_cnt_max;
@@ -472,6 +499,31 @@ for(int i=0;i<8;i++)
 //		remember_vy = vy;
 	
 //********************************************
+		
+		x_error[0]=x_error[1];
+		x_error[1]=x_error[2];
+		x_error[2]=target_dx-odometer_x;
+		x_error_for_pid[0]=x_error[2]-x_error[1];
+		x_error_for_pid[1]=x_error[2];
+		x_error_for_pid[2]=x_error[2]-2*x_error[1]+x_error[0];
+		vx+=pos_x_k_pid[0]*x_error_for_pid[0]+pos_x_k_pid[1]*x_error_for_pid[1]+pos_x_k_pid[2]*x_error_for_pid[2];
+		
+		y_error[0]=y_error[1];
+		y_error[1]=y_error[2];
+		y_error[2]=target_dy-odometer_y;
+		y_error_for_pid[0]=y_error[2]-y_error[1];
+		y_error_for_pid[1]=y_error[2];
+		y_error_for_pid[2]=y_error[2]-2*y_error[1]+y_error[0];
+		vy+=pos_y_k_pid[0]*y_error_for_pid[0]+pos_y_k_pid[1]*y_error_for_pid[1]+pos_y_k_pid[2]*y_error_for_pid[2];
+		
+		z_error[0]=z_error[1];
+		z_error[1]=z_error[2];
+		z_error[2]=target_dz-odometer_z;
+		z_error_for_pid[0]=z_error[2]-z_error[1];
+		z_error_for_pid[1]=z_error[2];
+		z_error_for_pid[2]=z_error[2]-2*z_error[1]+z_error[0];
+		wz+=pos_z_k_pid[0]*z_error_for_pid[0]+pos_z_k_pid[1]*z_error_for_pid[1]+pos_z_k_pid[2]*z_error_for_pid[2];
+		
 							if(vx>SPEED_MAX)vx=SPEED_MAX;
 							if(vx<-SPEED_MAX)vx=-SPEED_MAX;
 							if(vy>SPEED_MAX)vy=SPEED_MAX;
