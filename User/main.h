@@ -37,7 +37,7 @@
 
 #define PI 3.14159265359
 
-#define LENGTH 0.670
+#define LENGTH 0.0
 #define WIDTH 0.495
 #define RADIUS_OF_WHEEL 0.0825  //unit (m)
 #define RED_RATIO 20

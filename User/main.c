@@ -294,7 +294,8 @@ if(RS232_REC_Flag == 1)	   //如果串口接收到一帧数据（以“?;”结�
 							uvx = received_data[head_index+4]*0x0100+received_data[head_index+5];
 							vx = (int16_t)uvx;
 							uvy = received_data[head_index+6]*0x0100+received_data[head_index+7];
-							vy  = (int16_t)uvy;
+							//vy  = (int16_t)uvy;
+							vy=0;
 							uwz = received_data[head_index+8]*0x0100+received_data[head_index+9];
 							wz = (int16_t)uwz;
 							temp_recv_omega=uwz;
@@ -492,6 +493,7 @@ for(int i=0;i<8;i++)
 			wz=wzPrevious+DELTA_OMEGA_MAX*abs(wz-wzPrevious)/(float)(wz-wzPrevious);
 		}
 		
+		vy=0;
 		vxPrevious=vx;
 		vyPrevious=vy;
 		wzPrevious=wz;
