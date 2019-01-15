@@ -162,6 +162,7 @@ void init_motor(uint64_t num)
 
 int main(void)
 {
+	SCB ->VTOR = FLASH_BASE | 0x10000;
 	/*
 		ST固件库中的启动文件已经执行了 SystemInit() 函数，该函数在 system_stm32f4xx.c 文件，主要功能是
 		配置CPU系统的时钟，内部Flash访问时序，配置FSMC用于外部SRAM等。
