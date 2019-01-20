@@ -41,7 +41,8 @@ void odometer_update_by_wheels(float omega_1,float omega_2,float omega_3,float o
 	int32_t omega_4_tmp = (int32_t)(R_DIRECTION*1*omega_4);
 	
 	float vx_temp=(omega_1_tmp+omega_2_tmp+omega_3_tmp+omega_4_tmp)/(4.0*AGV_OUT_SPEED_K);
-	float vy_temp=(omega_1_tmp-omega_2_tmp+omega_3_tmp-omega_4_tmp)/(4.0*AGV_OUT_SPEED_K);
+	//float vy_temp=(omega_1_tmp-omega_2_tmp+omega_3_tmp-omega_4_tmp)/(4.0*AGV_OUT_SPEED_K);
+	float vy_temp=0;
 	float wz_temp=-(omega_1_tmp+omega_2_tmp-omega_3_tmp-omega_4_tmp)/(4.0*AGV_OUT_SPEED_K*AGV_SHAPE_K);
 	
 	
