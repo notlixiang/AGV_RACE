@@ -123,6 +123,8 @@ int temp_recv_omega=0;
 
 unsigned char dtu_buff[50];
 
+int la,lb,lc,ra,rb,rc;
+
 //void delay_ms(uint32_t t)
 //{
 //	uint32_t i;
@@ -252,7 +254,13 @@ LED_OFF();
 //		delay_ms_ms(1000);
 //	
 //LED_OFF();	
-	
+if(USART6_REC_Flag == 1)	   //如果串口接收到一帧数据（以“?;”结尾）
+		{
+			USART6_REC_Flag=0;
+			uint8_t infrared_signal= USART6_buff[0];
+			
+		}
+		USART6_rec_counter=0;
 	
 if(RS232_REC_Flag == 1)	   //如果串口接收到一帧数据（以“?;”结尾）
 		{
@@ -308,6 +316,9 @@ if(RS232_REC_Flag == 1)	   //如果串口接收到一帧数据（以“?;”结�
 			}
 		}
 					RS232_rec_counter = 0;
+		
+		
+		
 		
 //		
 //		
