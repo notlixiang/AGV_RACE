@@ -1,0 +1,28 @@
+--cpu=Cortex-M4.fp
+".\output\startup_stm32f4xx.o"
+".\output\can.o"
+".\output\delay.o"
+".\output\ks103.o"
+".\output\led.o"
+".\output\main.o"
+".\output\myiic.o"
+".\output\nvic.o"
+".\output\sci.o"
+".\output\stm32f4xx_assert.o"
+".\output\sys.o"
+".\output\systick.o"
+".\output\stm32f4xx_it.o"
+".\output\odometer.o"
+".\output\misc.o"
+".\output\stm32f4xx_rcc.o"
+".\output\stm32f4xx_tim.o"
+".\output\stm32f4xx_gpio.o"
+".\output\stm32f4xx_can.o"
+".\output\stm32f4xx_crc.o"
+".\output\stm32f4xx_syscfg.o"
+".\output\stm32f4xx_usart.o"
+".\output\system_stm32f4xx.o"
+--library_type=microlib --strict --scatter ".\output\test.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\output\test.map" -o .\output\test.axf
