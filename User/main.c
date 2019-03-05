@@ -155,12 +155,6 @@ void init_motor(uint64_t num)
 	delay_ms(40);
 }
 
-    CAN1_WriteData(0x600 + num, &begin2[0], 8);
-    delay(40);
-
-    CAN1_WriteData(0x600 + num, &begin3[0], 8);
-    delay(40);
-}
 
 
 int main(void) {
@@ -187,12 +181,7 @@ int main(void) {
 	int16_t random_value;
 
 	scanner_init();
-	
-    int16_t remember_vx = 0;
-    int16_t remember_vy = 0;
-    int16_t random_value;
-
-    //unsigned char led_num=0;
+	char led_num=0;
 
 //	init_can();
     init_motor(N1);
