@@ -13,6 +13,10 @@
 #include <stdlib.h>
 #include "led.h"
 #include <stdint.h>
+#include "qr.h"
+#include "sci.h"
+#include "delay.h"
+#include "string.h"
 
 #include "odometer.h"
 

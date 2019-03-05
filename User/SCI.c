@@ -1,4 +1,4 @@
-﻿
+
 #include "main.H"
 #include "SCI.H"
 /*********************************************************************
@@ -48,6 +48,11 @@ USART1~6 时钟 :RCC_APB1PeriphClockCmd
 volatile unsigned char RS232_REC_Flag = 0;
 volatile unsigned char RS232_buff[RS232_REC_BUFF_SIZE];//用于接收数据
 volatile unsigned int RS232_rec_counter = 0;//用于RS232接收计数
+
+volatile unsigned char UART4_REC_Flag = 0;
+volatile unsigned char UART4_buff[UART4_REC_BUFF_SIZE];//用于接收数据
+volatile unsigned int UART4_rec_counter = 0;//用于RS232接收计数
+
 static void RS485_Delay(uint32_t nCount);
 
 
@@ -165,3 +170,105 @@ void RS232_Send_Data(unsigned char *send_buff,unsigned int length)
 //   	  nCount --;   
 //   }
 // }
+
+
+void UART4_Configuration(void)
+{ 
+	
+	GPIO_InitTypeDef GPIO_InitStructure;//定义GPIO_InitTypeDef类型的结构体成员GPIO_InitStructure
+
+	USART_InitTypeDef USART_InitStructure;
+	USART_ClockInitTypeDef USART_ClockInitStruct;
+	//使能需要用到的GPIO管脚时钟
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
+	//使能USART1 时钟
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
+	///复位串口1
+	USART_DeInit(UART4);
+	
+	USART_StructInit(&USART_InitStructure);//载入默认USART参数
+	USART_ClockStructInit(&USART_ClockInitStruct);//载入默认USART参数        
+	//配置串口1的管脚 PA8 USART1_EN PA9 USART1_TX PA10 USART1_RX    
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;    //复用
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //推挽输出
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10; 
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
+	GPIO_PinAFConfig(GPIOC,GPIO_PinSource10,GPIO_AF_UART4);        //管脚PA9复用为USART1
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;        
+	GPIO_Init(GPIOC, &GPIO_InitStructure);                                                                                                                 
+	GPIO_PinAFConfig(GPIOC,GPIO_PinSource11,GPIO_AF_UART4);
+	
+	USART_ClockInit(UART4,&USART_ClockInitStruct);
+
+
+	USART_InitStructure.USART_BaudRate = 9600;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART_Init(UART4,&USART_InitStructure); 
+
+	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);        ///////接收中断使能
+	USART_ClearITPendingBit(UART4, USART_IT_TC);//清除中断TC位
+	USART_Cmd(UART4,ENABLE);//最后使能串?
+
+
+}
+
+void UART4_Send_Data(unsigned char *send_buff,unsigned int length)
+{
+ 	unsigned int i = 0;
+	for(i = 0;i < length;i ++)
+	{			
+		UART4->DR = send_buff[i];
+		while((UART4->SR&0X40)==0);	
+	}	
+}
+
+void UART4_IRQHandler(void)  
+{
+	USART_ClearFlag(UART4,USART_FLAG_TC);
+	if(USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
+	{	
+		UART4_buff[UART4_rec_counter] = UART4->DR;//
+		RS232_Send_Data(UART4_buff+UART4_rec_counter,1);
+		UART4_rec_counter ++;
+/********以RS232_END_FLAG1和RS232_END_FLAG2定义的字符作为一帧数据的结束标识************/
+//		if(UART4_rec_counter >= 2)	//只有接收到2个数据以上才做判断
+//		{
+//			if(UART4_buff[RS232_rec_counter - 1] == RS232_END_FLAG1 && RS232_buff[RS232_rec_counter - 1] == RS232_END_FLAG2) 	//帧起始标志   
+//			{
+//				RS232_REC_Flag = 1;
+//			}
+//		}
+//		if(RS232_rec_counter > RS232_REC_BUFF_SIZE)//超过接收缓冲区大小
+//		{
+//			RS232_rec_counter = 0;
+//		}
+		USART_ClearITPendingBit(UART4, USART_IT_RXNE);
+	}
+	if (USART_GetITStatus(UART4, USART_IT_TXE) != RESET) 
+	{
+        USART_ClearITPendingBit(UART4, USART_IT_TXE);           /* Clear the USART transmit interrupt                  */
+  }	
+}
+
+unsigned int crc_cal_by_bit(unsigned char *ptr, unsigned int len) {
+    unsigned int crc = 0;
+    while (len-- != 0) {
+        for (unsigned char i = 0x80; i != 0; i /= 2) {
+            crc *= 2;
+            if ((crc & 0x10000) !=
+                0) //上一位CRC乘2后，若首位是1，则除以0x11021 
+                crc ^= 0x11021;
+            if ((*ptr & i) != 0) //如果本位是1，那么CRC = 上一位的CRC + 本位/CRC_CCITT 
+                crc ^= 0x1021;
+        }
+        ptr++;
+    }
+    return crc;
+}
+

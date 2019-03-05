@@ -454,6 +454,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\odometer.c</FilePath>
             </File>
+            <File>
+              <FileName>qr.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\qr.C</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
