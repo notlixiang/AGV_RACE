@@ -7,15 +7,7 @@
 ***********************************************************************/
 #include "main.h"
 
-
-
 #define abs(x) ((x)>=0?(x):-(x))
-
-
-
-
-
-
 
 float AGV_OUT_SPEED_K = OUT_SPEED_K;
 float AGV_SHAPE_K = (LENGTH + WIDTH) / 2;
