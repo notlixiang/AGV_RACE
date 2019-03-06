@@ -33,6 +33,7 @@
  #include "math.h"
 #include "sys.h"
 
+#define DOUBLEWHEEL 0
 
 #define N1 0x01 //CAN ID of each wheel, left front wheel
 #define N2 0x0C  //left back wheel
@@ -41,7 +42,12 @@
 
 #define PI 3.14159265359
 
-#define LENGTH 0.670
+#if DOUBLEWHEEL
+	#define LENGTH 0
+#else
+	#define LENGTH 0.670
+#endif
+
 #define WIDTH 0.495
 #define RADIUS_OF_WHEEL 0.0825  //unit (m)
 #define RED_RATIO 20
@@ -56,6 +62,7 @@
 #define R_DIRECTION (-1) 
 
 #define ODOM_PERIOD_MS 200
+
 
 #endif
 

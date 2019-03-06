@@ -45,6 +45,11 @@ void odometer_update_by_wheels(float omega_1,float omega_2,float omega_3,float o
 	float wz_temp=-(omega_1_tmp+omega_2_tmp-omega_3_tmp-omega_4_tmp)/(4.0*AGV_OUT_SPEED_K*AGV_SHAPE_K);
 	
 	
+	if(DOUBLEWHEEL)
+	{
+		vy_temp=0;
+	}
+	
 	sprintf(odom_buff, "ODOMDTU x %d, y %d ,z %d,DTUODOM\r\n\0", 
 	(int)vx_temp,
 		//(int)(sin(PI/4.0)*1000),

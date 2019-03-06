@@ -283,6 +283,10 @@ LED_OFF();
 							vx = (int16_t)uvx;
 							uvy = received_data[head_index+6]*0x0100+received_data[head_index+7];
 							vy  = (int16_t)uvy;
+							if(DOUBLEWHEEL)
+							{
+								vy=0;
+							}
 							uwz = received_data[head_index+8]*0x0100+received_data[head_index+9];
 							wz = (int16_t)uwz;
 							temp_recv_omega=uwz;
@@ -463,6 +467,12 @@ uint16_t distance=0;
 				if(abs(wz-wzPrevious)>DELTA_OMEGA_MAX)
 		{
 			wz=wzPrevious+DELTA_OMEGA_MAX*abs(wz-wzPrevious)/(float)(wz-wzPrevious);
+		}
+		
+		
+		if(DOUBLEWHEEL)
+		{
+			vy=0;
 		}
 		
 		vxPrevious=vx;
