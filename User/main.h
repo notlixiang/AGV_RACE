@@ -19,6 +19,7 @@
 #include "string.h"
 
 #include "odometer.h"
+#include "StructSerial.h"
 
 #include "stm32f4xx_it.h"
 #include "stm32f4xx.h"
@@ -32,6 +33,7 @@
 #include "SysTick.H"
  #include "math.h"
 #include "sys.h"
+
 
 #define DOUBLEWHEEL 0
 

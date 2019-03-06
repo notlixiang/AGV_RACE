@@ -459,6 +459,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\qr.C</FilePath>
             </File>
+            <File>
+              <FileName>StructSerial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\StructSerial.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
