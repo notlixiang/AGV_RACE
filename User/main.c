@@ -580,7 +580,7 @@ uint16_t distance=0;
 	
 	//RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 				//50ms in total
-
+send_struct_feedback_serial();
     //    RS232_Send_Data(dtu_buff,strlen(dtu_buff));
         //50ms in total
 

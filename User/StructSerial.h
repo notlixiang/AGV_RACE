@@ -4,6 +4,8 @@
 
 #define COMMAND_DATA_LENGTH sizeof(struct_command_data)
 
+#define CHECK_FRONT_CMD 	23579
+#define CHECK_BACK_CMD 		74348
 
 typedef struct struct_command_data {
 	int check_front_cmd;
@@ -16,11 +18,14 @@ typedef struct struct_command_data {
 
 
 #define FEEDBACK_DATA_LENGTH sizeof(struct_feedback_data)
+	
+#define CHECK_FRONT_FBK 	61516
+#define CHECK_BACK_FBK 		23275
+
 typedef struct struct_feedback_data {
 	int check_front_fbk;	
 	
-	float speed_fbk[3];
-	
+	float speed_fbk[3];	
 	float pos_fbk[3];	
 	
 	float a_fbk[3];
@@ -34,6 +39,6 @@ typedef struct struct_feedback_data {
 } struct_feedback_data, *struct_feedback_data_ptr;
 
 
-
+void send_struct_feedback_serial(void);
 
 #endif

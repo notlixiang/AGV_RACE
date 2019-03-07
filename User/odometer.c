@@ -118,7 +118,7 @@ void TIM3_IRQHandler(void)
 	(int)odometer_z);
 	
 
-	RS232_Send_Data(odom_buff,strlen(odom_buff));
+//	RS232_Send_Data(odom_buff,strlen(odom_buff));
 	}
 	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //清除中断标志位
 }
