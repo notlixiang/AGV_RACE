@@ -24,7 +24,7 @@ void send_struct_feedback_serial(void){
 	feedback.a_fbk[i]=a_fbk[i];
 	feedback.g_fbk[i]=g_fbk[i];
 	}
-	
+//	speed_fbk[0]+=1.0;
 	for(i=0;i<12;i++){		
 	feedback.ultra_sound_signal_fbk[i]=ultra_sound_signal_fbk[i];
 	}
@@ -42,8 +42,8 @@ void send_struct_feedback_serial(void){
 	fbk_buff[FEEDBACK_DATA_LENGTH+3+0]='f';
 	fbk_buff[FEEDBACK_DATA_LENGTH+3+1]='b';
 	fbk_buff[FEEDBACK_DATA_LENGTH+3+2]='k';
-	fbk_buff[FEEDBACK_DATA_LENGTH+3+3]='\n';
-	fbk_buff[FEEDBACK_DATA_LENGTH+3+4]='\0';
+	fbk_buff[FEEDBACK_DATA_LENGTH+3+3]='\0';
+	fbk_buff[FEEDBACK_DATA_LENGTH+3+4]='\n';
 	
 	memcpy(fbk_buff+3, feedback_ptr_char, FEEDBACK_DATA_LENGTH);
 	

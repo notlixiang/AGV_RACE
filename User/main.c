@@ -559,7 +559,7 @@ uint16_t distance=0;
 //	LED_OFF();	
 //	delay_ms(999);
 
-	delay_ms(26);
+//	delay_ms(26);
  	sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0", 
 	(int)(speed_read_value[0]/K_omega*1000.0),
 	(int)(speed_read_value[1]/K_omega*1000.0),

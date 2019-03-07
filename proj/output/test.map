@@ -1082,18 +1082,18 @@ Image Symbol Table
     i.init_can                               0x080027a0   Section        0  main.o(i.init_can)
     i.init_motor                             0x080027bc   Section        0  main.o(i.init_motor)
     i.main                                   0x08002810   Section        0  main.o(i.main)
-    i.odometer_update_by_wheels              0x08002f88   Section        0  odometer.o(i.odometer_update_by_wheels)
-    i.odometer_update_by_xyz                 0x080030dc   Section        0  odometer.o(i.odometer_update_by_xyz)
-    i.scanner_init                           0x08003220   Section        0  qr.o(i.scanner_init)
-    i.send_struct_feedback_serial            0x08003250   Section        0  structserial.o(i.send_struct_feedback_serial)
-    .constdata                               0x08003320   Section      360  can.o(.constdata)
-    .constdata                               0x08003488   Section       48  cos_i.o(.constdata)
-    C                                        0x08003488   Data          48  cos_i.o(.constdata)
-    .constdata                               0x080034b8   Section      200  rred.o(.constdata)
-    pio2s                                    0x080034b8   Data          48  rred.o(.constdata)
-    twooverpi                                0x080034e8   Data         152  rred.o(.constdata)
-    .constdata                               0x08003580   Section       40  sin_i.o(.constdata)
-    S                                        0x08003580   Data          40  sin_i.o(.constdata)
+    i.odometer_update_by_wheels              0x08002f80   Section        0  odometer.o(i.odometer_update_by_wheels)
+    i.odometer_update_by_xyz                 0x080030d4   Section        0  odometer.o(i.odometer_update_by_xyz)
+    i.scanner_init                           0x08003218   Section        0  qr.o(i.scanner_init)
+    i.send_struct_feedback_serial            0x08003248   Section        0  structserial.o(i.send_struct_feedback_serial)
+    .constdata                               0x08003328   Section      360  can.o(.constdata)
+    .constdata                               0x08003490   Section       48  cos_i.o(.constdata)
+    C                                        0x08003490   Data          48  cos_i.o(.constdata)
+    .constdata                               0x080034c0   Section      200  rred.o(.constdata)
+    pio2s                                    0x080034c0   Data          48  rred.o(.constdata)
+    twooverpi                                0x080034f0   Data         152  rred.o(.constdata)
+    .constdata                               0x08003588   Section       40  sin_i.o(.constdata)
+    S                                        0x08003588   Data          40  sin_i.o(.constdata)
     .data                                    0x20000000   Section        9  can.o(.data)
     .data                                    0x2000000a   Section        4  delay.o(.data)
     fac_us                                   0x2000000a   Data           1  delay.o(.data)
@@ -1381,14 +1381,14 @@ Image Symbol Table
     fabs                                     0x08002789   Thumb Code    24  fabs.o(i.fabs)
     init_can                                 0x080027a1   Thumb Code    22  main.o(i.init_can)
     init_motor                               0x080027bd   Thumb Code    80  main.o(i.init_motor)
-    main                                     0x08002811   Thumb Code  1810  main.o(i.main)
-    odometer_update_by_wheels                0x08002f89   Thumb Code   282  odometer.o(i.odometer_update_by_wheels)
-    odometer_update_by_xyz                   0x080030dd   Thumb Code   310  odometer.o(i.odometer_update_by_xyz)
-    scanner_init                             0x08003221   Thumb Code    42  qr.o(i.scanner_init)
-    send_struct_feedback_serial              0x08003251   Thumb Code   204  structserial.o(i.send_struct_feedback_serial)
-    CAN_baud_table                           0x08003320   Data         360  can.o(.constdata)
-    Region$$Table$$Base                      0x080035a8   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x080035c8   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x08002811   Thumb Code  1804  main.o(i.main)
+    odometer_update_by_wheels                0x08002f81   Thumb Code   282  odometer.o(i.odometer_update_by_wheels)
+    odometer_update_by_xyz                   0x080030d5   Thumb Code   310  odometer.o(i.odometer_update_by_xyz)
+    scanner_init                             0x08003219   Thumb Code    42  qr.o(i.scanner_init)
+    send_struct_feedback_serial              0x08003249   Thumb Code   220  structserial.o(i.send_struct_feedback_serial)
+    CAN_baud_table                           0x08003328   Data         360  can.o(.constdata)
+    Region$$Table$$Base                      0x080035b0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080035d0   Number         0  anon$$obj.o(Region$$Table)
     can1_rec_flag                            0x20000000   Data           1  can.o(.data)
     CAN1_data                                0x20000001   Data           8  can.o(.data)
     received_len                             0x20000010   Data           1  main.o(.data)
@@ -1455,9 +1455,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00003698, Max: 0x00080000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000036a0, Max: 0x00080000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x000035c8, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x000035d0, Max: 0x00080000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1584,16 +1584,16 @@ Memory Map of the image
     0x08002788   0x00000018   Code   RO         2542    i.fabs              m_wm.l(fabs.o)
     0x080027a0   0x0000001c   Code   RO          325    i.init_can          main.o
     0x080027bc   0x00000054   Code   RO          326    i.init_motor        main.o
-    0x08002810   0x00000778   Code   RO          327    i.main              main.o
-    0x08002f88   0x00000154   Code   RO          641    i.odometer_update_by_wheels  odometer.o
-    0x080030dc   0x00000144   Code   RO          642    i.odometer_update_by_xyz  odometer.o
-    0x08003220   0x00000030   Code   RO          683    i.scanner_init      qr.o
-    0x08003250   0x000000d0   Code   RO          724    i.send_struct_feedback_serial  structserial.o
-    0x08003320   0x00000168   Data   RO           18    .constdata          can.o
-    0x08003488   0x00000030   Data   RO         2471    .constdata          m_wm.l(cos_i.o)
-    0x080034b8   0x000000c8   Data   RO         2489    .constdata          m_wm.l(rred.o)
-    0x08003580   0x00000028   Data   RO         2493    .constdata          m_wm.l(sin_i.o)
-    0x080035a8   0x00000020   Data   RO         2554    Region$$Table       anon$$obj.o
+    0x08002810   0x00000770   Code   RO          327    i.main              main.o
+    0x08002f80   0x00000154   Code   RO          641    i.odometer_update_by_wheels  odometer.o
+    0x080030d4   0x00000144   Code   RO          642    i.odometer_update_by_xyz  odometer.o
+    0x08003218   0x00000030   Code   RO          683    i.scanner_init      qr.o
+    0x08003248   0x000000e0   Code   RO          724    i.send_struct_feedback_serial  structserial.o
+    0x08003328   0x00000168   Data   RO           18    .constdata          can.o
+    0x08003490   0x00000030   Data   RO         2471    .constdata          m_wm.l(cos_i.o)
+    0x080034c0   0x000000c8   Data   RO         2489    .constdata          m_wm.l(rred.o)
+    0x08003588   0x00000028   Data   RO         2493    .constdata          m_wm.l(sin_i.o)
+    0x080035b0   0x00000020   Data   RO         2554    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00000698, Max: 0x00020000, ABSOLUTE)
@@ -1632,7 +1632,7 @@ Image component sizes
        644         40        360          9         20     272015   can.o
        148         12          0          4          0       1876   delay.o
        488         26          0          0          0       1290   led.o
-      2024        152          0        136        182       5405   main.o
+      2016        150          0        136        182       5401   main.o
        164         22          0          0          0       2875   misc.o
         64          8          0          0          0        507   myiic.o
        112          0          0          0          0        581   nvic.o
@@ -1646,12 +1646,12 @@ Image component sizes
        264         42          0         16          0       6053   stm32f4xx_rcc.o
        190         28          0          0          0       5013   stm32f4xx_tim.o
        522         34          0          0          0       7898   stm32f4xx_usart.o
-       208          4          0          0         70       1651   structserial.o
+       224          4          0          0         70       1659   structserial.o
        272         36          0          0          0       1497   system_stm32f4xx.o
         56         10          0         12          0       1558   systick.o
 
     ----------------------------------------------------------------------
-      8170        660        784        204       1480     331811   Object Totals
+      8178        658        784        204       1480     331815   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         10          0          0          3          9          0   (incl. Padding)
 
@@ -1719,15 +1719,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     12696        960       1072        208       1480     326843   Grand Totals
-     12696        960       1072        208       1480     326843   ELF Image Totals
-     12696        960       1072        208          0          0   ROM Totals
+     12704        958       1072        208       1480     326847   Grand Totals
+     12704        958       1072        208       1480     326847   ELF Image Totals
+     12704        958       1072        208          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                13768 (  13.45kB)
+    Total RO  Size (Code + RO Data)                13776 (  13.45kB)
     Total RW  Size (RW Data + ZI Data)              1688 (   1.65kB)
-    Total ROM Size (Code + RO Data + RW Data)      13976 (  13.65kB)
+    Total ROM Size (Code + RO Data + RW Data)      13984 (  13.66kB)
 
 ==============================================================================
 
