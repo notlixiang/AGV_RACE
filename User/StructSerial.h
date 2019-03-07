@@ -1,43 +1,39 @@
-/***********************************************************************
-�ļ����ƣ�LED.h
-��    �ܣ�led  IO��ʼ��
-��дʱ�䣺2013.4.25
-�� д �ˣ�
-ע    �⣺
-***********************************************************************/
 
 #ifndef _STRUCTSERIAL_H_
 #define _STRUCTSERIAL_H_
 
 #define COMMAND_DATA_LENGTH sizeof(struct_command_data)
 
+
 typedef struct struct_command_data {
-	int check_front;
+	int check_front_cmd;
 	
-	float vx;
-	float vy;
-	float wz;	
-	uint8_t  qr_scan;
+	float speed_cmd[3];
+	uint8_t  qr_scan_cmd;
 	
-	int check_back;
+	int check_back_cmd;
 } struct_command_data, *struct_command_data_ptr;
 
 
 #define FEEDBACK_DATA_LENGTH sizeof(struct_feedback_data)
 typedef struct struct_feedback_data {
-	int check_front;	
+	int check_front_fbk;	
 	
-	float vx;
-	float vy;
-	float wz;	
+	float speed_fbk[3];
 	
-	float pos_x;
-	float pos_y;
-	float pos_z;
+	float pos_fbk[3];	
 	
-	char qr_scan[10];
+	float a_fbk[3];
+	float g_fbk[3];
 	
-	int check_back;
+	uint8_t ultra_sound_signal_fbk[12];
+	
+	char qr_scan_fbk[10];
+	
+	int check_back_fbk;
 } struct_feedback_data, *struct_feedback_data_ptr;
+
+
+
 
 #endif
