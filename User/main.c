@@ -511,7 +511,16 @@ uint16_t distance=0;
 	command2[6] = (uint8_t)((omega2 >> 16)&0x000000ff);
 	command2[7] = (uint8_t)((omega2 >> 24)&0x000000ff);
 
+	command3[4] = (uint8_t)(omega3 & 0x000000ff);
+	command3[5] = (uint8_t)((omega3 >> 8)&0x000000ff);
+	command3[6] = (uint8_t)((omega3 >> 16)&0x000000ff);
+	command3[7] = (uint8_t)((omega3 >> 24)&0x000000ff);
 
+	command4[4] = (uint8_t)(omega4 & 0x000000ff);
+	command4[5] = (uint8_t)((omega4 >> 8)&0x000000ff);
+	command4[6] = (uint8_t)((omega4 >> 16)&0x000000ff);
+	command4[7] = (uint8_t)((omega4 >> 24)&0x000000ff);
+	
         omega1f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy + AGV_SHAPE_K * wz);
         omega2f = AGV_OUT_SPEED_K * (vx + 1 * vy + AGV_SHAPE_K * wz);
         omega3f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy - AGV_SHAPE_K * wz);
