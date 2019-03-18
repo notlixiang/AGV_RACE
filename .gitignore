@@ -17,3 +17,5 @@
    *.sct
    *.__i
    *.htm
+   *.TMP 
+   *.map
