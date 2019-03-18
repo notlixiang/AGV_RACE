@@ -7,7 +7,7 @@ float speed_fbk[3]={0};
 float pos_fbk[3]={0};	
 float a_fbk[3]={0};
 float g_fbk[3]={0};
-uint8_t ultra_sound_signal_fbk[12]={0};
+float ultra_sound_signal_fbk[12]={0};
 char qr_scan_fbk[10]={0};
 
 
@@ -16,7 +16,7 @@ void send_struct_feedback_serial(void){
 	struct_feedback_data* feedback_ptr=&feedback;
 	char* feedback_ptr_char=(char*)feedback_ptr;
 	
-	char fbk_buff[100];
+	char fbk_buff[150];
 	int i=0;
 	for(i=0;i<3;i++){		
 	feedback.speed_fbk[i]=speed_fbk[i];
