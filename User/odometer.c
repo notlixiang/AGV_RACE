@@ -77,27 +77,27 @@ void TIM3_Int_Init(u16 arr,u16 psc)
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);  ///Ê¹ÄÜTIM3Ê±ÖÓ
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);  ///Ê¹ï¿½ï¿½TIM3Ê±ï¿½ï¿½
 	
-  TIM_TimeBaseInitStructure.TIM_Period = arr; 	//×Ô¶¯ÖØ×°ÔØÖµ
-	TIM_TimeBaseInitStructure.TIM_Prescaler=psc;  //¶¨Ê±Æ÷·ÖÆµ
-	TIM_TimeBaseInitStructure.TIM_CounterMode=TIM_CounterMode_Up; //ÏòÉÏ¼ÆÊýÄ£Ê½
+  TIM_TimeBaseInitStructure.TIM_Period = arr; 	//ï¿½Ô¶ï¿½ï¿½ï¿½×°ï¿½ï¿½Öµ
+	TIM_TimeBaseInitStructure.TIM_Prescaler=psc;  //ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Æµ
+	TIM_TimeBaseInitStructure.TIM_CounterMode=TIM_CounterMode_Up; //ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½Ä£Ê½
 	TIM_TimeBaseInitStructure.TIM_ClockDivision=TIM_CKD_DIV1; 
 	
-	TIM_TimeBaseInit(TIM3,&TIM_TimeBaseInitStructure);//³õÊ¼»¯TIM3
+	TIM_TimeBaseInit(TIM3,&TIM_TimeBaseInitStructure);//ï¿½ï¿½Ê¼ï¿½ï¿½TIM3
 	
-	TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE); //ÔÊÐí¶¨Ê±Æ÷3¸üÐÂÖÐ¶Ï
-	TIM_Cmd(TIM3,ENABLE); //Ê¹ÄÜ¶¨Ê±Æ÷3
+	TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE); //ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½3ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+	TIM_Cmd(TIM3,ENABLE); //Ê¹ï¿½Ü¶ï¿½Ê±ï¿½ï¿½3
 	
-	NVIC_InitStructure.NVIC_IRQChannel=TIM3_IRQn; //¶¨Ê±Æ÷3ÖÐ¶Ï
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=0x01; //ÇÀÕ¼ÓÅÏÈ¼¶1
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority=0x03; //×ÓÓÅÏÈ¼¶3
+	NVIC_InitStructure.NVIC_IRQChannel=TIM3_IRQn; //ï¿½ï¿½Ê±ï¿½ï¿½3ï¿½Ð¶ï¿½
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=0x01; //ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½È¼ï¿½1
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority=0x03; //ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½3
 	NVIC_InitStructure.NVIC_IRQChannelCmd=ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
 }
 
-//¶¨Ê±Æ÷3ÖÐ¶Ï·þÎñº¯Êý
+//ï¿½ï¿½Ê±ï¿½ï¿½3ï¿½Ð¶Ï·ï¿½ï¿½ï¿½ï¿½ï¿½
 extern int32_t speed_read_value[4];//??????
 
 void TIM3_IRQHandler(void)
@@ -107,7 +107,7 @@ void TIM3_IRQHandler(void)
 	float omega_3=speed_read_value[2];//K_omega*1000.0;
 	float omega_4=speed_read_value[3];//K_omega*1000.0;
 	
-	if(TIM_GetITStatus(TIM3,TIM_IT_Update)==SET) //Òç³öÖÐ¶Ï
+	if(TIM_GetITStatus(TIM3,TIM_IT_Update)==SET) //ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
 	{
 		odometer_update_by_wheels( omega_1,omega_2,omega_3,omega_4,ODOM_PERIOD_MS/1000.0);
 			delay_ms(26);
@@ -120,5 +120,5 @@ void TIM3_IRQHandler(void)
 
 //	RS232_Send_Data(odom_buff,strlen(odom_buff));
 	}
-	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //Çå³ýÖÐ¶Ï±êÖ¾Î»
+	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //ï¿½ï¿½ï¿½ï¿½Ð¶Ï±ï¿½Ö¾Î»
 }
