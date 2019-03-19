@@ -146,7 +146,7 @@ int main(void) {
         配置CPU系统的时钟，内部Flash访问时序，配置FSMC用于外部SRAM等。
     */
 //	uint8_t i = 0;	
-  int ultra_signal = 0;
+	int ultra_signal = 0;
 	int ultrasonic_switch =0;
 	USART_Configuration();
 	NVIC_Configuration();
@@ -167,17 +167,17 @@ int main(void) {
 	char led_num=0;
 
 //	init_can();
-    init_motor(N1);
-    init_motor(N2);
-    init_motor(N3);
-    init_motor(N4);
+	init_motor(N1);
+	init_motor(N2);
+	init_motor(N3);
+	init_motor(N4);
 //	
 	command1[6] = (uint8_t)(0x0000000f);
 	command2[6] = (uint8_t)(0x0000000f);
 	command3[6] = (uint8_t)(0x0000000f);
 	command4[6] = (uint8_t)(0x0000000f);
 	
-	  delay_ms(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N1, &command1[0], 8);
 	delay_ms(2);
 	CAN1_WriteData(0x600+N2, &command2[0], 8);
@@ -187,7 +187,7 @@ int main(void) {
 	CAN1_WriteData(0x600+N4, &command4[0], 8);
 //	
 
-delay_ms(2);
+	delay_ms(2);
 	CAN1_WriteData(0x600+N1, &command_read_speed[0], 8);
 	delay_ms(2);
 	CAN1_WriteData(0x600+N2, &command_read_speed[0], 8);
@@ -200,15 +200,15 @@ TIM3_Int_Init(ODOM_PERIOD_MS*10-1,8400-1);//里程计更新周期50ms
 
 float msg_cnt=msg_cnt_max;
 
-    float led_on_cnt = 20.0;
-    led_on_cnt = 20;
-    LED_OFF();
-    while (1) {
+float led_on_cnt = 20.0;
+led_on_cnt = 20;
+LED_OFF();
+while (1) {
 
 //	delay_ms(20);
 //	CAN1_WriteData(0x600+N2, &command_test[0], 8);
 	
-msg_cnt-=1;
+	msg_cnt-=1;
 	if(msg_cnt<0)
 	{
 		vx=0;
@@ -218,9 +218,9 @@ msg_cnt-=1;
 	
 	if(led_on_cnt>0)
 	{		
-	led_on_cnt-=1;
+		led_on_cnt-=1;
 	}	else{		
-LED_OFF();	
+		LED_OFF();	
 	}
 	
 	
@@ -235,30 +235,30 @@ LED_OFF();
 
         if (RS232_REC_Flag == 1)       //如果串口接收到一帧数据（以“?;”结尾）
         {
-            RS232_REC_Flag = 0;
+        	RS232_REC_Flag = 0;
             //RS232_Send_Data(RS232_buff,RS232_rec_counter);
             //int i = 0;
-            uint8_t i = 0;
-            for (i = 0; i < RS232_rec_counter; i++) {
-                received_data[i] = RS232_buff[i];
-            }
-            received_len = RS232_rec_counter;
+        	uint8_t i = 0;
+        	for (i = 0; i < RS232_rec_counter; i++) {
+        		received_data[i] = RS232_buff[i];
+        	}
+        	received_len = RS232_rec_counter;
             if (received_len >= 11)//Serial data are valid
             {
                 //uint8_t head_index = 0;
-                for (head_index = 0; head_index < received_len -
+            	for (head_index = 0; head_index < received_len -
                                                   1; head_index++)//find the head of msg  FA FB ** **** **** ** EE FF 3F 3B (HEX)
-                {
-                    if (received_data[head_index] == 0x53 && received_data[head_index + 1] == 0x4a &&
-                        received_data[head_index + 2] == 0x54 && received_data[head_index + 3] == 0x55) {
-                        break;
-                    }
-                }
+            	{
+            		if (received_data[head_index] == 0x53 && received_data[head_index + 1] == 0x4a &&
+            			received_data[head_index + 2] == 0x54 && received_data[head_index + 3] == 0x55) {
+            			break;
+            	}
+            }
                 if ((head_index + 11) <= (received_len))//data valid confirm
                 {
 //										if(received_data[head_index+10]==0x01)//msg valid confirm
 					if(received_data[head_index+10]==0x01)//msg valid confirm
-				{
+					{
 						if(/*received_data[head_index+2]==0x01&&*/agv_started==0)//first start
 						{
 							init_can();
@@ -282,29 +282,29 @@ LED_OFF();
 							wz = (int16_t)uwz;
 							temp_recv_omega=uwz;
 						}
-		msg_cnt=msg_cnt_max;
+						msg_cnt=msg_cnt_max;
 						
-				}
+					}
 				}
 			}
 		}
-					RS232_rec_counter = 0;
+		RS232_rec_counter = 0;
 		
 //		
 //		
 		
 		//ultra_sonic!!!******************************	
-if(0)
-{	
-	u8 	ultrasonic_Address2[8]={0xE2,0xD0,0xD4,0xD6,0xE0,0xDE,0xDA,0xD8};
-for(int i=0;i<8;i++)
-{
-	KS103_WriteOneByte(ultrasonic_Address2[i],0X02,0X71); 
-	delay_ms(5);
-} 
-u8  CurrentAddress=0;
-u8  OldAddress=0;
-uint16_t distance=0;
+		if(0)
+		{	
+			u8 	ultrasonic_Address2[8]={0xE2,0xD0,0xD4,0xD6,0xE0,0xDE,0xDA,0xD8};
+			for(int i=0;i<8;i++)
+			{
+				KS103_WriteOneByte(ultrasonic_Address2[i],0X02,0X71); 
+				delay_ms(5);
+			} 
+			u8  CurrentAddress=0;
+			u8  OldAddress=0;
+			uint16_t distance=0;
 //u8 	ultrasonic_Address2[8]={0xE2,0xD0,0xD4,0xD6,0xE0,0xDE,0xDA,0xD8};
 //for(int i=0;i<8;i++)
 //{
@@ -312,53 +312,53 @@ uint16_t distance=0;
 //} 
 //	u8 	ultrasonic_Address2[8]={0x04,0x60,0xC0,0xE0,0xE4,0x80,0x40,0x20};
 //		u8 	ultrasonic_Address2[8]={0xE2,0xD0,0xD4,0xD6,0xE0,0xDE,0xDA,0xD8};
-            u8 ultrasonic_enable[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-            u8 ultrasonic_result[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-            uint16_t ultrasonic_value[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
-            if ((vx >= 0) && (vy >= 0)) {
+			u8 ultrasonic_enable[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+			u8 ultrasonic_result[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+			uint16_t ultrasonic_value[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
+			if ((vx >= 0) && (vy >= 0)) {
                 //ultrasonic_enable[0] = 1;
-                ultrasonic_enable[1] = 1;
-                ultrasonic_enable[2] = 1;
-                ultrasonic_enable[3] = 1;
+				ultrasonic_enable[1] = 1;
+				ultrasonic_enable[2] = 1;
+				ultrasonic_enable[3] = 1;
 
-            }
-            if ((vx <= 0) && (vy >= 0)) {
+			}
+			if ((vx <= 0) && (vy >= 0)) {
 
-                ultrasonic_enable[1] = 1;
-                ultrasonic_enable[2] = 1;
-                ultrasonic_enable[3] = 1;
+				ultrasonic_enable[1] = 1;
+				ultrasonic_enable[2] = 1;
+				ultrasonic_enable[3] = 1;
                 //ultrasonic_enable[4] = 1;
-            }
-            if ((vx <= 0) && (vy <= 0)) {
+			}
+			if ((vx <= 0) && (vy <= 0)) {
                 //ultrasonic_enable[0] = 1;
-                ultrasonic_enable[5] = 1;
-                ultrasonic_enable[6] = 1;
-                ultrasonic_enable[7] = 1;
-            }
-            if ((vx >= 0) && (vy <= 0)) {
+				ultrasonic_enable[5] = 1;
+				ultrasonic_enable[6] = 1;
+				ultrasonic_enable[7] = 1;
+			}
+			if ((vx >= 0) && (vy <= 0)) {
                 //ultrasonic_enable[4] = 1;
-                ultrasonic_enable[5] = 1;
-                ultrasonic_enable[6] = 1;
-                ultrasonic_enable[7] = 1;
-            }
+				ultrasonic_enable[5] = 1;
+				ultrasonic_enable[6] = 1;
+				ultrasonic_enable[7] = 1;
+			}
 
-            for (int i = 0; i < 8; i++) {
-                if (ultrasonic_enable[i] == 1) {
-                    KS103_WriteOneByte(ultrasonic_Address2[i], 0X02, 0Xb0);
-                    delay_ms(10);
-                    distance = KS103_ReadOneByte(ultrasonic_Address2[i], 0x02);
-                    distance <<= 8;
-                    distance += KS103_ReadOneByte(ultrasonic_Address2[i], 0x03);
+			for (int i = 0; i < 8; i++) {
+				if (ultrasonic_enable[i] == 1) {
+					KS103_WriteOneByte(ultrasonic_Address2[i], 0X02, 0Xb0);
+					delay_ms(10);
+					distance = KS103_ReadOneByte(ultrasonic_Address2[i], 0x02);
+					distance <<= 8;
+					distance += KS103_ReadOneByte(ultrasonic_Address2[i], 0x03);
 //							printf("ID: %x ,distance:%d \r\n",ultrasonic_Address2[i],distance);
-                    delay_ms(5);
-                    ultrasonic_value[i] = distance;
-                    if (distance < 150) {
-                        ultra_signal = 1;
-                        ultrasonic_result[i] = 1;
-                    }
-                }
-                distance = 0;
-            }
+					delay_ms(5);
+					ultrasonic_value[i] = distance;
+					if (distance < 150) {
+						ultra_signal = 1;
+						ultrasonic_result[i] = 1;
+					}
+				}
+				distance = 0;
+			}
 //				printf("\r\n--------------------- \r\n");
 //						vx=remember_vx;
 //						vy=remember_vy;
@@ -371,57 +371,57 @@ uint16_t distance=0;
 //				}
 
 
-            if ((vx >= 0) && (vy >= 0)) {
-                if (ultrasonic_result[1] + ultrasonic_result[2] + ultrasonic_result[3] > 0) {
-                    vx = 0.0;
-                    vy = 0.0;
-                    wz = 0.0;
+			if ((vx >= 0) && (vy >= 0)) {
+				if (ultrasonic_result[1] + ultrasonic_result[2] + ultrasonic_result[3] > 0) {
+					vx = 0.0;
+					vy = 0.0;
+					wz = 0.0;
 //					vx = -vx;
 //					vy = -vy;
 //					wz=0.0;
 //				remember_vx = 2*(rand()%(150-50+1)+50);
 //				remember_vy = 2*(rand()%(150-50+1)+50);
-                }
-            }
+				}
+			}
 
-            if ((vx <= 0) && (vy >= 0)) {
-                if (ultrasonic_result[1] + ultrasonic_result[2] + ultrasonic_result[3] > 0) {
-                    vx = 0.0;
-                    vy = 0.0;
-                    wz = 0.0;
+			if ((vx <= 0) && (vy >= 0)) {
+				if (ultrasonic_result[1] + ultrasonic_result[2] + ultrasonic_result[3] > 0) {
+					vx = 0.0;
+					vy = 0.0;
+					wz = 0.0;
 //					vx = -vx;
 //					vy = -vy;
 //					wz=0.0;
 //				remember_vx = 2*(rand()%(150-50+1)+50);
 //				remember_vy = 2*(rand()%(150-50+1)+50);
-                }
-            }
+				}
+			}
 
-            if ((vx <= 0) && (vy <= 0)) {
-                if (ultrasonic_result[5] + ultrasonic_result[6] + ultrasonic_result[7] > 0) {
-                    vx = 0.0;
-                    vy = 0.0;
-                    wz = 0.0;
+			if ((vx <= 0) && (vy <= 0)) {
+				if (ultrasonic_result[5] + ultrasonic_result[6] + ultrasonic_result[7] > 0) {
+					vx = 0.0;
+					vy = 0.0;
+					wz = 0.0;
 //					vx = -vx;
 //					vy = -vy;
 //					wz=0.0;
 //				remember_vx = 2*(rand()%(150-50+1)+50);
 //				remember_vy = 2*(rand()%(150-50+1)+50);
-                }
-            }
+				}
+			}
 
-            if ((vx >= 0) && (vy <= 0)) {
-                if (ultrasonic_result[7] + ultrasonic_result[6] + ultrasonic_result[5] > 0) {
-                    vx = 0.0;
-                    vy = 0.0;
-                    wz = 0.0;
+			if ((vx >= 0) && (vy <= 0)) {
+				if (ultrasonic_result[7] + ultrasonic_result[6] + ultrasonic_result[5] > 0) {
+					vx = 0.0;
+					vy = 0.0;
+					wz = 0.0;
 //					vx = -vx;
 //					vy = -vy;
 //					wz=0.0;
 //				remember_vx = 2*(rand()%(150-50+1)+50);
 //				remember_vy = 2*(rand()%(150-50+1)+50);
-                }
-            }
+				}
+			}
 //			if((ultrasonic_value[0]>200)&&(ultrasonic_value[0]<400))
 //				{
 
@@ -434,27 +434,27 @@ uint16_t distance=0;
 //					vx = vx + 100;
 
 //				}
-        }
+		}
 //		remember_vx = vx;
 //		remember_vy = vy;
 
 //********************************************
-							if(vx>SPEED_MAX)vx=SPEED_MAX;
-							if(vx<-SPEED_MAX)vx=-SPEED_MAX;
-							if(vy>SPEED_MAX)vy=SPEED_MAX;
-							if(vy<-SPEED_MAX)vy=-SPEED_MAX;
-							if(wz>OMEGA_MAX)wz=OMEGA_MAX;
-							if(wz<-OMEGA_MAX)wz=-OMEGA_MAX;
+		if(vx>SPEED_MAX)vx=SPEED_MAX;
+		if(vx<-SPEED_MAX)vx=-SPEED_MAX;
+		if(vy>SPEED_MAX)vy=SPEED_MAX;
+		if(vy<-SPEED_MAX)vy=-SPEED_MAX;
+		if(wz>OMEGA_MAX)wz=OMEGA_MAX;
+		if(wz<-OMEGA_MAX)wz=-OMEGA_MAX;
 		
 		if(abs(vx-vxPrevious)>DELTA_SPEED_MAX)//缓慢加速，加速度与下发频率相关
 		{
 			vx=vxPrevious+DELTA_SPEED_MAX*abs(vx-vxPrevious)/(float)(vx-vxPrevious);
 		}
-				if(abs(vy-vyPrevious)>DELTA_SPEED_MAX)
+		if(abs(vy-vyPrevious)>DELTA_SPEED_MAX)
 		{
 			vy=vyPrevious+DELTA_SPEED_MAX*abs(vy-vyPrevious)/(float)(vy-vyPrevious);
 		}
-				if(abs(wz-wzPrevious)>DELTA_OMEGA_MAX)
+		if(abs(wz-wzPrevious)>DELTA_OMEGA_MAX)
 		{
 			wz=wzPrevious+DELTA_OMEGA_MAX*abs(wz-wzPrevious)/(float)(wz-wzPrevious);
 		}
@@ -469,22 +469,22 @@ uint16_t distance=0;
 		vyPrevious=vy;
 		wzPrevious=wz;
 		
-	
-	omega1f = AGV_OUT_SPEED_K*(1*vx + 1*vy - AGV_SHAPE_K * wz);
-	omega2f = AGV_OUT_SPEED_K*(vx - 1*vy - AGV_SHAPE_K * wz);
-	omega3f = AGV_OUT_SPEED_K*(1*vx + 1*vy + AGV_SHAPE_K * wz);
-	omega4f = AGV_OUT_SPEED_K*(vx - 1*vy + AGV_SHAPE_K * wz);
-	
-	omega1 = (int32_t)(L_DIRECTION*1*omega1f);
-	omega2 = (int32_t)(L_DIRECTION*1*omega2f);
-	omega3 = (int32_t)(R_DIRECTION*1*omega3f);
+		
+		omega1f = AGV_OUT_SPEED_K*(1*vx + 1*vy - AGV_SHAPE_K * wz);
+		omega2f = AGV_OUT_SPEED_K*(vx - 1*vy - AGV_SHAPE_K * wz);
+		omega3f = AGV_OUT_SPEED_K*(1*vx + 1*vy + AGV_SHAPE_K * wz);
+		omega4f = AGV_OUT_SPEED_K*(vx - 1*vy + AGV_SHAPE_K * wz);
+		
+		omega1 = (int32_t)(L_DIRECTION*1*omega1f);
+		omega2 = (int32_t)(L_DIRECTION*1*omega2f);
+		omega3 = (int32_t)(R_DIRECTION*1*omega3f);
 	omega4 = (int32_t)(R_DIRECTION*1*omega4f);  //take the installnation direction of motors into account.
 
 	sprintf(dtu_buff, "ODOMDTU w1 %d, w2 %d ,w3 %d, w4 %d,DTUODOM\r\n\0", 
-	(int)omega1, 
-	(int)omega2,
-	(int)omega3,
-	(int)omega4);
+		(int)omega1, 
+		(int)omega2,
+		(int)omega3,
+		(int)omega4);
 	
 
 	//RS232_Send_Data(dtu_buff,strlen(dtu_buff));
@@ -511,59 +511,59 @@ uint16_t distance=0;
 	command4[6] = (uint8_t)((omega4 >> 16)&0x000000ff);
 	command4[7] = (uint8_t)((omega4 >> 24)&0x000000ff);
 	
-        omega1f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy + AGV_SHAPE_K * wz);
-        omega2f = AGV_OUT_SPEED_K * (vx + 1 * vy + AGV_SHAPE_K * wz);
-        omega3f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy - AGV_SHAPE_K * wz);
-        omega4f = AGV_OUT_SPEED_K * (vx + 1 * vy - AGV_SHAPE_K * wz);
+	omega1f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy + AGV_SHAPE_K * wz);
+	omega2f = AGV_OUT_SPEED_K * (vx + 1 * vy + AGV_SHAPE_K * wz);
+	omega3f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy - AGV_SHAPE_K * wz);
+	omega4f = AGV_OUT_SPEED_K * (vx + 1 * vy - AGV_SHAPE_K * wz);
 
-        omega1 = (int32_t)(L_DIRECTION * 1 * omega1f);
-        omega2 = (int32_t)(L_DIRECTION * 1 * omega2f);
-        omega3 = (int32_t)(R_DIRECTION * 1 * omega3f);
+	omega1 = (int32_t)(L_DIRECTION * 1 * omega1f);
+	omega2 = (int32_t)(L_DIRECTION * 1 * omega2f);
+	omega3 = (int32_t)(R_DIRECTION * 1 * omega3f);
         omega4 = (int32_t)(R_DIRECTION * 1 * omega4f);  //take the installnation direction of motors into account.
 
-  delay_ms(2);
-	CAN1_WriteData(0x600+N1, &command1[0], 8);
-	delay_ms(2);
-	CAN1_WriteData(0x600+N2, &command2[0], 8);
-	delay_ms(2);
-	CAN1_WriteData(0x600+N3, &command3[0], 8);
-	delay_ms(2);
-	CAN1_WriteData(0x600+N4, &command4[0], 8);
-	
+        delay_ms(2);
+        CAN1_WriteData(0x600+N1, &command1[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600+N2, &command2[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600+N3, &command3[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600+N4, &command4[0], 8);
+        
 
-	delay_ms(2);
-	CAN1_WriteData(0x600+N1, &command_read_position[0], 8);
-	delay_ms(2);
-	CAN1_WriteData(0x600+N2, &command_read_position[0], 8);
-	delay_ms(2);
-	CAN1_WriteData(0x600+N3, &command_read_position[0], 8);
-	delay_ms(2);
-	CAN1_WriteData(0x600+N4, &command_read_position[0], 8);
-	
-	
+        delay_ms(2);
+        CAN1_WriteData(0x600+N1, &command_read_position[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600+N2, &command_read_position[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600+N3, &command_read_position[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600+N4, &command_read_position[0], 8);
+        
+        
 	//read speed command_read_speed
-		delay_ms(2);
-	CAN1_WriteData(0x600+N1, &command_read_speed[0], 8);
-	delay_ms(2);
-	CAN1_WriteData(0x600+N2, &command_read_speed[0], 8);
-	delay_ms(2);
-	CAN1_WriteData(0x600+N3, &command_read_speed[0], 8);
-	delay_ms(2);
-	CAN1_WriteData(0x600+N4, &command_read_speed[0], 8);
-	delay_ms(2);
-	
-	
+        delay_ms(2);
+        CAN1_WriteData(0x600+N1, &command_read_speed[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600+N2, &command_read_speed[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600+N3, &command_read_speed[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600+N4, &command_read_speed[0], 8);
+        delay_ms(2);
+        
+        
 //	LED_ON();	
 //	delay_ms(999);
 //	LED_OFF();	
 //	delay_ms(999);
 
 //	delay_ms(26);
- 	sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0", 
-	(int)(speed_read_value[0]/K_omega*1000.0),
-	(int)(speed_read_value[1]/K_omega*1000.0),
-	(int)(speed_read_value[2]/K_omega*1000.0),
-	(int)(speed_read_value[3]/K_omega*1000.0));
+        sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0", 
+        	(int)(speed_read_value[0]/K_omega*1000.0),
+        	(int)(speed_read_value[1]/K_omega*1000.0),
+        	(int)(speed_read_value[2]/K_omega*1000.0),
+        	(int)(speed_read_value[3]/K_omega*1000.0));
 //	sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0", 
 //	(int)(speed_read_value[0]/OUT_OMEGA_K*1000.0),
 //	(int)(speed_read_value[1]/OUT_OMEGA_K*1000.0),
@@ -574,7 +574,7 @@ uint16_t distance=0;
 //	(int)(speed_read_value[1]),
 //	(int)(speed_read_value[2]),
 //	(int)(speed_read_value[3]));
-	
+        
 //	delay_ms(20);
 //RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 
