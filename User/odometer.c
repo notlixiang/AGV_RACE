@@ -10,6 +10,9 @@ extern float AGV_SHAPE_K ;
 
 unsigned char odom_buff[100];
 
+extern float speed_fbk[3];
+extern float pos_fbk[3];	
+
 void odometer_reset(void)
 {
 odometer_x=0;
@@ -30,7 +33,9 @@ void odometer_update_by_xyz(float vx,float vy,float wz,float delta_t)
 	odometer_x=odometer_x+vx*delta_t*cos(odometer_z/1000.0)-vy*delta_t*sin(odometer_z/1000.0);
 	odometer_y=odometer_y+vx*delta_t*sin(odometer_z/1000.0)+vy*delta_t*cos(odometer_z/1000.0);
 	odometer_z+=wz*delta_t;
-	
+	pos_fbk[0]=odometer_x/1000.0f;
+	pos_fbk[1]=odometer_y/1000.0f;
+	pos_fbk[2]=odometer_z/1000.0f;
 }
 
 void odometer_update_by_wheels(float omega_1,float omega_2,float omega_3,float omega_4,float delta_t)
@@ -69,7 +74,9 @@ void odometer_update_by_wheels(float omega_1,float omega_2,float omega_3,float o
 	
 	
 	odometer_update_by_xyz(vx_temp,vy_temp,wz_temp,delta_t);	
-	
+	speed_fbk[0]=vx_temp/1000.0f;
+	speed_fbk[1]=vy_temp/1000.0f;
+	speed_fbk[2]=wz_temp/1000.0f;
 }
 
 void TIM3_Int_Init(u16 arr,u16 psc)
@@ -110,14 +117,13 @@ void TIM3_IRQHandler(void)
 	if(TIM_GetITStatus(TIM3,TIM_IT_Update)==SET) //����ж�
 	{
 		odometer_update_by_wheels( omega_1,omega_2,omega_3,omega_4,ODOM_PERIOD_MS/1000.0);
-			delay_ms(26);
  	sprintf(odom_buff, "ODOMDTU x %d, y %d ,z %d,DTUODOM\r\n\0", 
 	(int)odometer_x,
 		//(int)(sin(PI/4.0)*1000),
 	(int)odometer_y,
 	(int)odometer_z);
 	
-
+send_struct_feedback_serial();
 //	RS232_Send_Data(odom_buff,strlen(odom_buff));
 	}
 	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //����жϱ�־λ

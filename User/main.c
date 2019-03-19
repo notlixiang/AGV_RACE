@@ -114,7 +114,6 @@ int temp_recv_omega = 0;
 
 unsigned char dtu_buff[50];
 
-extern float speed_fbk[3];
 
 void init_can()
 {
@@ -581,7 +580,6 @@ uint16_t distance=0;
 
 //RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 				//50ms in total
-send_struct_feedback_serial();
 
     }
 }
