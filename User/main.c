@@ -114,15 +114,7 @@ int temp_recv_omega = 0;
 
 unsigned char dtu_buff[50];
 
-//void delay_ms(uint32_t t)
-//{
-//	uint32_t i;
-//	uint16_t j;
-//	for(i=0;i<t;i++)
-//	{
-//		for(j=0;j<10000;j++);
-//	}
-//}
+extern float speed_fbk[3];
 
 void init_can()
 {
@@ -291,7 +283,6 @@ LED_OFF();
 							wz = (int16_t)uwz;
 							temp_recv_omega=uwz;
 						}
-						
 		msg_cnt=msg_cnt_max;
 						
 				}
