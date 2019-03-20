@@ -113,7 +113,8 @@ int lift_status = 0;
 int temp_recv_omega = 0;
 
 unsigned char dtu_buff[50];
-
+extern char qr_scan_fbk[10];
+extern float ultra_sound_signal_fbk[12];
 
 void init_can()
 {
