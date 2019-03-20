@@ -44,7 +44,7 @@ unit of vx_ vy_ are mm/s
 unit of w_ is rpm
 ***********************************************************************/
 
-static uint8_t received_data[100] = {0};
+volatile char received_data[100] = {0};
 uint8_t received_len = 0;
 uint8_t begin1[2] = {0x01, 0x0f}; // id=0x00;
 uint8_t begin2[8] = {0x2f, 0x60, 0x60, 0x00, 0x03, 0x00, 0x00, 0x00};//2F 60 60 00 03 00 00 00 id=0x600+num:
@@ -233,7 +233,7 @@ while (1) {
 //	
 //LED_OFF();	
 
-
+delay_ms(100);
         if (RS232_REC_Flag == 1)       //如果串口接收到一帧数据（以“?;”结尾）
         {
         	RS232_REC_Flag = 0;
@@ -242,6 +242,9 @@ while (1) {
         	uint8_t i = 0;
         	for (i = 0; i < RS232_rec_counter; i++) {
         		received_data[i] = RS232_buff[i];
+        	}
+					for (i = 0; i < 12; i++) {
+        		ultra_sound_signal_fbk[i] =(float)(uint8_t)RS232_buff[i];
         	}
         	received_len = RS232_rec_counter;
             if (received_len >= 11)//Serial data are valid

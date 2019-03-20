@@ -109,6 +109,7 @@ void USART_Configuration(void)
 编 写 人：
 注    意  RS232用的是USART1.
 ***********************************************************************/
+const char* back_cmd="cmd";
 void USART1_IRQHandler(void)  
 {
 	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
@@ -116,9 +117,11 @@ void USART1_IRQHandler(void)
 		RS232_buff[RS232_rec_counter] = USART1->DR;//
 		RS232_rec_counter ++;
 /********以RS232_END_FLAG1和RS232_END_FLAG2定义的字符作为一帧数据的结束标识************/
-		if(RS232_rec_counter >= 2)	//只有接收到2个数据以上才做判断
+		if(RS232_rec_counter >= COMMAND_DATA_LENGTH+8)	//只有接收到2个数据以上才做判断
 		{
-			if(RS232_buff[RS232_rec_counter - 1] == RS232_END_FLAG1 && RS232_buff[RS232_rec_counter - 1] == RS232_END_FLAG2) 	//帧起始标志   
+			if(RS232_buff[RS232_rec_counter - 2] == back_cmd[0] && 
+				RS232_buff[RS232_rec_counter - 1] == back_cmd[1] && 
+				RS232_buff[RS232_rec_counter - 0] == back_cmd[2] ) 	//帧起始标志   
 			{
 				RS232_REC_Flag = 1;
 			}
