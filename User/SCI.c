@@ -109,7 +109,7 @@ void USART_Configuration(void)
 编 写 人：
 注    意  RS232用的是USART1.
 ***********************************************************************/
-const char* back_cmd="cmd";
+extern char* back_cmd;
 void USART1_IRQHandler(void)  
 {
 	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
