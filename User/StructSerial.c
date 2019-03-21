@@ -7,6 +7,7 @@ float speed_fbk[3]={0};
 float pos_fbk[3]={0};	
 float a_fbk[3]={0};
 float g_fbk[3]={0};
+float yaw_fbk=0;
 float ultra_sound_signal_fbk[12]={0};
 //char qr_scan_fbk[10]={0};
 char qr_scan_fbk[10]="test str";
@@ -23,7 +24,8 @@ void send_struct_feedback_serial(void){
 	feedback.pos_fbk[i]=pos_fbk[i];
 	feedback.a_fbk[i]=a_fbk[i];
 	feedback.g_fbk[i]=g_fbk[i];
-	}
+	}	
+	feedback.yaw_fbk=yaw_fbk;
 //	speed_fbk[0]+=1.0;
 	for(i=0;i<12;i++){		
 	feedback.ultra_sound_signal_fbk[i]=ultra_sound_signal_fbk[i];
