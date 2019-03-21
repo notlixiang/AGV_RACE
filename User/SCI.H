@@ -9,7 +9,7 @@
 #define  _SCI_H_
 #include "main.h"
 
-#define RS232_REC_BUFF_SIZE				25
+#define RS232_REC_BUFF_SIZE				200
 #define RS232_END_FLAG1	0x01		//RS232һ�����ݽ�����־1 
 #define RS232_END_FLAG2	0x01			//RS232һ�����ݽ�����־2 
 typedef struct __FILE FILE;
