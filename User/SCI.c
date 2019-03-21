@@ -117,7 +117,7 @@ void USART1_IRQHandler(void)
 		RS232_buff[RS232_rec_counter] = USART1->DR;//
 		RS232_rec_counter ++;
 /********以RS232_END_FLAG1和RS232_END_FLAG2定义的字符作为一帧数据的结束标识************/
-		if(RS232_rec_counter >= COMMAND_DATA_LENGTH+8)	//只有接收到2个数据以上才做判断
+		if(RS232_rec_counter >= 3)	//只有接收到2个数据以上才做判断
 		{
 			if(RS232_buff[RS232_rec_counter - 2] == back_cmd[0] && 
 				RS232_buff[RS232_rec_counter - 1] == back_cmd[1] && 

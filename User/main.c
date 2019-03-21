@@ -44,7 +44,7 @@ unit of vx_ vy_ are mm/s
 unit of w_ is rpm
 ***********************************************************************/
 
-volatile char received_data[100] = {0};
+volatile char received_data[200] = {0};
 uint8_t received_len = 0;
 uint8_t begin1[2] = {0x01, 0x0f}; // id=0x00;
 uint8_t begin2[8] = {0x2f, 0x60, 0x60, 0x00, 0x03, 0x00, 0x00, 0x00};//2F 60 60 00 03 00 00 00 id=0x600+num:
@@ -120,7 +120,7 @@ extern float ultra_sound_signal_fbk[12];
 extern float speed_fbk[3];
 extern float a_fbk[3];
 extern float g_fbk[3];
-
+extern float speed_cmd[3];
 void init_can()
 {
     CAN1_WriteData(0x00, &init[0], 2);
@@ -242,8 +242,9 @@ int main(void)
         //
         //LED_OFF();
 
-//        delay_ms(100);
-        if (RS232_REC_Flag == 1)       //如果串口接收到一帧数据（以“?;”结尾）
+        delay_ms(50);
+//						g_fbk[0]=RS232_rec_counter;
+        if (RS232_REC_Flag == 1&&RS232_rec_counter>= COMMAND_DATA_LENGTH + 8)       //如果串口接收到一帧数据（以“?;”结尾）
         {
             RS232_REC_Flag = 0;
             //RS232_Send_Data(RS232_buff,RS232_rec_counter);
