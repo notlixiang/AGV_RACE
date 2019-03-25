@@ -171,11 +171,11 @@ int main(void) {
     init_motor(N2);
     init_motor(N3);
     init_motor(N4);
-//	
-	command1[6] = (uint8_t)(0x0000000f);
-	command2[6] = (uint8_t)(0x0000000f);
-	command3[6] = (uint8_t)(0x0000000f);
-	command4[6] = (uint8_t)(0x0000000f);
+    //
+//    command1[6] = (uint8_t)(0x0000000f);
+//    command2[6] = (uint8_t)(0x0000000f);
+//    command3[6] = (uint8_t)(0x0000000f);
+//    command4[6] = (uint8_t)(0x0000000f);
 	
 	  delay_ms(2);
 	CAN1_WriteData(0x600+N1, &command1[0], 8);
