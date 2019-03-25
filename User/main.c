@@ -301,9 +301,9 @@ int main(void)
 //														a_fbk[1]=cmd_data.speed_cmd[1];
 //														a_fbk[2]=cmd_data.speed_cmd[2];
 														
-														a_fbk[0]=vx;
-														a_fbk[1]=vy;
-														a_fbk[2]=wz;
+//														a_fbk[0]=vx;
+//														a_fbk[1]=vy;
+//														a_fbk[2]=wz;
                         }
                     }
                 }
@@ -555,36 +555,36 @@ int main(void)
         omega3 = (int32_t)(R_DIRECTION * 1 * omega3f);
         omega4 = (int32_t)(R_DIRECTION * 1 * omega4f);  //take the installnation direction of motors into account.
 
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N1, &command1[0], 8);
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N2, &command2[0], 8);
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N3, &command3[0], 8);
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N4, &command4[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N1, &command1[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N2, &command2[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N3, &command3[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N4, &command4[0], 8);
 
 
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N1, &command_read_position[0], 8);
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N2, &command_read_position[0], 8);
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N3, &command_read_position[0], 8);
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N4, &command_read_position[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N1, &command_read_position[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N2, &command_read_position[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N3, &command_read_position[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N4, &command_read_position[0], 8);
 
 
-//        //read speed command_read_speed
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N1, &command_read_speed[0], 8);
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N2, &command_read_speed[0], 8);
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N3, &command_read_speed[0], 8);
-//        delay_ms(2);
-//        CAN1_WriteData(0x600 + N4, &command_read_speed[0], 8);
-//        delay_ms(2);
+        //read speed command_read_speed
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N1, &command_read_speed[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N2, &command_read_speed[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N3, &command_read_speed[0], 8);
+        delay_ms(2);
+        CAN1_WriteData(0x600 + N4, &command_read_speed[0], 8);
+        delay_ms(2);
 
 
         //	LED_ON();
