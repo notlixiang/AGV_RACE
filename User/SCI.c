@@ -237,7 +237,7 @@ void UART4_IRQHandler(void)
 	if(USART_GetITStatus(UART4, USART_IT_RXNE) != RESET)
 	{	
 		UART4_buff[UART4_rec_counter] = UART4->DR;//
-		RS232_Send_Data(UART4_buff+UART4_rec_counter,1);
+//		RS232_Send_Data(UART4_buff+UART4_rec_counter,1);
 		UART4_rec_counter ++;
 /********以RS232_END_FLAG1和RS232_END_FLAG2定义的字符作为一帧数据的结束标识************/
 //		if(UART4_rec_counter >= 2)	//只有接收到2个数据以上才做判断
@@ -247,10 +247,10 @@ void UART4_IRQHandler(void)
 //				RS232_REC_Flag = 1;
 //			}
 //		}
-//		if(RS232_rec_counter > RS232_REC_BUFF_SIZE)//超过接收缓冲区大小
-//		{
-//			RS232_rec_counter = 0;
-//		}
+		if(UART4_rec_counter > UART4_REC_BUFF_SIZE)//超过接收缓冲区大小
+		{
+			UART4_rec_counter = 0;
+		}
 		USART_ClearITPendingBit(UART4, USART_IT_RXNE);
 	}
 	if (USART_GetITStatus(UART4, USART_IT_TXE) != RESET) 

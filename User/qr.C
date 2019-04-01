@@ -47,10 +47,12 @@ void scanner_init(void) {
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 }
-
+extern char qr_scan_fbk[10];
 void scanner_triggger(void) {
+	UART4_rec_counter=0;
     GPIO_WriteBit(GPIOA, GPIO_Pin_8, Bit_RESET);
 		delay_ms(2);
 	delay_ms(2000);
     GPIO_WriteBit(GPIOA, GPIO_Pin_8, Bit_SET);
+	memcpy((unsigned char*)qr_scan_fbk, (unsigned char*)UART4_buff, UART4_rec_counter);	
 }

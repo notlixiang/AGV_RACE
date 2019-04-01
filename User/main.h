@@ -58,7 +58,7 @@
 
 #define OUT_SPEED_K 4*5*RED_RATIO*LINE_NUM/(PI*RADIUS_OF_WHEEL*1000)
 #define OUT_OMEGA_K 4*5*RED_RATIO*LINE_NUM/(PI*1.0)
-#define K_omega 557042.3008f
+//#define K_omega 557042.3008f
 
 #define L_DIRECTION (1)
 #define R_DIRECTION (-1) 
