@@ -304,6 +304,16 @@ int main(void)
 //														a_fbk[0]=vx;
 //														a_fbk[1]=vy;
 //														a_fbk[2]=wz;
+														
+														if(cmd_data.qr_scan_cmd)
+														{
+															vx = 0;
+															vy = 0;
+															wz = 0;
+															scanner_triggger();
+//															strcpy(qr_scan_fbk, "triggered");
+														}
+														
                         }
                     }
                 }

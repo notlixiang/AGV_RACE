@@ -54,5 +54,6 @@ void scanner_triggger(void) {
 		delay_ms(2);
 	delay_ms(2000);
     GPIO_WriteBit(GPIOA, GPIO_Pin_8, Bit_SET);
-	memcpy((unsigned char*)qr_scan_fbk, (unsigned char*)UART4_buff, UART4_rec_counter);	
+	strcpy(qr_scan_fbk,  (unsigned char*)UART4_buff);
+//	memcpy((unsigned char*)qr_scan_fbk, (unsigned char*)UART4_buff, UART4_rec_counter);
 }
