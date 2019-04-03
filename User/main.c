@@ -171,6 +171,7 @@ int main(void)
     int16_t random_value;
 
     scanner_init();
+		scanner_triggger();
     char led_num = 0;
 
     //	init_can();
@@ -321,7 +322,9 @@ int main(void)
         }
         RS232_rec_counter = 0;
 
-        
+//        scanner_triggger();
+//				delay_ms(1000);
+//				RS232_Send_Data(UART4_buff,10);
         //ultra_sonic!!!******************************
         if(0)
         {

@@ -247,7 +247,7 @@ void UART4_IRQHandler(void)
 //				RS232_REC_Flag = 1;
 //			}
 //		}
-		if(UART4_rec_counter > UART4_REC_BUFF_SIZE)//超过接收缓冲区大小
+		if(UART4_rec_counter >= UART4_REC_BUFF_SIZE)//超过接收缓冲区大小
 		{
 			UART4_rec_counter = 0;
 		}

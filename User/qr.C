@@ -49,11 +49,15 @@ void scanner_init(void) {
 }
 extern char qr_scan_fbk[10];
 void scanner_triggger(void) {
-	UART4_rec_counter=0;
-    GPIO_WriteBit(GPIOA, GPIO_Pin_8, Bit_RESET);
 		delay_ms(2);
-	delay_ms(2000);
+	UART4_rec_counter=0;
+	memset(UART4_buff, 0, sizeof(char)*10);
+    GPIO_WriteBit(GPIOA, GPIO_Pin_8, Bit_RESET);
+	delay_ms(1000);
     GPIO_WriteBit(GPIOA, GPIO_Pin_8, Bit_SET);
+	delay_ms(1000);
+	memset(qr_scan_fbk, 0, sizeof(char)*10);
 	strcpy(qr_scan_fbk,  (unsigned char*)UART4_buff);
 //	memcpy((unsigned char*)qr_scan_fbk, (unsigned char*)UART4_buff, UART4_rec_counter);
+//	qr_scan_fbk[UART4_rec_counter]='\0';
 }
