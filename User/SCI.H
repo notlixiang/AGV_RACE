@@ -18,7 +18,7 @@ extern volatile unsigned char RS232_REC_Flag ;
 extern volatile unsigned char RS232_buff[RS232_REC_BUFF_SIZE] ;//���ڽ�������
 extern volatile unsigned int RS232_rec_counter ;//����RS232���ռ���
 
-#define UART4_REC_BUFF_SIZE				50
+#define UART4_REC_BUFF_SIZE				QR_LENGTH
 extern volatile unsigned char UART4_REC_Flag ;
 extern volatile unsigned char UART4_buff[UART4_REC_BUFF_SIZE];//用于接收数据
 extern volatile unsigned int UART4_rec_counter;//用于RS232接收计数

@@ -13,13 +13,13 @@
 #include <stdlib.h>
 #include "led.h"
 #include <stdint.h>
+#include "StructSerial.h"
 #include "qr.h"
 #include "sci.h"
 #include "delay.h"
 #include "string.h"
 
 #include "odometer.h"
-#include "StructSerial.h"
 
 #include "stm32f4xx_it.h"
 #include "stm32f4xx.h"
@@ -58,13 +58,12 @@
 
 #define OUT_SPEED_K 4*5*RED_RATIO*LINE_NUM/(PI*RADIUS_OF_WHEEL*1000)
 #define OUT_OMEGA_K 4*5*RED_RATIO*LINE_NUM/(PI*1.0)
-#define K_omega 557042.3008f
+//#define K_omega 557042.3008f
 
 #define L_DIRECTION (1)
 #define R_DIRECTION (-1) 
 
 #define ODOM_PERIOD_MS 100
-
 
 #endif
 

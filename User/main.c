@@ -171,6 +171,7 @@ int main(void)
     int16_t random_value;
 
     scanner_init();
+		scanner_triggger();
     char led_num = 0;
 
     //	init_can();
@@ -304,14 +305,27 @@ int main(void)
 //														a_fbk[0]=vx;
 //														a_fbk[1]=vy;
 //														a_fbk[2]=wz;
+														
+														if(cmd_data.qr_scan_cmd)
+														{
+															vx = 0;
+															vy = 0;
+															wz = 0;
+															scanner_triggger();
+//															strcpy(qr_scan_fbk, "triggered");
+														}
+														
                         }
                     }
                 }
             }
         }
+//				delay_ms(10);
         RS232_rec_counter = 0;
 
-        
+//        scanner_triggger();
+//				delay_ms(5000);
+//				RS232_Send_Data(UART4_buff,10);
         //ultra_sonic!!!******************************
         if(0)
         {
@@ -545,15 +559,15 @@ int main(void)
         command4[6] = (uint8_t)((omega4 >> 16) & 0x000000ff);
         command4[7] = (uint8_t)((omega4 >> 24) & 0x000000ff);
 
-        omega1f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy + AGV_SHAPE_K * wz);
-        omega2f = AGV_OUT_SPEED_K * (vx + 1 * vy + AGV_SHAPE_K * wz);
-        omega3f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy - AGV_SHAPE_K * wz);
-        omega4f = AGV_OUT_SPEED_K * (vx + 1 * vy - AGV_SHAPE_K * wz);
+//        omega1f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy + AGV_SHAPE_K * wz);
+//        omega2f = AGV_OUT_SPEED_K * (vx + 1 * vy + AGV_SHAPE_K * wz);
+//        omega3f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy - AGV_SHAPE_K * wz);
+//        omega4f = AGV_OUT_SPEED_K * (vx + 1 * vy - AGV_SHAPE_K * wz);
 
-        omega1 = (int32_t)(L_DIRECTION * 1 * omega1f);
-        omega2 = (int32_t)(L_DIRECTION * 1 * omega2f);
-        omega3 = (int32_t)(R_DIRECTION * 1 * omega3f);
-        omega4 = (int32_t)(R_DIRECTION * 1 * omega4f);  //take the installnation direction of motors into account.
+//        omega1 = (int32_t)(L_DIRECTION * 1 * omega1f);
+//        omega2 = (int32_t)(L_DIRECTION * 1 * omega2f);
+//        omega3 = (int32_t)(R_DIRECTION * 1 * omega3f);
+//        omega4 = (int32_t)(R_DIRECTION * 1 * omega4f);  //take the installnation direction of motors into account.
 
         delay_ms(2);
         CAN1_WriteData(0x600 + N1, &command1[0], 8);
@@ -593,11 +607,11 @@ int main(void)
         //	delay_ms(999);
 
         //	delay_ms(26);
-        sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0",
-                (int)(speed_read_value[0] / K_omega * 1000.0),
-                (int)(speed_read_value[1] / K_omega * 1000.0),
-                (int)(speed_read_value[2] / K_omega * 1000.0),
-                (int)(speed_read_value[3] / K_omega * 1000.0));
+//        sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0",
+//                (int)(speed_read_value[0] / K_omega * 1000.0),
+//                (int)(speed_read_value[1] / K_omega * 1000.0),
+//                (int)(speed_read_value[2] / K_omega * 1000.0),
+//                (int)(speed_read_value[3] / K_omega * 1000.0));
         //	sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0",
         //	(int)(speed_read_value[0]/OUT_OMEGA_K*1000.0),
         //	(int)(speed_read_value[1]/OUT_OMEGA_K*1000.0),

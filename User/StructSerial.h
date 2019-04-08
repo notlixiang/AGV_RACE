@@ -7,6 +7,8 @@
 #define CHECK_FRONT_CMD 	23579
 #define CHECK_BACK_CMD 		74348
 
+#define QR_LENGTH 10
+
 typedef struct struct_command_data {
 	int check_front_cmd;
 	
@@ -35,7 +37,7 @@ typedef struct struct_feedback_data {
 	
 	float ultra_sound_signal_fbk[12];
 	
-	char qr_scan_fbk[10];
+	char qr_scan_fbk[QR_LENGTH];
 	
 	int check_back_fbk;
 } struct_feedback_data, *struct_feedback_data_ptr;
