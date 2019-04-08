@@ -13,13 +13,13 @@
 #include <stdlib.h>
 #include "led.h"
 #include <stdint.h>
+#include "StructSerial.h"
 #include "qr.h"
 #include "sci.h"
 #include "delay.h"
 #include "string.h"
 
 #include "odometer.h"
-#include "StructSerial.h"
 
 #include "stm32f4xx_it.h"
 #include "stm32f4xx.h"
@@ -64,7 +64,6 @@
 #define R_DIRECTION (-1) 
 
 #define ODOM_PERIOD_MS 100
-
 
 #endif
 

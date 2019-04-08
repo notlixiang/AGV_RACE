@@ -126,7 +126,7 @@ void USART1_IRQHandler(void)
 				RS232_REC_Flag = 1;
 			}
 		}
-		if(RS232_rec_counter > RS232_REC_BUFF_SIZE)//超过接收缓冲区大小
+		if(RS232_rec_counter >= RS232_REC_BUFF_SIZE)//超过接收缓冲区大小
 		{
 			RS232_rec_counter = 0;
 		}

@@ -10,7 +10,7 @@ float g_fbk[3]={0};
 float yaw_fbk=0;
 float ultra_sound_signal_fbk[12]={0};
 //char qr_scan_fbk[10]={0};
-char qr_scan_fbk[10]="init";
+char qr_scan_fbk[QR_LENGTH]="init";
 
 void send_struct_feedback_serial(void){
 	struct_feedback_data feedback;

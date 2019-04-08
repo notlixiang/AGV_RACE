@@ -320,10 +320,11 @@ int main(void)
                 }
             }
         }
+//				delay_ms(10);
         RS232_rec_counter = 0;
 
 //        scanner_triggger();
-//				delay_ms(1000);
+//				delay_ms(5000);
 //				RS232_Send_Data(UART4_buff,10);
         //ultra_sonic!!!******************************
         if(0)
