@@ -33,7 +33,7 @@
 #include "SysTick.H"
  #include "math.h"
 #include "sys.h"
-
+#include "adc.h"
 
 #define DOUBLEWHEEL 0
 

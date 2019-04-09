@@ -162,7 +162,6 @@ int main(void)
     IIC_Init();
     LED_Configuration();
     delay_init(168);
-    delay_ms(2);
     delay_ms(3000);
     //init_can();
     //manyou
@@ -172,6 +171,7 @@ int main(void)
 
     scanner_init();
 		scanner_triggger();
+		Adc_Init();
     char led_num = 0;
 
     //	init_can();
@@ -308,9 +308,9 @@ int main(void)
 														
 														if(cmd_data.qr_scan_cmd)
 														{
-															vx = 0;
-															vy = 0;
-															wz = 0;
+//															vx = 0;
+//															vy = 0;
+//															wz = 0;
 															scanner_triggger();
 //															strcpy(qr_scan_fbk, "triggered");
 														}

@@ -122,7 +122,8 @@ void TIM3_IRQHandler(void)
 		//(int)(sin(PI/4.0)*1000),
 	(int)odometer_y,
 	(int)odometer_z);
-	
+
+				update_voltage();
 send_struct_feedback_serial();
 //	RS232_Send_Data(odom_buff,strlen(odom_buff));
 	}
