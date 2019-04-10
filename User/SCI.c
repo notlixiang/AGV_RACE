@@ -53,6 +53,10 @@ volatile unsigned char UART4_REC_Flag = 0;
 volatile unsigned char UART4_buff[UART4_REC_BUFF_SIZE];//用于接收数据
 volatile unsigned int UART4_rec_counter = 0;//用于RS232接收计数
 
+volatile unsigned char UART6_REC_Flag = 0;
+volatile unsigned char UART6_buff[UART6_REC_BUFF_SIZE];//用于接收数据
+volatile unsigned int UART6_rec_counter = 0;//用于RS232接收计数
+
 static void RS485_Delay(uint32_t nCount);
 
 
@@ -257,6 +261,100 @@ void UART4_IRQHandler(void)
 	{
         USART_ClearITPendingBit(UART4, USART_IT_TXE);           /* Clear the USART transmit interrupt                  */
   }	
+}
+
+void UART6_Configuration(void)
+{ 
+	GPIO_InitTypeDef GPIO_InitStructure;//定义GPIO_InitTypeDef类型的结构体成员GPIO_InitStructure
+
+	USART_InitTypeDef USART_InitStructure;
+	USART_ClockInitTypeDef USART_ClockInitStruct;
+	//使能需要用到的GPIO管脚时钟
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
+	//使能USART1 时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART6, ENABLE);
+	///复位串口1
+	USART_DeInit(USART6);
+	
+	USART_StructInit(&USART_InitStructure);//载入默认USART参数
+	USART_ClockStructInit(&USART_ClockInitStruct);//载入默认USART参数        
+	//配置串口1的管脚 PA8 USART1_EN PA9 USART1_TX PA10 USART1_RX    
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;    //复用
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //推挽输出
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6; 
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
+	GPIO_PinAFConfig(GPIOC,GPIO_PinSource6,GPIO_AF_USART6);        //管脚PA9复用为USART1
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;        
+	GPIO_Init(GPIOC, &GPIO_InitStructure);                                                                                                                 
+	GPIO_PinAFConfig(GPIOC,GPIO_PinSource7,GPIO_AF_USART6);
+	
+	USART_ClockInit(USART6,&USART_ClockInitStruct);
+
+
+	USART_InitStructure.USART_BaudRate = 9600;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART_Init(USART6,&USART_InitStructure); 
+
+	USART_ITConfig(USART6, USART_IT_RXNE, ENABLE);        ///////接收中断使能
+	USART_ClearITPendingBit(USART6, USART_IT_TC);//清除中断TC位
+	USART_Cmd(USART6,ENABLE);//最后使能串?
+}
+
+void UART6_Send_Data(unsigned char *send_buff,unsigned int length)
+{
+ 	unsigned int i = 0;
+	for(i = 0;i < length;i ++)
+	{			
+		USART6->DR = send_buff[i];
+		while((USART6->SR&0X40)==0);	
+	}	
+}
+
+void USART6_IRQHandler(void)  
+{
+	USART_ClearFlag(USART6,USART_FLAG_TC);
+	if(USART_GetITStatus(USART6, USART_IT_RXNE) != RESET)
+	{	
+		UART6_buff[UART6_rec_counter] = USART6->DR;//
+//		RS232_Send_Data(UART4_buff+UART4_rec_counter,1);
+		UART6_rec_counter ++;
+/********以RS232_END_FLAG1和RS232_END_FLAG2定义的字符作为一帧数据的结束标识************/
+//		if(UART4_rec_counter >= 2)	//只有接收到2个数据以上才做判断
+//		{
+//			if(UART4_buff[RS232_rec_counter - 1] == RS232_END_FLAG1 && RS232_buff[RS232_rec_counter - 1] == RS232_END_FLAG2) 	//帧起始标志   
+//			{
+//				RS232_REC_Flag = 1;
+//			}
+//		}
+		if(UART6_rec_counter >= UART6_REC_BUFF_SIZE)//超过接收缓冲区大小
+		{
+			UART6_rec_counter = 0;
+		}
+		USART_ClearITPendingBit(USART6, USART_IT_RXNE);
+	}
+	if (USART_GetITStatus(USART6, USART_IT_TXE) != RESET) 
+	{
+        USART_ClearITPendingBit(USART6, USART_IT_TXE);           /* Clear the USART transmit interrupt  */
+  }
+}
+
+extern uint8_t infrared_fbk[6];
+void update_infrared(void){
+	uint8_t res=UART6_buff[0];
+	printf("%d\n",res);
+	if(res&(1<<5)){	infrared_fbk[0]=1;	}else{	infrared_fbk[0]=0;	}
+	if(res&(1<<4)){	infrared_fbk[1]=1;	}else{	infrared_fbk[1]=0;	}
+	if(res&(1<<3)){	infrared_fbk[2]=1;	}else{	infrared_fbk[2]=0;	}
+	if(res&(1<<2)){	infrared_fbk[3]=1;	}else{	infrared_fbk[3]=0;	}
+	if(res&(1<<1)){	infrared_fbk[4]=1;	}else{	infrared_fbk[4]=0;	}
+	if(res&(1<<0)){	infrared_fbk[5]=1;	}else{	infrared_fbk[5]=0;	}
+		
 }
 
 unsigned int crc_cal_by_bit(unsigned char *ptr, unsigned int len) {

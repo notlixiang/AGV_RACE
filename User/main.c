@@ -173,6 +173,7 @@ int main(void)
 		scanner_triggger();
 		Adc_Voltage_Init();
 		KEY_Init();
+		UART6_Configuration();
     char led_num = 0;
 
     //	init_can();

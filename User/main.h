@@ -36,7 +36,7 @@
 #include "adc.h"
 #include "key.h"
 
-#define DOUBLEWHEEL 0
+#define DOUBLEWHEEL 1
 
 #define N1 0x01 //CAN ID of each wheel, left front wheel
 #define N2 0x0C  //left back wheel

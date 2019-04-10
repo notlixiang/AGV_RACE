@@ -12,6 +12,9 @@ unsigned char odom_buff[100];
 
 extern float speed_fbk[3];
 extern float pos_fbk[3];	
+extern float voltage_fbk;
+extern uint8_t charging_status_fbk;
+extern uint8_t infrared_fbk[6];
 
 void odometer_reset(void)
 {
@@ -125,7 +128,13 @@ void TIM3_IRQHandler(void)
 
 				update_voltage();
 	update_charging_status();
-send_struct_feedback_serial();
+	update_infrared();
+//send_struct_feedback_serial();
+//	printf("%f\n",voltage_fbk);
+//	printf("%d\n",charging_status_fbk);
+	printf("%d %d %d %d %d %d\n",
+	infrared_fbk[0],infrared_fbk[1],infrared_fbk[2],
+	infrared_fbk[3],infrared_fbk[4],infrared_fbk[5]);
 //	RS232_Send_Data(odom_buff,strlen(odom_buff));
 	}
 	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //����жϱ�־λ

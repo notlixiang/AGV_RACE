@@ -23,11 +23,17 @@ extern volatile unsigned char UART4_REC_Flag ;
 extern volatile unsigned char UART4_buff[UART4_REC_BUFF_SIZE];//用于接收数据
 extern volatile unsigned int UART4_rec_counter;//用于RS232接收计数
 
+#define UART6_REC_BUFF_SIZE				1
+extern volatile unsigned char UART6_REC_Flag ;
+extern volatile unsigned char UART6_buff[UART6_REC_BUFF_SIZE];//用于接收数据
+extern volatile unsigned int UART6_rec_counter;//用于RS232接收计数
 
 void RS232_Send_Data(unsigned char *send_buff,unsigned int length);
 static void RS485_Delay(uint32_t nCount);
 void USART_Configuration(void);
 void UART4_Configuration(void);
 void UART4_Send_Data(unsigned char *send_buff,unsigned int length);
-
+void UART6_Configuration(void);
+void UART6_Send_Data(unsigned char *send_buff,unsigned int length);
+void update_infrared(void);
 #endif
