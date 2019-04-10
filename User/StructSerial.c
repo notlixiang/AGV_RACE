@@ -11,6 +11,7 @@ float yaw_fbk=0;
 float ultra_sound_signal_fbk[12]={0};
 //char qr_scan_fbk[10]={0};
 float voltage_fbk=0;
+uint8_t charging_status_fbk=0;
 char qr_scan_fbk[QR_LENGTH]="init";
 
 void send_struct_feedback_serial(void){
@@ -32,6 +33,7 @@ void send_struct_feedback_serial(void){
 	feedback.ultra_sound_signal_fbk[i]=ultra_sound_signal_fbk[i];
 	}
 	feedback.voltage_fbk=voltage_fbk;
+	feedback.charging_status_fbk=charging_status_fbk;	
 	for(i=0;i<10;i++){		
 	feedback.qr_scan_fbk[i]=qr_scan_fbk[i];
 	}

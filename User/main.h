@@ -34,6 +34,7 @@
  #include "math.h"
 #include "sys.h"
 #include "adc.h"
+#include "key.h"
 
 #define DOUBLEWHEEL 0
 

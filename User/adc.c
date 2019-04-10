@@ -14,7 +14,7 @@
 
 
 //初始化ADC				PC5											   
-void  Adc_Init(void)
+void  Adc_Voltage_Init(void)
 {    
   GPIO_InitTypeDef  GPIO_InitStructure;
 	ADC_CommonInitTypeDef ADC_CommonInitStructure;
@@ -50,7 +50,8 @@ void  Adc_Init(void)
  
 	ADC_Cmd(ADC1, ENABLE);//开启AD转换器	
 
-}				  
+}		
+
 //获得ADC值
 //ch: @ref ADC_channels 
 //通道值 0~16取值范围为：ADC_Channel_0~ADC_Channel_16

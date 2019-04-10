@@ -171,7 +171,8 @@ int main(void)
 
     scanner_init();
 		scanner_triggger();
-		Adc_Init();
+		Adc_Voltage_Init();
+		KEY_Init();
     char led_num = 0;
 
     //	init_can();

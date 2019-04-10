@@ -124,6 +124,7 @@ void TIM3_IRQHandler(void)
 	(int)odometer_z);
 
 				update_voltage();
+	update_charging_status();
 send_struct_feedback_serial();
 //	RS232_Send_Data(odom_buff,strlen(odom_buff));
 	}

@@ -38,6 +38,7 @@ typedef struct struct_feedback_data {
 	float ultra_sound_signal_fbk[12];
 		
 	float voltage_fbk;
+	uint8_t charging_status_fbk;
 	
 	char qr_scan_fbk[QR_LENGTH];
 	
