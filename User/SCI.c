@@ -347,7 +347,7 @@ void USART6_IRQHandler(void)
 extern uint8_t infrared_fbk[6];
 void update_infrared(void){
 	uint8_t res=UART6_buff[0];
-	printf("%d\n",res);
+//	printf("%d\n",res);
 	if(res&(1<<5)){	infrared_fbk[0]=1;	}else{	infrared_fbk[0]=0;	}
 	if(res&(1<<4)){	infrared_fbk[1]=1;	}else{	infrared_fbk[1]=0;	}
 	if(res&(1<<3)){	infrared_fbk[2]=1;	}else{	infrared_fbk[2]=0;	}

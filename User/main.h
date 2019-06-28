@@ -64,7 +64,7 @@
 #define L_DIRECTION (1)
 #define R_DIRECTION (-1) 
 
-#define ODOM_PERIOD_MS 100
+#define ODOM_PERIOD_MS 90
 
 #endif
 

@@ -129,12 +129,12 @@ void TIM3_IRQHandler(void)
 				update_voltage();
 	update_charging_status();
 	update_infrared();
-//send_struct_feedback_serial();
+	send_struct_feedback_serial();
 //	printf("%f\n",voltage_fbk);
 //	printf("%d\n",charging_status_fbk);
-	printf("%d %d %d %d %d %d\n",
-	infrared_fbk[0],infrared_fbk[1],infrared_fbk[2],
-	infrared_fbk[3],infrared_fbk[4],infrared_fbk[5]);
+//	printf("%d %d %d %d %d %d\n",
+//	infrared_fbk[0],infrared_fbk[1],infrared_fbk[2],
+//	infrared_fbk[3],infrared_fbk[4],infrared_fbk[5]);
 //	RS232_Send_Data(odom_buff,strlen(odom_buff));
 	}
 	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //����жϱ�־λ
