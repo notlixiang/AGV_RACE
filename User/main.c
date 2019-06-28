@@ -121,6 +121,38 @@ extern float speed_fbk[3];
 extern float a_fbk[3];
 extern float g_fbk[3];
 extern float speed_cmd[3];
+
+const char *mystrstr(const char *pOri, int OriNum, const char *pFind, int FindNum)
+{
+    // char *p = NULL;
+    if(OriNum < FindNum)
+        return NULL;
+    else
+    {
+        int i = 0, j = 0, Match = 0;
+        for(i = 0; i < OriNum && FindNum + i + 1 <= OriNum; i++)
+        {
+            int e = i;
+            for(j = 0; j < FindNum; j++)
+            {
+                if(!memcmp(pFind + j, pOri + e, 1))
+                {
+                    e++;
+                    Match++;
+                }
+                else
+                    Match = 0;
+            }
+            if(Match == FindNum)
+            {
+                return (pOri + i);
+                break;
+            }
+        }
+    }
+    return NULL;
+}
+
 void init_can()
 {
     CAN1_WriteData(0x00, &init[0], 2);
@@ -264,10 +296,11 @@ int main(void)
             received_len = RS232_rec_counter;
             if (received_len >= COMMAND_DATA_LENGTH + 8) //Serial data are valid
             {
-                const char *head = strstr((char *)received_data, front_cmd);
+                const char *head = mystrstr((char *)received_data,received_len, front_cmd,strlen(front_cmd));
                 if(head != NULL)
                 {
-                    if(head[COMMAND_DATA_LENGTH + 3 + 0] == back_cmd[0] &&
+                    if((int)(head + COMMAND_DATA_LENGTH + 3 + 2 - (char *)received_data) <= received_len &&
+											head[COMMAND_DATA_LENGTH + 3 + 0] == back_cmd[0] &&
                             head[COMMAND_DATA_LENGTH + 3 + 1] == back_cmd[1] &&
                             head[COMMAND_DATA_LENGTH + 3 + 2] == back_cmd[2])
                     {
@@ -318,12 +351,22 @@ int main(void)
 														}
 														
                         }
+												RS232_rec_counter = 0;
+                    }
+										else
+                    {
+                        static int cnt_char_error = 0;
+                        cnt_char_error += 1;
+                        if(cnt_char_error > 5)
+                        {
+                            cnt_char_error = 0;
+                            RS232_rec_counter = 0;
+                        }
                     }
                 }
             }
         }
 //				delay_ms(10);
-        RS232_rec_counter = 0;
 
 //        scanner_triggger();
 //				delay_ms(5000);
