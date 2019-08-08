@@ -1,21 +1,21 @@
 !*.c 
 !*.h
-   *.log
-   *.plg
-   *.bak
-   *.dep
-   *.uvgui.*
-   *.uvguix.*
-   JLinkLog.txt
-   *.o
-   *.d
-   *.crf
-   *.tra
-   *.axf
-   *.hex
-   *.lnp
-   *.sct
-   *.__i
-   *.htm
-   *.TMP
-   *.map
+*.log
+*.plg
+*.bak
+*.dep
+*.uvgui.*
+*.uvguix.*
+JLinkLog.txt
+*.o
+*.d
+*.crf
+*.tra
+*.axf
+*.hex
+*.lnp
+*.sct
+*.__i
+*.htm
+*.TMP
+*.map
