@@ -128,6 +128,7 @@ void TIM3_IRQHandler(void)
 
 				update_voltage();
 	update_charging_status();
+	update_displacement_sensor();
 	update_infrared();
 	send_struct_feedback_serial();
 //	printf("%f\n",voltage_fbk);

@@ -24,7 +24,7 @@ void  Adc_Voltage_Init(void)
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE); //使能ADC1时钟
 
   //先初始化ADC1通道5 IO口
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;//PA5 通道5
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5|GPIO_Pin_4;//PC5 通道5
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;//模拟输入
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;//不带上下拉
   GPIO_Init(GPIOC, &GPIO_InitStructure);//初始化  
@@ -84,10 +84,17 @@ u16 Get_Adc_Average(u8 ch,u8 times)
 } 
 	 
 extern float voltage_fbk;
-void update_voltage(void){
+void update_voltage(void){//PC5 ADC12_IN15
 	u16 adcx;
 	adcx=Get_Adc_Average(ADC_Channel_15,2);
 	voltage_fbk=(float)adcx*(3.3/4096);
+}
+
+extern float displacement_sensor_voltage_fbk;
+void update_displacement_sensor(void){//PC4 ADC12_IN14
+	u16 adcx;
+	adcx=Get_Adc_Average(ADC_Channel_14,2);
+	displacement_sensor_voltage_fbk=(float)adcx*(3.3/4096);
 }
 
 

@@ -214,3 +214,14 @@ void static LED_Delay(uint32_t nCount)
   	  nCount --;   
   }
 }
+
+void Charging_Switch_ON(void)//PF11
+{
+	GPIO_WriteBit( GPIOF, GPIO_Pin_11, Bit_RESET);
+}
+	
+void Charging_Switch_OFF(void)//PF11
+{
+	GPIO_WriteBit( GPIOF, GPIO_Pin_11, Bit_SET);
+}
+	
