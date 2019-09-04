@@ -26,4 +26,6 @@ void One_LED_ON(unsigned char led_num);
 void static LED_Delay(uint32_t nCount);
 void LED_ON(void);
 void LED_OFF(void);
+void Charging_Switch_ON(void);
+void Charging_Switch_OFF(void);
 #endif

@@ -32,7 +32,9 @@ void LED_Configuration(void)
 			
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_OD; //> 开漏输出
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL; //> 无上拉下拉
 	GPIO_Init(GPIOF, &GPIO_InitStructure);
 	
 		//> 指示灯

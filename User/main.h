@@ -34,7 +34,7 @@
  #include "math.h"
 #include "sys.h"
 #include "adc.h"
-#include "key.h"
+//#include "key.h"
 
 #define DOUBLEWHEEL 1
 
@@ -57,8 +57,8 @@
 #define LINE_NUM 2500
 
 
-#define OUT_SPEED_K 4*5*RED_RATIO*LINE_NUM/(PI*RADIUS_OF_WHEEL*1000)
-#define OUT_OMEGA_K 4*5*RED_RATIO*LINE_NUM/(PI*1.0)
+#define OUT_SPEED_K (4*5*RED_RATIO*LINE_NUM/(PI*RADIUS_OF_WHEEL*1000))
+#define OUT_OMEGA_K (4*5*RED_RATIO*LINE_NUM/(PI*1.0))
 //#define K_omega 557042.3008f
 
 #define L_DIRECTION (1)

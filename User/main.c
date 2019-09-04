@@ -204,7 +204,7 @@ int main(void)
     scanner_init();
 		scanner_triggger();
 		Adc_Voltage_Init();
-		KEY_Init();
+		//KEY_Init();
 		UART6_Configuration();
     char led_num = 0;
 
@@ -645,7 +645,13 @@ int main(void)
         CAN1_WriteData(0x600 + N4, &command_read_speed[0], 8);
         delay_ms(2);
 
-
+					
+//	Charging_Switch_ON();
+//	LED_ON();
+//	delay_ms(1000);
+//	Charging_Switch_OFF();
+//	LED_OFF();
+//	delay_ms(1000);	
         //	LED_ON();
         //	delay_ms(999);
         //	LED_OFF();

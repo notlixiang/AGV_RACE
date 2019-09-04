@@ -126,8 +126,8 @@ void TIM3_IRQHandler(void)
 	(int)odometer_y,
 	(int)odometer_z);
 
-				update_voltage();
-	update_charging_status();
+	update_voltage();
+	//update_charging_status();
 	update_displacement_sensor();
 	update_infrared();
 	send_struct_feedback_serial();

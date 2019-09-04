@@ -94,7 +94,7 @@ extern float displacement_sensor_voltage_fbk;
 void update_displacement_sensor(void){//PC4 ADC12_IN14
 	u16 adcx;
 	adcx=Get_Adc_Average(ADC_Channel_14,2);
-	displacement_sensor_voltage_fbk=(float)adcx*(3.3/4096);
+	displacement_sensor_voltage_fbk=(float)adcx*(5.0/4096);
 }
 
 

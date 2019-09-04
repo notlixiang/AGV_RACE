@@ -36,6 +36,7 @@ void send_struct_feedback_serial(void){
 	}
 	feedback.voltage_fbk=voltage_fbk;	
 	feedback.displacement_sensor_voltage_fbk=displacement_sensor_voltage_fbk;
+	//	printf("%f\n",displacement_sensor_voltage_fbk);	
 	feedback.charging_status_fbk=charging_status_fbk;	
 	for(i=0;i<6;i++){		
 	feedback.infrared_fbk[i]=infrared_fbk[i];
