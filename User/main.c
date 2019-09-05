@@ -121,6 +121,7 @@ extern float speed_fbk[3];
 extern float a_fbk[3];
 extern float g_fbk[3];
 extern float speed_cmd[3];
+extern float displacement_sensor_voltage_fbk;
 
 const char *mystrstr(const char *pOri, int OriNum, const char *pFind, int FindNum)
 {
@@ -366,6 +367,11 @@ int main(void)
                 }
             }
         }
+				if(displacement_sensor_voltage_fbk<0.1){
+					vx=vx>0.0?0.0:vx;
+					vy=0.0;
+					wz=0.0;
+				}
 //				delay_ms(10);
 
 //        scanner_triggger();
