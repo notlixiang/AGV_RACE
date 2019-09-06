@@ -60,7 +60,6 @@ volatile unsigned int UART6_rec_counter = 0;//用于RS232接收计数
 static void RS485_Delay(uint32_t nCount);
 
 
-extern float ultra_sound_signal_fbk[12];
 void USART_Configuration(void)
 {
 

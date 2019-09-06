@@ -8,13 +8,14 @@ float odometer_z=0;
 extern float AGV_OUT_SPEED_K ;
 extern float AGV_SHAPE_K ;
 
-unsigned char odom_buff[100];
+//unsigned char odom_buff[100];
 
 extern float speed_fbk[3];
 extern float pos_fbk[3];	
 extern float voltage_fbk;
 extern uint8_t charging_status_fbk;
 extern uint8_t infrared_fbk[6];
+extern float ultra_sound_signal_fbk[12];
 
 void odometer_reset(void)
 {
@@ -60,11 +61,11 @@ void odometer_update_by_wheels(float omega_1,float omega_2,float omega_3,float o
 		wz_temp=-(omega_1_tmp+omega_2_tmp-omega_3_tmp-omega_4_tmp)/(2.0*AGV_OUT_SPEED_K*AGV_SHAPE_K);
 	}
 	
-	sprintf(odom_buff, "ODOMDTU x %d, y %d ,z %d,DTUODOM\r\n\0", 
-	(int)vx_temp,
-		//(int)(sin(PI/4.0)*1000),
-	(int)vy_temp,
-	(int)wz_temp);
+//	sprintf(odom_buff, "ODOMDTU x %d, y %d ,z %d,DTUODOM\r\n\0", 
+//	(int)vx_temp,
+//		//(int)(sin(PI/4.0)*1000),
+//	(int)vy_temp,
+//	(int)wz_temp);
 	
 //	sprintf(odom_buff, "ODOMDTU w1 %d, w2 %d ,w3 %d, w4 %d,DTUODOM\r\n\0", 
 //	(int)omega_1, 
@@ -120,11 +121,11 @@ void TIM3_IRQHandler(void)
 	if(TIM_GetITStatus(TIM3,TIM_IT_Update)==SET) //����ж�
 	{
 		odometer_update_by_wheels( omega_1,omega_2,omega_3,omega_4,ODOM_PERIOD_MS/1000.0);
- 	sprintf(odom_buff, "ODOMDTU x %d, y %d ,z %d,DTUODOM\r\n\0", 
-	(int)odometer_x,
-		//(int)(sin(PI/4.0)*1000),
-	(int)odometer_y,
-	(int)odometer_z);
+// 	sprintf(odom_buff, "ODOMDTU x %d, y %d ,z %d,DTUODOM\r\n\0", 
+//	(int)odometer_x,
+//		//(int)(sin(PI/4.0)*1000),
+//	(int)odometer_y,
+//	(int)odometer_z);
 
 	update_voltage();
 	//update_charging_status();

@@ -44,7 +44,7 @@ unit of vx_ vy_ are mm/s
 unit of w_ is rpm
 ***********************************************************************/
 
-volatile char received_data[200] = {0};
+volatile char received_data[RS232_REC_BUFF_SIZE] = {0};
 uint8_t received_len = 0;
 uint8_t begin1[2] = {0x01, 0x0f}; // id=0x00;
 uint8_t begin2[8] = {0x2f, 0x60, 0x60, 0x00, 0x03, 0x00, 0x00, 0x00};//2F 60 60 00 03 00 00 00 id=0x600+num:
@@ -114,7 +114,7 @@ int temp_recv_omega = 0;
 
 const char *front_cmd = "CMD";
 const char *back_cmd = "cmd";
-unsigned char dtu_buff[50];
+//unsigned char dtu_buff[50];
 extern char qr_scan_fbk[10];
 extern float ultra_sound_signal_fbk[12];
 extern float speed_fbk[3];
@@ -579,11 +579,11 @@ int main(void)
         omega3 = (int32_t)(R_DIRECTION * 1 * omega3f);
         omega4 = (int32_t)(R_DIRECTION * 1 * omega4f); //take the installnation direction of motors into account.
 
-        sprintf(dtu_buff, "ODOMDTU w1 %d, w2 %d ,w3 %d, w4 %d,DTUODOM\r\n\0",
-                (int)omega1,
-                (int)omega2,
-                (int)omega3,
-                (int)omega4);
+//        sprintf(dtu_buff, "ODOMDTU w1 %d, w2 %d ,w3 %d, w4 %d,DTUODOM\r\n\0",
+//                (int)omega1,
+//                (int)omega2,
+//                (int)omega3,
+//                (int)omega4);
 
 
         //RS232_Send_Data(dtu_buff,strlen(dtu_buff));
