@@ -60,6 +60,7 @@ volatile unsigned int UART6_rec_counter = 0;//用于RS232接收计数
 static void RS485_Delay(uint32_t nCount);
 
 
+extern float ultra_sound_signal_fbk[12];
 void USART_Configuration(void)
 {
 
@@ -117,18 +118,19 @@ extern char *back_cmd;
 void USART1_IRQHandler(void)
 {
     if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
-    {
+    {			
         RS232_buff[RS232_rec_counter] = USART1->DR;//
         RS232_rec_counter ++;
         /********以RS232_END_FLAG1和RS232_END_FLAG2定义的字符作为一帧数据的结束标识************/
-        if(RS232_rec_counter >= 3)	//只有接收到2个数据以上才做判断
+        if(RS232_rec_counter >= COMMAND_DATA_LENGTH + 8)	//只有接收到2个数据以上才做判断
         {
-            if(RS232_buff[RS232_rec_counter - 2] == back_cmd[0] &&
-                    RS232_buff[RS232_rec_counter - 1] == back_cmd[1] &&
-                    RS232_buff[RS232_rec_counter - 0] == back_cmd[2] ) 	//帧起始标志
-            {
-                RS232_REC_Flag = 1;
-            }
+            RS232_REC_Flag = 1;
+//            if(RS232_buff[RS232_rec_counter - 2] == back_cmd[0] &&
+//                    RS232_buff[RS232_rec_counter - 1] == back_cmd[1] &&
+//                    RS232_buff[RS232_rec_counter - 0] == back_cmd[2] ) 	//帧起始标志
+//            {
+//                RS232_REC_Flag = 1;
+//            }
         }
         if(RS232_rec_counter >= RS232_REC_BUFF_SIZE)//超过接收缓冲区大小
         {
