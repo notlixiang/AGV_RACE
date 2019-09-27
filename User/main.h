@@ -38,16 +38,20 @@
 
 #define DOUBLEWHEEL 1
 
-#define N1 0x01 //CAN ID of each wheel, left front wheel
-#define N2 0x0C  //left back wheel
-#define N3 0x04	//right back wheel
-#define N4 0x02	//right front wheel
 
 #define PI 3.14159265359
 
 #if DOUBLEWHEEL
+  #define N3 0x01 //CAN ID of each wheel, left front wheel
+  #define N4 0x0C  //left back wheel
+  #define N1 0x04	//right back wheel
+  #define N2 0x02	//right front wheel
 	#define LENGTH 0
 #else
+  #define N1 0x01 //CAN ID of each wheel, left front wheel
+  #define N2 0x0C  //left back wheel
+  #define N3 0x04	//right back wheel
+  #define N4 0x02	//right front wheel
 	#define LENGTH 0.670
 #endif
 

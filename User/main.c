@@ -367,7 +367,7 @@ int main(void)
                 }
             }
         }
-				if(displacement_sensor_voltage_fbk<0.1){
+				if(displacement_sensor_voltage_fbk<2.0){
 					vx=vx>0.0?0.0:vx;
 					vy=0.0;
 					wz=0.0;
