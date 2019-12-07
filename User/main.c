@@ -7,24 +7,22 @@
 ***********************************************************************/
 #include "main.h"
 
-#define abs(x) ((x)>=0?(x):-(x))
+#define abs(x) ((x) >= 0 ? (x) : -(x))
 
 float AGV_OUT_SPEED_K = OUT_SPEED_K;
 float AGV_SHAPE_K = (LENGTH + WIDTH) / 2;
 
-#define SPEED_MAX 1200        //	mm/s 直线速度，经过测试可以保证驱动器稳定工作最高为700
-#define OMEGA_MAX SPEED_MAX/AGV_SHAPE_K        // 	mrad/s	旋转速度，保证驱动器稳定工作
+#define SPEED_MAX 1200                    //	mm/s 直线速度，经过测试可以保证驱动器稳定工作最高为700
+#define OMEGA_MAX SPEED_MAX / AGV_SHAPE_K // 	mrad/s	旋转速度，保证驱动器稳定工作
 
 #define DELTA_SPEED_MAX 100
-#define DELTA_OMEGA_MAX DELTA_SPEED_MAX/AGV_SHAPE_K
-
+#define DELTA_OMEGA_MAX DELTA_SPEED_MAX / AGV_SHAPE_K
 
 #define Speed_K 5000
 
 //install direction of motors output axis, let left direction installnation as positive.
 
-
-#define msg_cnt_max  2000
+#define msg_cnt_max 2000
 
 /***********************************************************************
 [omga1]       [1 -1 -(LENGTH+WIDTH)/2] [vx]
@@ -46,9 +44,9 @@ unit of w_ is rpm
 
 volatile char received_data[RS232_REC_BUFF_SIZE] = {0};
 uint8_t received_len = 0;
-uint8_t begin1[2] = {0x01, 0x0f}; // id=0x00;
-uint8_t begin2[8] = {0x2f, 0x60, 0x60, 0x00, 0x03, 0x00, 0x00, 0x00};//2F 60 60 00 03 00 00 00 id=0x600+num:
-uint8_t begin3[8] = {0x2b, 0x40, 0x60, 0x00, 0x1F, 0x00, 0x00, 0x00};//2b 40 60 00 1F 00 00 00
+uint8_t begin1[2] = {0x01, 0x0f};                                     // id=0x00;
+uint8_t begin2[8] = {0x2f, 0x60, 0x60, 0x00, 0x03, 0x00, 0x00, 0x00}; //2F 60 60 00 03 00 00 00 id=0x600+num:
+uint8_t begin3[8] = {0x2b, 0x40, 0x60, 0x00, 0x1F, 0x00, 0x00, 0x00}; //2b 40 60 00 1F 00 00 00
 uint8_t init[2] = {0x01, 0x0f};
 
 //uint8_t command1[8] = {0x23, 0xff, 0x60, 0x00, 0x00, 0x3c, 0xf6, 0xff};//23 FF 60 00 00 c4 09 00
@@ -59,7 +57,7 @@ uint8_t init[2] = {0x01, 0x0f};
 
 uint8_t command_test[8] = {0x23, 0xff, 0x60, 0x00, 0x00, 0xc4, 0x09, 0x00};
 
-uint8_t command1[8] = {0x23, 0xff, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00};//23 FF 60 00 00 c4 09 00
+uint8_t command1[8] = {0x23, 0xff, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00}; //23 FF 60 00 00 c4 09 00
 uint8_t command2[8] = {0x23, 0xff, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00};
 uint8_t command3[8] = {0x23, 0xff, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00};
 uint8_t command4[8] = {0x23, 0xff, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00};
@@ -67,22 +65,18 @@ uint8_t command4[8] = {0x23, 0xff, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00};
 uint8_t command_read_position[8] = {0xA0, 0x40, 0x22, 0x00, 0x7F, 0x0E, 0x00, 0x00};
 uint8_t command_read_speed[8] = {0xA0, 0x69, 0x60, 0x00, 0x7F, 0x0E, 0x00, 0x00};
 
-int32_t speed_read_value[4] = {0.0, 0.0, 0.0, 0.0};//读取的速度值
-int32_t position_read_value[4] = {0.0, 0.0, 0.0, 0.0};//读取的位置值
-
-
+int32_t speed_read_value[4] = {0.0, 0.0, 0.0, 0.0};    //读取的速度值
+int32_t position_read_value[4] = {0.0, 0.0, 0.0, 0.0}; //读取的位置值
 
 uint8_t agv_started = 0;
 uint8_t first_start = 0;
 
 uint8_t head_index = 0;
 
-
 float omega1f = 0;
 float omega2f = 0;
 float omega3f = 0;
 float omega4f = 0;
-
 
 int32_t omega1;
 int32_t omega2;
@@ -96,11 +90,9 @@ int16_t vy = 0;
 uint16_t uwz = 0;
 int16_t wz = 0;
 
-
 int16_t vxPrevious = 0;
 int16_t vyPrevious = 0;
 int16_t wzPrevious = 0;
-
 
 uint8_t ok_flag1 = 0;
 uint8_t ok_flag2 = 0;
@@ -108,7 +100,6 @@ uint8_t ok_flag3 = 0;
 uint8_t ok_flag4 = 0;
 
 int lift_status = 0;
-
 
 int temp_recv_omega = 0;
 
@@ -126,17 +117,17 @@ extern float displacement_sensor_voltage_fbk;
 const char *mystrstr(const char *pOri, int OriNum, const char *pFind, int FindNum)
 {
     // char *p = NULL;
-    if(OriNum < FindNum)
+    if (OriNum < FindNum)
         return NULL;
     else
     {
         int i = 0, j = 0, Match = 0;
-        for(i = 0; i < OriNum && FindNum + i + 1 <= OriNum; i++)
+        for (i = 0; i < OriNum && FindNum + i + 1 <= OriNum; i++)
         {
             int e = i;
-            for(j = 0; j < FindNum; j++)
+            for (j = 0; j < FindNum; j++)
             {
-                if(!memcmp(pFind + j, pOri + e, 1))
+                if (!memcmp(pFind + j, pOri + e, 1))
                 {
                     e++;
                     Match++;
@@ -144,7 +135,7 @@ const char *mystrstr(const char *pOri, int OriNum, const char *pFind, int FindNu
                 else
                     Match = 0;
             }
-            if(Match == FindNum)
+            if (Match == FindNum)
             {
                 return (pOri + i);
                 break;
@@ -158,9 +149,7 @@ void init_can()
 {
     CAN1_WriteData(0x00, &init[0], 2);
     delay_ms(2);
-
 }
-
 
 void init_motor(uint64_t num)
 {
@@ -176,8 +165,6 @@ void init_motor(uint64_t num)
     CAN1_WriteData(0x600 + num, &begin3[0], 8);
     delay_ms(40);
 }
-
-
 
 int main(void)
 {
@@ -203,10 +190,10 @@ int main(void)
     int16_t random_value;
 
     scanner_init();
-		scanner_triggger();
-		Adc_Voltage_Init();
-		//KEY_Init();
-		UART6_Configuration();
+    scanner_triggger();
+    Adc_Voltage_Init();
+    //KEY_Init();
+    UART6_Configuration();
     char led_num = 0;
 
     //	init_can();
@@ -215,10 +202,10 @@ int main(void)
     init_motor(N3);
     init_motor(N4);
     //
-//    command1[6] = (uint8_t)(0x0000000f);
-//    command2[6] = (uint8_t)(0x0000000f);
-//    command3[6] = (uint8_t)(0x0000000f);
-//    command4[6] = (uint8_t)(0x0000000f);
+    //    command1[6] = (uint8_t)(0x0000000f);
+    //    command2[6] = (uint8_t)(0x0000000f);
+    //    command3[6] = (uint8_t)(0x0000000f);
+    //    command4[6] = (uint8_t)(0x0000000f);
 
     delay_ms(2);
     CAN1_WriteData(0x600 + N1, &command1[0], 8);
@@ -253,14 +240,14 @@ int main(void)
         //	CAN1_WriteData(0x600+N2, &command_test[0], 8);
 
         msg_cnt -= 1;
-        if(msg_cnt < 0)
+        if (msg_cnt < 0)
         {
             vx = 0;
             vy = 0;
             wz = 0;
         }
 
-        if(led_on_cnt > 0)
+        if (led_on_cnt > 0)
         {
             led_on_cnt -= 1;
         }
@@ -268,7 +255,6 @@ int main(void)
         {
             LED_OFF();
         }
-
 
         //		delay_ms_ms(1000);
         //
@@ -279,8 +265,8 @@ int main(void)
         //LED_OFF();
 
         delay_ms(50);
-//						g_fbk[0]=RS232_rec_counter;
-        if (RS232_REC_Flag == 1&&RS232_rec_counter>= COMMAND_DATA_LENGTH + 8)       //如果串口接收到一帧数据（以“?;”结尾）
+        //						g_fbk[0]=RS232_rec_counter;
+        if (RS232_REC_Flag == 1 && RS232_rec_counter >= COMMAND_DATA_LENGTH + 8) //如果串口接收到一帧数据（以“?;”结尾）
         {
             RS232_REC_Flag = 0;
             //RS232_Send_Data(RS232_buff,RS232_rec_counter);
@@ -290,27 +276,27 @@ int main(void)
             {
                 received_data[i] = RS232_buff[i];
             }
-//            for (i = 0; i < 12; i++)
-//            {
-//                ultra_sound_signal_fbk[i] = (float)(uint8_t)RS232_buff[i];
-//            }
+            //            for (i = 0; i < 12; i++)
+            //            {
+            //                ultra_sound_signal_fbk[i] = (float)(uint8_t)RS232_buff[i];
+            //            }
             received_len = RS232_rec_counter;
             if (received_len >= COMMAND_DATA_LENGTH + 8) //Serial data are valid
             {
-                const char *head = mystrstr((char *)received_data,received_len, front_cmd,strlen(front_cmd));
-                if(head != NULL)
+                const char *head = mystrstr((char *)received_data, received_len, front_cmd, strlen(front_cmd));
+                if (head != NULL)
                 {
-                    if((int)(head + COMMAND_DATA_LENGTH + 3 + 2 - (char *)received_data) <= received_len &&
-											head[COMMAND_DATA_LENGTH + 3 + 0] == back_cmd[0] &&
-                            head[COMMAND_DATA_LENGTH + 3 + 1] == back_cmd[1] &&
-                            head[COMMAND_DATA_LENGTH + 3 + 2] == back_cmd[2])
+                    if ((int)(head + COMMAND_DATA_LENGTH + 3 + 2 - (char *)received_data) <= received_len &&
+                        head[COMMAND_DATA_LENGTH + 3 + 0] == back_cmd[0] &&
+                        head[COMMAND_DATA_LENGTH + 3 + 1] == back_cmd[1] &&
+                        head[COMMAND_DATA_LENGTH + 3 + 2] == back_cmd[2])
                     {
                         struct_command_data *cmd_ptr = (struct_command_data *)(head + 3);
                         struct_command_data cmd_data = *cmd_ptr;
-                        if(cmd_data.check_front_cmd == CHECK_FRONT_CMD &&
-                                cmd_data.check_back_cmd == CHECK_BACK_CMD)
+                        if (cmd_data.check_front_cmd == CHECK_FRONT_CMD &&
+                            cmd_data.check_back_cmd == CHECK_BACK_CMD)
                         {
-                            if(agv_started == 0) //first start
+                            if (agv_started == 0) //first start
                             {
                                 init_can();
                                 init_motor(N1);
@@ -319,46 +305,45 @@ int main(void)
                                 init_motor(N4);
                                 agv_started = 1;
                             }
-                            if(agv_started == 1) //started
+                            if (agv_started == 1) //started
                             {
                                 vx = cmd_data.speed_cmd[0];
-//                                vx = (int16_t)uvx;
+                                //                                vx = (int16_t)uvx;
                                 vy = cmd_data.speed_cmd[1];
-//                                vy  = (int16_t)uvy;
-                                if(DOUBLEWHEEL)
+                                //                                vy  = (int16_t)uvy;
+                                if (DOUBLEWHEEL)
                                 {
                                     vy = 0;
                                 }
                                 wz = cmd_data.speed_cmd[2];
-//                                wz = (int16_t)uwz;
-//                                temp_recv_omega = uwz;
+                                //                                wz = (int16_t)uwz;
+                                //                                temp_recv_omega = uwz;
                             }
                             msg_cnt = msg_cnt_max;
-//														a_fbk[0]=cmd_data.speed_cmd[0];
-//														a_fbk[1]=cmd_data.speed_cmd[1];
-//														a_fbk[2]=cmd_data.speed_cmd[2];
-														
-//														a_fbk[0]=vx;
-//														a_fbk[1]=vy;
-//														a_fbk[2]=wz;
-														
-														if(cmd_data.qr_scan_cmd)
-														{
-//															vx = 0;
-//															vy = 0;
-//															wz = 0;
-															scanner_triggger();
-//															strcpy(qr_scan_fbk, "triggered");
-														}
-														
+                            //														a_fbk[0]=cmd_data.speed_cmd[0];
+                            //														a_fbk[1]=cmd_data.speed_cmd[1];
+                            //														a_fbk[2]=cmd_data.speed_cmd[2];
+
+                            //														a_fbk[0]=vx;
+                            //														a_fbk[1]=vy;
+                            //														a_fbk[2]=wz;
+
+                            if (cmd_data.qr_scan_cmd)
+                            {
+                                //															vx = 0;
+                                //															vy = 0;
+                                //															wz = 0;
+                                scanner_triggger();
+                                //															strcpy(qr_scan_fbk, "triggered");
+                            }
                         }
-												RS232_rec_counter = 0;
+                        RS232_rec_counter = 0;
                     }
-										else
+                    else
                     {
                         static int cnt_char_error = 0;
                         cnt_char_error += 1;
-                        if(cnt_char_error > 5)
+                        if (cnt_char_error > 5)
                         {
                             cnt_char_error = 0;
                             RS232_rec_counter = 0;
@@ -367,27 +352,28 @@ int main(void)
                 }
             }
         }
-				if(displacement_sensor_voltage_fbk<2.0){
-					vx=vx>0.0?0.0:vx;
-					vy=0.0;
-					wz=0.0;
-				}
-//				delay_ms(10);
-
-//        scanner_triggger();
-//				delay_ms(5000);
-//				RS232_Send_Data(UART4_buff,10);
-        //ultra_sonic!!!******************************
-        if(0)
+        if (displacement_sensor_voltage_fbk < 2.0)
         {
-            u8 	ultrasonic_Address2[8] = {0xE2, 0xD0, 0xD4, 0xD6, 0xE0, 0xDE, 0xDA, 0xD8};
-            for(int i = 0; i < 8; i++)
+            vx = vx > 0.0 ? 0.0 : vx;
+            vy = 0.0;
+            wz = 0.0;
+        }
+        //				delay_ms(10);
+
+        //        scanner_triggger();
+        //				delay_ms(5000);
+        //				RS232_Send_Data(UART4_buff,10);
+        //ultra_sonic!!!******************************
+        if (0)
+        {
+            u8 ultrasonic_Address2[8] = {0xE2, 0xD0, 0xD4, 0xD6, 0xE0, 0xDE, 0xDA, 0xD8};
+            for (int i = 0; i < 8; i++)
             {
                 KS103_WriteOneByte(ultrasonic_Address2[i], 0X02, 0X71);
                 delay_ms(5);
             }
-            u8  CurrentAddress = 0;
-            u8  OldAddress = 0;
+            u8 CurrentAddress = 0;
+            u8 OldAddress = 0;
             uint16_t distance = 0;
             //u8 	ultrasonic_Address2[8]={0xE2,0xD0,0xD4,0xD6,0xE0,0xDE,0xDA,0xD8};
             //for(int i=0;i<8;i++)
@@ -405,7 +391,6 @@ int main(void)
                 ultrasonic_enable[1] = 1;
                 ultrasonic_enable[2] = 1;
                 ultrasonic_enable[3] = 1;
-
             }
             if ((vx <= 0) && (vy >= 0))
             {
@@ -460,7 +445,6 @@ int main(void)
             //					direction = 1;
 
             //				}
-
 
             if ((vx >= 0) && (vy >= 0))
             {
@@ -538,28 +522,33 @@ int main(void)
         //		remember_vy = vy;
 
         //********************************************
-        if(vx > SPEED_MAX)vx = SPEED_MAX;
-        if(vx < -SPEED_MAX)vx = -SPEED_MAX;
-        if(vy > SPEED_MAX)vy = SPEED_MAX;
-        if(vy < -SPEED_MAX)vy = -SPEED_MAX;
-        if(wz > OMEGA_MAX)wz = OMEGA_MAX;
-        if(wz < -OMEGA_MAX)wz = -OMEGA_MAX;
+        if (vx > SPEED_MAX)
+            vx = SPEED_MAX;
+        if (vx < -SPEED_MAX)
+            vx = -SPEED_MAX;
+        if (vy > SPEED_MAX)
+            vy = SPEED_MAX;
+        if (vy < -SPEED_MAX)
+            vy = -SPEED_MAX;
+        if (wz > OMEGA_MAX)
+            wz = OMEGA_MAX;
+        if (wz < -OMEGA_MAX)
+            wz = -OMEGA_MAX;
 
-        if(abs(vx - vxPrevious) > DELTA_SPEED_MAX) //缓慢加速，加速度与下发频率相关
+        if (abs(vx - vxPrevious) > DELTA_SPEED_MAX) //缓慢加速，加速度与下发频率相关
         {
             vx = vxPrevious + DELTA_SPEED_MAX * abs(vx - vxPrevious) / (float)(vx - vxPrevious);
         }
-        if(abs(vy - vyPrevious) > DELTA_SPEED_MAX)
+        if (abs(vy - vyPrevious) > DELTA_SPEED_MAX)
         {
             vy = vyPrevious + DELTA_SPEED_MAX * abs(vy - vyPrevious) / (float)(vy - vyPrevious);
         }
-        if(abs(wz - wzPrevious) > DELTA_OMEGA_MAX)
+        if (abs(wz - wzPrevious) > DELTA_OMEGA_MAX)
         {
             wz = wzPrevious + DELTA_OMEGA_MAX * abs(wz - wzPrevious) / (float)(wz - wzPrevious);
         }
 
-
-        if(DOUBLEWHEEL)
+        if (DOUBLEWHEEL)
         {
             vy = 0;
         }
@@ -567,7 +556,6 @@ int main(void)
         vxPrevious = vx;
         vyPrevious = vy;
         wzPrevious = wz;
-
 
         omega1f = AGV_OUT_SPEED_K * (1 * vx + 1 * vy - AGV_SHAPE_K * wz);
         omega2f = AGV_OUT_SPEED_K * (vx - 1 * vy - AGV_SHAPE_K * wz);
@@ -579,12 +567,11 @@ int main(void)
         omega3 = (int32_t)(R_DIRECTION * 1 * omega3f);
         omega4 = (int32_t)(R_DIRECTION * 1 * omega4f); //take the installnation direction of motors into account.
 
-//        sprintf(dtu_buff, "ODOMDTU w1 %d, w2 %d ,w3 %d, w4 %d,DTUODOM\r\n\0",
-//                (int)omega1,
-//                (int)omega2,
-//                (int)omega3,
-//                (int)omega4);
-
+        //        sprintf(dtu_buff, "ODOMDTU w1 %d, w2 %d ,w3 %d, w4 %d,DTUODOM\r\n\0",
+        //                (int)omega1,
+        //                (int)omega2,
+        //                (int)omega3,
+        //                (int)omega4);
 
         //RS232_Send_Data(dtu_buff,strlen(dtu_buff));
 
@@ -593,7 +580,6 @@ int main(void)
         command1[5] = (uint8_t)((omega1 >> 8) & 0x000000ff);
         command1[6] = (uint8_t)((omega1 >> 16) & 0x000000ff);
         command1[7] = (uint8_t)((omega1 >> 24) & 0x000000ff);
-
 
         command2[4] = (uint8_t)(omega2 & 0x000000ff);
         command2[5] = (uint8_t)((omega2 >> 8) & 0x000000ff);
@@ -610,15 +596,15 @@ int main(void)
         command4[6] = (uint8_t)((omega4 >> 16) & 0x000000ff);
         command4[7] = (uint8_t)((omega4 >> 24) & 0x000000ff);
 
-//        omega1f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy + AGV_SHAPE_K * wz);
-//        omega2f = AGV_OUT_SPEED_K * (vx + 1 * vy + AGV_SHAPE_K * wz);
-//        omega3f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy - AGV_SHAPE_K * wz);
-//        omega4f = AGV_OUT_SPEED_K * (vx + 1 * vy - AGV_SHAPE_K * wz);
+        //        omega1f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy + AGV_SHAPE_K * wz);
+        //        omega2f = AGV_OUT_SPEED_K * (vx + 1 * vy + AGV_SHAPE_K * wz);
+        //        omega3f = AGV_OUT_SPEED_K * (-1 * vx + 1 * vy - AGV_SHAPE_K * wz);
+        //        omega4f = AGV_OUT_SPEED_K * (vx + 1 * vy - AGV_SHAPE_K * wz);
 
-//        omega1 = (int32_t)(L_DIRECTION * 1 * omega1f);
-//        omega2 = (int32_t)(L_DIRECTION * 1 * omega2f);
-//        omega3 = (int32_t)(R_DIRECTION * 1 * omega3f);
-//        omega4 = (int32_t)(R_DIRECTION * 1 * omega4f);  //take the installnation direction of motors into account.
+        //        omega1 = (int32_t)(L_DIRECTION * 1 * omega1f);
+        //        omega2 = (int32_t)(L_DIRECTION * 1 * omega2f);
+        //        omega3 = (int32_t)(R_DIRECTION * 1 * omega3f);
+        //        omega4 = (int32_t)(R_DIRECTION * 1 * omega4f);  //take the installnation direction of motors into account.
 
         delay_ms(2);
         CAN1_WriteData(0x600 + N1, &command1[0], 8);
@@ -629,7 +615,6 @@ int main(void)
         delay_ms(2);
         CAN1_WriteData(0x600 + N4, &command4[0], 8);
 
-
         delay_ms(2);
         CAN1_WriteData(0x600 + N1, &command_read_position[0], 8);
         delay_ms(2);
@@ -638,7 +623,6 @@ int main(void)
         CAN1_WriteData(0x600 + N3, &command_read_position[0], 8);
         delay_ms(2);
         CAN1_WriteData(0x600 + N4, &command_read_position[0], 8);
-
 
         //read speed command_read_speed
         delay_ms(2);
@@ -651,24 +635,23 @@ int main(void)
         CAN1_WriteData(0x600 + N4, &command_read_speed[0], 8);
         delay_ms(2);
 
-					
-//	Charging_Switch_ON();
-//	LED_ON();
-//	delay_ms(1000);
-//	Charging_Switch_OFF();
-//	LED_OFF();
-//	delay_ms(1000);	
+        //	Charging_Switch_ON();
+        //	LED_ON();
+        //	delay_ms(1000);
+        //	Charging_Switch_OFF();
+        //	LED_OFF();
+        //	delay_ms(1000);
         //	LED_ON();
         //	delay_ms(999);
         //	LED_OFF();
         //	delay_ms(999);
 
         //	delay_ms(26);
-//        sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0",
-//                (int)(speed_read_value[0] / K_omega * 1000.0),
-//                (int)(speed_read_value[1] / K_omega * 1000.0),
-//                (int)(speed_read_value[2] / K_omega * 1000.0),
-//                (int)(speed_read_value[3] / K_omega * 1000.0));
+        //        sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0",
+        //                (int)(speed_read_value[0] / K_omega * 1000.0),
+        //                (int)(speed_read_value[1] / K_omega * 1000.0),
+        //                (int)(speed_read_value[2] / K_omega * 1000.0),
+        //                (int)(speed_read_value[3] / K_omega * 1000.0));
         //	sprintf(dtu_buff, "SPEEDDTU%d,%d,%d,%dDTUSPEED\r\n\0",
         //	(int)(speed_read_value[0]/OUT_OMEGA_K*1000.0),
         //	(int)(speed_read_value[1]/OUT_OMEGA_K*1000.0),
@@ -685,6 +668,5 @@ int main(void)
 
         //RS232_Send_Data(dtu_buff,strlen(dtu_buff));
         //50ms in total
-
     }
 }
